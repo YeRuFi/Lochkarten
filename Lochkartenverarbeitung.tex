@@ -1,0 +1,433 @@
+\documentclass[twocolumn,german]{article}
+
+%Durch die Verwendung von hyperref werden im PDF alle
+% URLs, ref's und cite's verlinkt.
+\usepackage{hyperref}
+
+%paralist wird benötigt, um bei Aufzählungen die
+% kompakten Varianten zu verwenden
+\usepackage{paralist}
+
+%listings ist das Paket, welches die Darstellung
+% von Code mit Hilfe der lstlisting Umgebung erlaubt.
+\usepackage{listings}
+
+%Ein von uns erstelltes package mit ein paar Definitionen
+% welche in unseren Ausarbeitungen verwendet werden sollen.
+\usepackage{Ausarbeitung}
+
+
+% Bitte hier Ihren Namen eintragen
+\author{Robert Lang und Jan Fischer \\ Technische Universität München}
+
+\title{Verarbeitung von Lochkarten: Hollerith und die D 11}
+
+% Bitte Datum des Vortrags angeben
+\date{06.07.2016}
+
+%Soll bei jedem Übersetzen der .tex Datei in ein PDF das aktuelle Datum
+% eingefügt werden, kann alternativ auch
+% \date{\today}
+% verwendet werden. Vorsicht mit der Formatierung!
+
+
+%zwischen \begin{document} und \end{document} befindet sich der eigentliche Inhalt
+\begin{document}
+
+
+%An die Stelle des Aufrufs von maketitle werden die oben definierten Informationen
+% wie title und author in den Dokumenten-Kopf übersetzt.
+\maketitle
+
+
+%In Dokumenten, bei denen dies verlangt wird (wie in der Ausarbeitung)
+% wird in der abstract Umgebung eine kurze Zusammenfassung der Arbeit erstellt.
+\begin{abstract}
+
+Dieses Dokument soll einen Überblick über die Lochkartentechnologie geben. Dafür werden beispielhaft zwei besonders wichtige Maschinen der Lochkartentechnik beschrieben.
+
+\end{abstract}
+
+
+% definiert einen Abschnitt, die Nummerierung erfolgt automatisch
+% es gibt auch \subsection und \subsubsection
+% die Variante \section* \subsection* etc. sind für nicht nummerierte
+% (Unter-)Abschnitte
+\section{Einführung in die Verarbeitung von Lochkarten}
+
+% Label können frei gewählt werden. Später kann mittels \ref{Einleitung}
+% auf diesen Abschnitt verwiesen werden
+\label{Einleitung}
+
+Eingangs soll ein allgemeiner Überblick über die Verarbeitung von Lochkarten gegeben werden. Dazu wird an Hand eines Beispiels die Codierung von Lochkarten und darüberhinaus der Prozess der Datenverarbeitung mit Hilfe der verschiedenen Maschinen beleuchtet.
+Lochkarten wurden über einen sehr langen Zeitraum als Speichermedium verwendet. Im Lauf der Zeit wurden für verschiedene Arten von Daten entsprechende Codierungen entwickelt. So wurden Lochkarten bereits 1890 in den USA zur Volkszählung verwendet (siehe \ref{Hollerith}). Bald spielten sie auch in Unternehmen zur Speicherung und Verarbeitung von Daten, wie zum Beispiel in der Buchhaltung, eine wichtige Rolle. Im weiteren Verlauf wurden Lochkarten auch als Ein- und Ausgabe Medien für Computer verwendet, bis sie dann durch andere Speichermedien abgelöst wurden.~\cite{Data}
+% Die Tilde zwischen . und \cite erzeugt ein Leerzeichen, verbietet
+% aber, dass an dieser Stelle ein Zeilenumbruch eingefügt wird.
+% mit ~\cite kann man sich auf Quellen beziehen
+% Die Quellen sind in der Datei Latex-Einfuehrung.bib definiert
+
+\subsection{Codierung von Lochkarten}
+
+\begin{figure*}[h]
+    \centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+    \includegraphics[width=0.9\textwidth]{Abbildungen/punch-card-wiki}
+    }
+    \caption{Codierung der Zeichen der IBM Standardlochkarte mit 80 Spalten}
+    \label{80}
+    % Dieses Label bezieht sich auf die Abildung
+\end{figure*}
+
+Als Beispiel dient die am häufigsten verwendete IBM Standardlochkarte (siehe Abb.~\ref{80}). Auf der IBM Standardlochkarte (auch Hollerith Karte genannt) können sowohl Zahlen als auch Text gespeichert werden. In jeder Spalte kann eine Ziffer (bzw. ein Buchstabe) gespeichert werden. Die IBM Standardlochkarte hat insgesamt 80 Spalten, bietet damit also Platz für 80 Zeichen. Dabei wird eine Zahl sehr intuitiv im Dezimalsystem codiert: Die Reihenfolge der einzelnen Ziffern erfolgt wie für den Menschen gewohnt. Um auf einer einzelnen Lochkarte mehrere Daten zu speichern, wird die Karte gewöhnlich in Felder unterteilt: Beispielsweise  könnten die ersten 8 Spalten als Kundennummer festgelegt werden.
+\newline
+Die im Anschluss genauer beschriebenen Maschinen benutzten dasselbe Konzept für die Codierung der Lochkarten, das auf Herman Hollerith zurückgeht. Die ersten Maschinen verwendeten allerdings noch eine Karte mit weniger Spalten. Die DEHOMAG D 11 verwendete schon die IBM Standardlochkarte mit 80 Spalten, die 1928 eingeführt wurde. Allerdings wurde noch kein Text auf Lochkarten gespeichert, sondern nur nummerische Daten.~\cite{WayToD11}
+
+\subsection{Datenverarbeitung mit Lochkarten}
+
+Die Datenverarbeitung mit Lochkarten unterscheidet sich nicht wesentlich von der Elektronischen Datenverarbeitung. ~\cite{WayToD11} In Abbildung ...
+
+\section{Die Hollerith-Maschine}
+\label{Hollerith}
+\subsection{Das Leben von Herman-Hollerith}
+Herman Hollerith wurde 1860 in Buffalo, New York geboren. Seine Eltern sind 1848 von Deutschland in die USA eingewandert. Mit 19 Jahren hat er einen Abschluss als Mineningenieur an der Columbia University gemacht. Seine erste Arbeitsstelle trat er 1880 beim Statistikamt an. Dort arbeitete er an der Volkszählung von 1880 mit. Dort erfuhr er die aufwändige und monotone Arbeit. Außerdem konnte er die Prozesse und Anforderungen der Volkszählung studieren. Dies brachte ihm später Vorteile bei der Entwicklung seiner Hollerith-Maschine für die Volkszählung.
+\subsection{Volkszählungen in den USA}
+\subsubsection{Zweck}
+Volkszählungen sind in den USA seit ???? in der Verfassung festgeschrieben. Sie werden durchgeführt, um die Anzahl der Mitglieder im House of Representatives festzulegen. Die Mitglieder verteilen sich nach der Anzahl der in einem Bundestaat lebenden Menschen im Verhältnis zur Gesamtbevölkerung in den USA, wobei jeder Staat mindestens Sitz im House of Representatives bekommt. So ist jede Dekade eine Volkszählung durchzuführen.
+\subsubsection{Ablauf}
+Bei der Volkszählung werden im Zeitraum von einem Jahr Interviewer in jeden Haushalt des Landes gesendet, um die Informationen zu sammeln. Da die Volkszählung eine Möglichkeit bietet von den Bewohnern Informationen zu sammeln und die Bevölkerung damit besser abbilden zu können wurden bei der Volkszählung 1880 circa 26 Standardfragen gestellt. Zusätzlich wuuden spezielle Fragen insbesondere die Landwirtschaft betreffend gestellt; insgesamt sollen so 160 Fragen gestellt worden sein.
+1890 sollen
+\subsubsection{Abgefragte Informationen}
+\subsection{Bestandteile der Maschine}
+\subsection{Weiterentwicklungen}
+
+
+\section{Die Dehomag D 11}
+
+\subsection{Höhepunkt der Entwicklung von Tabelliermaschinen}
+
+\begin{quote}
+	``Whatever the definition of a 'computer' may be, and at the moment there is no consensus about this, the DEHOMAG D11 is a computer.''
+	(F.W. Kistermann, ~\cite{D11}, Seite 234)
+\end{quote}
+
+%Auch wenn die Graphik inhaltlich zu einem späteren Kapitel gehört,
+% kann es Sinn machen diese weiter vorne zu platzieren, wenn an
+% dieser Stellt besser Platz für eine Grahpik ist.
+%Frei bewegliches Feld für Abbildung in Spaltenbreite
+\begin{figure}
+  \begin{center}
+    % Eine Abbildung, die 90% der Spaltenbreite einnimmt
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/d11.PNG}
+    \caption{Aufbau der DEHOMAG D11}
+    \label{Aufbau}
+    % Dieses Label bezieht sich auf die Abildung
+  \end{center}
+\end{figure}
+
+%Auch wenn die Graphik inhaltlich zu einem späteren Kapitel gehört,
+% kann es Sinn machen diese weiter vorne zu platzieren, wenn an
+% dieser Stellt besser Platz für eine Grahpik ist.
+%Frei bewegliches Feld für Abbildung in Spaltenbreite
+\begin{figure}
+  \begin{center}
+    % Eine Abbildung, die 90% der Spaltenbreite einnimmt
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/museumdigital.jpg}
+    \caption{DEHOMAG D11}
+    \label{D11Bild1}
+    % Dieses Label bezieht sich auf die Abildung
+  \end{center}
+\end{figure}
+
+
+Die Tabelliermaschine D 11 der Deutschen Hollerith Maschinen Gesellschaft wurde 1935 Den Entwicklern der Maschine war durchaus bewusst, dass ihre Maschine eigentlich ein Computer und nicht nur eine Tabelliermaschine war: Bei einem internen ...Wettbewerb 
+
+
+\begin{quote}
+	``The D 11 is the missing link between the tabulators of the punched-card era and the electronic computer era.'' 
+	(F.W. Kistermann, ~\cite{WayToD11}, Seite 47)
+\end{quote}
+
+\subsection{Überblick über die Funktionsweise}
+
+\subsection{Die Programmierung mit Hilfe des Schaltbretts}
+
+Erfunden von...
+Wenig Programmierung in den 1930er Jahren -> IBM Fortbildung nach dem Krieg
+
+\subsection{Verwendung im dritten Reich}
+Die DEHOMAG D 11 wurde in der Zeit des dritten Reiches in Deutschland entwickelt (1935). 
+Die Firma DEHOMAG stand dem Nazi-Regime positiv gegenüber. Der Firmenchef Willy Heidinger sprach 1934 bei einer Werkseröffnung, bei der auch Parteimitglieder der NSDAP anwesend waren, davon dem Führer zu vertrauen und blind zu folgen. Weiterhin untermauerte die Firma ihre nationalistische Berechtigung in ihrer Festschrift zum 25-jährigen Firmenjubiläum: Der Erfinder der Lochkarte Herman Hollerith wird kurzerhand zum ''biederen Pfälzer'' (aus ~\cite{Fest}, Seite 66), obwohl er nie in Europa gelebt hatte, sondern lediglich ein Sohn deutscher Auswanderer war. Die Firmenpolitik ging kurzfristig auf: Die DEHOMAG wurde zu einer wichtigen Firma für die deutsche Wiederaufrüstung. Das Wachstum der Firma war sogar größer als das von Siemens.~\cite{Explosion} 
+Die Maschinen der DEHOMAG und insbesondere auch die D11 fanden breite Verwendung in verschiedensten Unternehmen und erhöhten so die Effizienz der deutschen Wirtschaft. Wichtige Anwendungsgebiete waren die betriebswirtschaftliche Statistik und die Buchhaltung. Insbesondere zur Verwaltung der Wehrmacht wurden die Maschinen verwendet (Organisation und Kriegsführung). Für die statistische Überwachung von Soldaten, Ressourcen und Zivilbevölkerung spielten die Maschinen der DEHOMAG eine entscheidende Rolle. Eine spezielle Version der D 11 wurde für eine Volkszählung 1939 eingesetzt.~\cite{Nonrole} Desweiteren wurden die Mitglieder der NSDAP, SS und SA auf Lochkarten erfasst.
+Zum Ausmaß der Verwendung der D 11 im Holocaust gibt es widersprüchliche Quellen. Unumstritten ist jedoch, dass Maschinen in Konzentrationslagern aufgestellt waren und den Häftlingen Nummern eintätowiert wurden. Edwin Black stellt in seinem Buch ''IBM and the Holocaust: The Strategic Alliance between Nazi Germany and America's Most Powerful Corporation'' die folgenden Thesen auf: Die Organisation des Holocaust wäre mit Hilfe von Lochkartenmaschinen erfolgt und erst dadurch möglich gewesen (insbesondere die Lokalisierung der Juden). Desweiteren habe die amerikanische IBM als strategischer Partner des Nazi Regimes fungiert. Allerdings gibt es Kritik an der Wissenschaftlichkeit des Buches: Eine ausführlichere Auseinandersetzung mit dem Thema (als Reaktion auf das Buch von Black) findet sich in ~\cite{Genocide}. Eine umfassende Beschreibung würde in dieser Arbeit zu weit führen. Zur genaueren Auseinandersetzung empfiehlt sich die Lektüre von ~\cite{Explosion}, in welchem sich eine umfassende Beschreibung der wirtschaftlichen Entwicklung der Lochkartentechnik (insbesondere auch während des 2. Weltkrieges) findet.
+
+
+\section{Erzeugung eines PDFs aus den Vorlagen}
+
+Um auf einem Linux Rechner mit installierter \LaTeX\ Software
+(z.B.~ TexLive\footnote{\url{http://www.tug.org/texlive/}})
+aus den vorliegenden Beispielen ein PDF zu erzeugen, extrahieren Sie das entsprechende
+Archiv und führen in dem extrahierten Ordner ein \textit{ make} aus.
+
+Den eigentlichen Inhalt mit den \textit{ Markups} finden Sie in den entsprechenden
+\textit{ .tex} Dateien.
+
+Sollten Sie keinen eigenen Rechner haben, auf dem \LaTeX\ Software installiert
+werden kann, können Sie die Rechner der \textit{ lxhalle.informatik.tu-muenchen.de} verwenden.
+Kopieren Sie die auf der Seminar-Homepage bereitgestellte Datei in Ihr home-Verzeichnis in
+der lxhalle. Verbinden Sie sich per SSH mit X11-Forwarding zur lxhalle (unter Linux mit
+\textit{ ssh -X $<$username$>$@lxhalle.informatik.tu-muenchen.de}). Nachdem das Archiv hier mit dem
+Befehl \textit{ tar -xvzf Latex-Einfuehrung.tar.gz} entpackt wurde, stehen Ihnen alle notwendigen
+Dateien im neuen Ordner \textit{ Latex-Einfuehrung} zur Verfügung. Benutzen Sie in diesem Ordner
+\textit{ make} um die \LaTeX-Vorlagen in ein PDF zu verwandeln. Mit \textit{ make clean} löschen Sie
+alle temporären Dateien. Vorausgesetzt die Verbindung ist richtig konfiguriert, können Sie das
+erstellte PDF direkt über den Befehl \textit{ evince Latex-Einfuehrung.pdf} öffnen, ohne das PDF
+vorher wieder auf ihren lokalen Rechner zu kopieren.
+
+
+
+\section{Textformatierung}
+
+Bitte nicht zu viele Schriftgrößen oder Formatanweisungen verwenden. Eigentlich
+genügt es \texttt{ wichtige} Passagen hervorzuheben, evtl. auch \textbf{ fett} oder
+\textit{ kursiv}. Nutzen Sie diese sparsam und nicht wild gemischt.\\
+
+Die Schriftgröße kann auch angepasst werden, wenn ein wichtiger Grund hierzu
+existiert:
+\begin{itemize}
+  \item {\tiny tiny}
+  \item {\small small}
+  \item normal
+  \item {\large large}
+  \item {\huge huge}
+\end{itemize}
+
+Denken Sie daran, dass eine gute Textformatierung durch Vorgaben von Profis einer der
+Gründe für die Verwendung von \LaTeX\ ist.
+
+
+\section{Sonderzeichen \& Formeln}
+
+Anführungszeichen in Latex macht man übrigens ``so''. Evtl. gibt es auch Schwierigkeiten mit Sonderzeichen,
+hier die wichtigsten:\\ %Eine neue Zeile kann man per \newline oder \\ erzeugen.
+ \$ \& \% \# \{ \} [ ] \_ @ \S $<$ $>$ $\backslash$ @ \textasciitilde $\sim$ /
+\newline %eine neue Zeile gefolgt von einer leeren Zeile erzeugt einen Absatz
+
+Noch wildere Sachen kann man im sog. mathematischen Modus machen:
+\begin{equation}
+a^2 + b^2 = c^2
+\label{Pythagoras}
+\end{equation}
+
+Auf diese Formel kann man sich auch im Text beziehen (siehe Formel~\ref{Pythagoras}). Falls dies nicht
+benötigt wird, gibt es auch Formeln ohne Nummer:
+
+\begin{displaymath}
+x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2a}\\
+\end{displaymath}
+
+Ganz kurze Formeln können auch direkt in den Text (z.B. $x \to \infty$) eingebettet werden.
+
+
+\section{Aufzählungen}
+
+Für Aufzählungen stehen verschiedene Möglichkeiten zur Verfügung. Ob mit
+Punkten...
+
+\begin{itemize}
+	\item Bla
+	\item Blub
+	\item Bla-Blub
+\end{itemize}
+
+... oder durchnummeriert...
+
+\begin{enumerate}
+	\item Punkt
+	\item Punkt
+\end{enumerate}
+
+Um einzelne Punkte weiter zu untergliedern, können diese Umbegungen auch
+Rekursiv verwendet werden. Im diesem Beispiel in kompakter Form:
+
+\begin{compactenum}
+  \item Punkt 1
+    \begin{compactitem}
+      \item Unterpunkt A
+      \item Unterpunkt B
+    \end{compactitem}
+  \item Punkt 2
+ohne Unterpunkte
+\end{compactenum}
+
+\section{Textverweise}
+
+Verschiedenen Strukturen (z.B. \textit{ section}, \textit{ figure}) können sog. Labels zugewiesen
+werden, mit Hilfe deren man an anderer Stelle im Text auf z.B. die Einleitung (Kapitel~\ref{Einleitung})
+oder das Logo der TU München (Abbildung~\ref{TUM}) verweisen kann.
+
+
+\section{Abbildungen}
+%Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
+\begin{figure*}[ht]
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/test.pdf}
+}
+\caption{Eine Bildunterschrift, die in ein oder zwei Sätzen
+         erklärt, was auf dem Bilde zu sehen ist.}
+\label{Abb2}
+\end{figure*}
+
+
+
+Abbildungen lassen sich entweder in Spaltenbreite (siehe Abb.~\ref{TUM}), oder
+in voller Seitenbreite einbinden (siehe Abb.~\ref{Abb2}). Den besten Ort für die Zeichnung wählt Latex
+automatisch. Teilweise ist die Platzierung nicht so, wie gewünscht. In diesem Fall kann es sinnvoll sein,
+die Graphik etwas nach vorn zu verschieben, wenn dort noch Platz ist. Hierzu fügt man die entsprechende
+\textit{ figure}-Umgebung in der \textit{ .tex}-Datei etwas früher im Text ein. (Wie z.B. für die Abbildung des
+TUM-Logos in diesem Beispiel)\\
+
+ Als Parameter für die \textit{ figure}-Umgebung kann man eine gewünschte Position angeben.
+Wie man an Abb.~\ref{TUM} sieht, führt die Verwendung von Bitmap-Graphiken zu keiner
+guten Qualität. Bessere Ergebnisse erzielt man mit Vektorgraphiken (z.B. im EPS oder PDF Format, siehe
+Abb.~\ref{Abb2}).\\
+
+Zum Erstellen von Vektorgraphiken bietet sich das Programm
+\textit{ Inkscape}\footnote{\url{http://www.inkscape.org}} an.
+Um Daten (z.B. Speedup-Kurven) zu plotten, können aus gemessene Daten mit
+\textit{ gnuplot}\footnote{\url{http://www.gnuplot.info/}}
+Graphiken in unterschiedlichen Formaten (z.B. png) erzeugt werden.
+
+\section{Tabellen}
+% Es gibt auch table (ohne *) für schmale Tabellen
+\begin{table*}
+\caption{Tabellen bekommen keine Unter-, sondern eine Überschrift.}
+% label bezieht sich auf die Tabelle
+\label{Tab1}
+\begin{center}
+% Die Argumente beschreiben die Spalten:
+% c = center
+% l = links
+% r = rechts (z. B. für Geldbeträge)
+% p = Spalte mit fester Breite und Blocksatz
+% | = senkrechte Linie
+\begin{tabular}{|l|p{2cm}|c|c|c|c|c|r|}
+% waagerechte Linie
+\hline
+% & bedeutet nächste Spalte
+% \\ bedeutet nächste Zeile
+	& Spalte 1 & Spalte 2 & Spalte 3 & Spalte 4& Spalte 5& Spalte 6& Betrag\\
+\hline
+Zeile 1 & Diese Spalte hat eine maximale Breite von 2 cm.& X & X& X& X& X& 126,00\\
+\hline
+Zeile 1 & & \multicolumn{3}{p{5cm}|}{Dieser Eintrag geht ausnahmsweise über 3 Spalten.}& X &X & 8,00\\
+\hline
+\multicolumn{7}{|l}{Summe} &134,00\\
+\hline
+\end{tabular}
+\end{center}
+\end{table*}
+
+Ähnlich wie Abbildungen lassen sich auch Tabellen verwenden (siehe z.B. Tab.~\ref{Tab1}).
+Hier ist es manchmal auch sinnvoll, die Tabelle direkt in den Text einzubinden:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+	& Spalte 1 & Spalte 2 \\
+\hline
+Zeile 1 & A& B\\
+Zeile 2 & C& D\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+\section{Einfügen von Code}
+
+Um Code direkt in das Dokument einzubinden, verwendet man z.B. das Paket \textit{ listings}.
+Für manche Programmiersprachen ist ein rudimentäres Syntax-Highlighting gegeben, welches weiter verfeinert werden kann.
+Es ist z.B. möglich eigene Keywords zu definieren. Wie für alle nutzbaren \LaTeX-Pakete gibt er hierzu Dokumentation, in der man nähere Informationen findet.\\
+
+%Die vielen Parameter, die für das Paket listings gesetzt werden können,
+% kann man entweder in \lstset oder in direkt hinter dem
+% \begin{lstlisting}[...] Befehl in den [] anpassen.
+\lstset{language=C, basicstyle=\small,  numbers=left, numberstyle=\tiny}
+\begin{lstlisting}[caption={Simple \textit{ Hello\_World.c}},frame=single, captionpos=b, label=code-comm-task, xleftmargin=.03\textwidth]
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(){
+  printf(``Hello World!\n'');
+  return 0;
+}
+\end{lstlisting}
+
+
+
+
+
+\section{Literatur}
+
+Natürlich sollten Sie alle Quellen im Literaturverzeichnis angeben
+(=zitieren). Wörtlich zitieren sollten Sie nur bedeutende Aussagen,
+wie z.B.:
+\begin{quote}
+	``I think there is a world market for maybe five computers.''
+	(T.J. Watson, IBM, 1943)
+\end{quote}
+Der übrige Teil der Arbeit müssen Sie in eigenen Worten frei formulieren,
+wobei Sie als Beleg auf die Literatur verweisen können. Z.B. basiert die
+``Analytical Engine'' von Charles Babbage aus dem Jahre 1838 auf dem Dezimalsystem.
+
+
+
+Die entsprechenden Bibtex-Einträge finden Sie in der Datei \textit{ Latex-Einfuehrung.bib}.
+Sie können diese von Hand erstellen, meist ist es jedoch leichter und schneller,
+Veröffentlichungen bei den entsprechenden Verlagen zu suchen und dort den (meist)
+bereitgestellten Bibtex-Eintrag zu kopieren. \\
+Mehrere Läufe des verwendeten Programms \textit{ pdflatex} sind notwendig, um aus einem
+\textit{ $\backslash$cite\{\}} Befehl die entsprechende Referenzierung zu erzeugen und
+im Text anzuzeigen. Achten Sie darauf, dass alle Referenzen richtig erscheinen und
+nicht so angezeigt werden:~\cite{DiesenBibtexEintragGibtEsNicht}.\\
+
+Nicht nur für den \textit{ $\backslash$cite\{\}} Befehl, sondern auch bei Referenzen mit
+\textit{ $\backslash$ref\{\}}, ist es Sinnvoll, vor dem $\backslash$ das Leerzeichen
+durch eine $\sim$  zu ersetzen. Dies gewährleistet, dass das vorherige Wort nicht von
+der Referenz getrennt wird. Dies vermeidet vor allem ungewollte Umbrüche, wie
+diese extra hervorgerufene neue Zeile %hier durch Wahl ``passender'' Wörter...
+
+
+\section{Schlusswort}
+\label{schluss}
+
+Diese Seiten, zusammen mit dem bereitgestellten Archiv, sollten Ihnen eine kurze
+Einleitung zur Arbeit mit \LaTeX\ geben. Für die Seminar-Ausarbeitung sollten die
+hier verwendeten Mittel ausreichend sein. Umfangreichere, detailliertere (und wohl
+auch professionellere) Hilfe und Dokumentation finden Sie reichlich im Internet.
+Neben der Dokumentation einzelner Pakete und zahlreicher Tutorials findet man
+leicht für jede (\LaTeX-)Frage eine Lösung.
+Zusätzlich sind verschiedene Ausgaben von~\cite{Nonrole}
+im Online-Katalog der Bibliothek der TUM verzeichnet, zusammen mit einer
+großen Auswahl weiterer Bücher zum Thema.
+
+
+
+
+
+% MIt diesem Kommando kann man nicht im Text zitierte Quellen zum Literaturverzeichnis
+% hinzufuegen
+% Die Quellen sind in der Datei Latex-Einfuehrung.bib definiert
+% Literatur Einträge, die im Text referenziert werden, werden automatisch
+% zur Literaturliste hinzugefügt. Sollen hier weitere Einträge aus der .bib
+% Datei erscheinen, können diese mit dem Befehl \nocite eingebunden werden.
+% Dies sollten in einer eigentlichen Ausarbeitung Ausnahmen sein!
+\nocite{Nonrole, Data}
+
+
+\bibliographystyle{plain}
+% Die Quellen sind in der Datei Latex-Einfuehrung.bib definiert
+\bibliography{Lochkartenverarbeitung}
+\end{document}
