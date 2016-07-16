@@ -60,7 +60,7 @@ Dieses Dokument soll einen Überblick über die Lochkartentechnologie geben. Dafür
 \label{Einleitung}
 
 Eingangs soll ein allgemeiner Überblick über die Verarbeitung von Lochkarten gegeben werden. Dazu wird an Hand eines Beispiels die Codierung von Lochkarten und darüberhinaus der Prozess der Datenverarbeitung mit Hilfe der verschiedenen Maschinen beleuchtet.
-Lochkarten wurden über einen sehr langen Zeitraum als Speichermedium verwendet. Im Lauf der Zeit wurden für verschiedene Arten von Daten entsprechende Codierungen entwickelt. So wurden Lochkarten bereits 1890 in den USA zur Volkszählung verwendet (siehe \ref{Hollerith}). Bald spielten sie auch in Unternehmen zur Speicherung und Verarbeitung von Daten, wie zum Beispiel in der Buchhaltung, eine wichtige Rolle. Im weiteren Verlauf wurden Lochkarten auch als Ein- und Ausgabe Medien für Computer verwendet, bis sie dann durch andere Speichermedien abgelöst wurden.~\cite{Data}
+Lochkarten wurden über einen sehr langen Zeitraum als Speichermedium verwendet. Im Lauf der Zeit wurden für verschiedene Arten von Daten entsprechende Codierungen entwickelt. So wurden Lochkarten bereits 1890 in den USA zur Volkszählung verwendet, worauf in Kapitel \ref{Hollerith} genauer eingegangen wird. Bald spielten Lochakrten auch in Unternehmen zur Speicherung und Verarbeitung von Daten, wie zum Beispiel in der Buchhaltung, eine wichtige Rolle. Im weiteren Verlauf wurden Lochkarten auch als Ein- und Ausgabe Medien für Computer verwendet, bis sie dann durch andere Speichermedien abgelöst wurden.
 % Die Tilde zwischen . und \cite erzeugt ein Leerzeichen, verbietet
 % aber, dass an dieser Stelle ein Zeilenumbruch eingefügt wird.
 % mit ~\cite kann man sich auf Quellen beziehen
@@ -78,13 +78,23 @@ Lochkarten wurden über einen sehr langen Zeitraum als Speichermedium verwendet. 
     % Dieses Label bezieht sich auf die Abildung
 \end{figure*}
 
-Als Beispiel dient die am häufigsten verwendete IBM Standardlochkarte (siehe Abb.~\ref{80}). Auf der IBM Standardlochkarte (auch Hollerith Karte genannt) können sowohl Zahlen als auch Text gespeichert werden. In jeder Spalte kann eine Ziffer (bzw. ein Buchstabe) gespeichert werden. Die IBM Standardlochkarte hat insgesamt 80 Spalten, bietet damit also Platz für 80 Zeichen. Dabei wird eine Zahl sehr intuitiv im Dezimalsystem codiert: Die Reihenfolge der einzelnen Ziffern erfolgt wie für den Menschen gewohnt. Um auf einer einzelnen Lochkarte mehrere Daten zu speichern, wird die Karte gewöhnlich in Felder unterteilt: Beispielsweise  könnten die ersten 8 Spalten als Kundennummer festgelegt werden.
+Als Beispiel dient die am häufigsten verwendete IBM Standardlochkarte (siehe Abb.~\ref{80}). Auf der IBM Standardlochkarte (auch Hollerith Karte genannt) können sowohl Zahlen als auch Text gespeichert werden. In jeder Spalte kann eine Ziffer (bzw. ein Buchstabe) gespeichert werden. Die IBM Standardlochkarte hat insgesamt 80 Spalten, bietet damit also Platz für 80 Zeichen. Dabei wird eine Zahl sehr intuitiv im Dezimalsystem codiert: Die Reihenfolge der einzelnen Ziffern erfolgt wie für den Menschen gewohnt. Um die Ziffer 2 zu speichern wird die 2 gelocht. Natürlich ist für die Maschinen nur die Position des Loches entscheidend. Um auf einer einzelnen Lochkarte mehrere Daten zu speichern, wird die Karte gewöhnlich in Felder unterteilt: Beispielsweise könnten die ersten 5 Spalten als Kundennummer festgelegt werden. Dies wird an Abbildung deutlich. Auf dieser Lochkarte wurde eine Kundennummer, ein Text und ein Geldbetrag gespeichert. ~\cite{Data}
 \newline
-Die im Anschluss genauer beschriebenen Maschinen benutzten dasselbe Konzept für die Codierung der Lochkarten, das auf Herman Hollerith zurückgeht. Die ersten Maschinen verwendeten allerdings noch eine Karte mit weniger Spalten. Die DEHOMAG D 11 verwendete schon die IBM Standardlochkarte mit 80 Spalten, die 1928 eingeführt wurde. Allerdings wurde noch kein Text auf Lochkarten gespeichert, sondern nur nummerische Daten.~\cite{WayToD11}
+Die im Anschluss genauer beschriebenen Maschinen benutzten dasselbe Konzept für die Codierung der Lochkarten, das auf Herman Hollerith zurückgeht. Die ersten Maschinen verwendeten allerdings noch eine Karte mit weniger Spalten. Die DEHOMAG D11 verwendete schon die IBM Standardlochkarte mit 80 Spalten, die 1928 eingeführt wurde. Allerdings wurde mit der D11 noch kein Text verarbeitet, sondern nur nummerische Daten.~\cite{WayToD11}
 
 \subsection{Datenverarbeitung mit Lochkarten}
 
-Die Datenverarbeitung mit Lochkarten unterscheidet sich nicht wesentlich von der Elektronischen Datenverarbeitung. ~\cite{WayToD11} In Abbildung ...
+Die Datenverarbeitung mit Lochkarten unterscheidet sich nicht wesentlich von der Elektronischen Datenverarbeitung.~\cite{WayToD11} Der Prozess nach dem EVA-Prinzip (Eingabe, Verarbeitung und Ausgabe) wird in Abbildung ~\ref{EVA} anschaulich dargstellt. Zuerst müssen die Daten auf Lochkarten gespeichert werden, was mit Hilfe des Kartenlochers geschieht. Modernere Locher wie in der Abbildung hatten eine Tastatur (wie eine Schreibmaschine) und lochten die codierten Daten in die Lochkarten. Bei den früheren Lochern musste der Operateur die Löcher noch selber auswählen, also den Code kennen. Für ein 'B' beispielsweise musste der Operateur eine 12er-Zonenlochung und eine 2er-Lochung auf dem Locher eingeben. Da dies fehleranfällig war gab es auch Maschinen zur Überprüfung der Lochkarten: Die Daten mussten also zweimal eingegeben werden um zu verhindern, dass fehlerhafte Daten gespeichert wurden.~\cite{D11} Desweiteren druckten modernere Locher auch den Text menschenlsbar auf den oberen Rand der Lochkarte, sodass eine Überprüfung und ein Auslesen durch den Menschen schnell möglich war. Es gab mit moderneren Lochern auch Maschinen, die alle Funktionen umfassten: Lochen, Verifizieren und Drucken. 
+
+\begin{figure*}[h]
+    \centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+    \includegraphics[width=0.9\textwidth]{Abbildungen/punch-card-wiki}
+    }
+    \caption{Codierung der Zeichen der IBM Standardlochkarte mit 80 Spalten}
+    \label{EVA}
+    % Dieses Label bezieht sich auf die Abildung
+\end{figure*}
 
 \section{Die Hollerith-Maschine}
 \label{Hollerith}
