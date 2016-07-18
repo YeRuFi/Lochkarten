@@ -20,7 +20,7 @@
 % Bitte hier Ihren Namen eintragen
 \author{Robert Lang und Jan Fischer \\ Technische Universität München}
 
-\title{Verarbeitung von Lochkarten: Hollerith und die D 11}
+\title{Verarbeitung von Lochkarten: Hollerith und die D11}
 
 % Bitte Datum des Vortrags angeben
 \date{06.07.2016}
@@ -86,7 +86,7 @@ Die im Anschluss genauer beschriebenen Maschinen benutzten dasselbe Konzept für 
 
 Die Datenverarbeitung mit Lochkarten unterscheidet sich nicht wesentlich von der Elektronischen Datenverarbeitung.~\cite{WayToD11} Der Prozess nach dem EVA-Prinzip (Eingabe, Verarbeitung und Ausgabe) wird in Abbildung~\ref{EVA} anschaulich dargstellt. \newline
 Zuerst müssen die Daten auf Lochkarten gespeichert werden, was mit Hilfe des Kartenlochers geschieht. Modernere Locher wie in der Abbildung hatten eine Tastatur (wie eine Schreibmaschine) und lochten die codierten Daten in die Lochkarten. Zusätzlich konnten die Daten auch als Klartext auf den oberen Rand der Lochkarte gedruckt werden (wie in Abbildung~\ref{80}), wodurch die Überprüfung und das Auslesen der Karte für den Menschen erleichtert wurde. Für die verarbeitenden Maschinen ist dieser Text natürlich irrelevant, einzig die Position und Anzahl der Löcher bestimmen den tatsächlichen Inhalt. Bei früheren Lochern hingegen musste der Operateur die Löcher noch selber auswählen, also den Code kennen. Für ein 'B' beispielsweise musste der Operateur eine 12er-Zonenlochung und eine 2er-Lochung auf dem Locher eingeben. Da dies fehleranfällig war gab es auch Maschinen zur Überprüfung der Lochkarten: Die Daten mussten also zweimal eingegeben werden um zu verhindern, dass fehlerhafte Daten gespeichert wurden.~\cite{D11} Es gab mit moderneren Lochern auch Maschinen, die alle Funktionen umfassten: Lochen, Verifizieren und Drucken des Klartexts. \newline
-Verarbeitet wurden die Lochkarten in der Regel durch verschiedene Maschinen. So gab es Sortiermaschinen, Tabelliermaschinen und Kartenmischer. Die zentrale Maschine war die Tabelliermaschine. Sie verarbeitete die Daten und gab als Ausgabe eine Tabelle. Da sich Tabelliermaschinen in ihrem Funktionsumfang immer mehr in Richtung Computer entwickelten (und tatsächlich die Vorläufer der Computer waren~\ref{D11}), werden diese in Abbildung~\ref{EVA} einfach als ''calculator'' bezeichnet. In den Kapiteln~\ref{Hollerith} und~\ref{DieD11} der Arbeit werden verschiedene Tabelliermaschinen vorgestellt. Die ersten Tabelliermaschinen waren noch keine ''Rechner'' sondern zählten nur die Lochanzahl in entsprechenden Zählern. Nach und nach kamen dann immer mehr Funktionen wie Addieren, Subtrahieren und später auch Multiplizieren und DIvidieren hinzu. Die DEHOMAG D11 gilt als Höhepunkt der Entwicklung von Tabelliermaschinen. An derselben wird auch deutlich werden, wie viele Funktionen eines Computers die Tabelliermaschinen in dieser Zeit bereits umfassten. Zur Vorbereitung der Lochkarten wurden Sortiermaschinen eingesetzt um so ein einfaches Abarbeiten der Daten durch einfache Programme der Tabelliermaschine zu ermöglichen. Dies war auch eng mit den Anwendungsbereichen der Lochkartentechnik verbunden, die zum Beispiel eine Gruppierung nach Artikelnummern erforderten. Mischer\newline
+Verarbeitet wurden die Lochkarten in der Regel durch verschiedene Maschinen. So gab es Sortiermaschinen, Tabelliermaschinen und Kartenmischer. Die zentrale Maschine war die Tabelliermaschine. Sie verarbeitete die Daten und gab als Ausgabe eine Tabelle. Da sich Tabelliermaschinen in ihrem Funktionsumfang immer mehr in Richtung Computer entwickelten (und tatsächlich die Vorläufer der Computer waren~\ref{D11}), werden diese in Abbildung~\ref{EVA} einfach als ''calculator'' bezeichnet. In den Kapiteln~\ref{Hollerith} und~\ref{DieD11} der Arbeit werden verschiedene Tabelliermaschinen vorgestellt. Die ersten Tabelliermaschinen waren noch keine ''Rechner'' sondern zählten nur die Lochanzahl in entsprechenden Zählern. Nach und nach kamen dann immer mehr Funktionen wie Addieren, Subtrahieren und später auch Multiplizieren und Dividieren hinzu. Die DEHOMAG D11 gilt als Höhepunkt der Entwicklung von Tabelliermaschinen. An derselben wird auch deutlich werden, wie viele Funktionen eines Computers die Tabelliermaschinen in dieser Zeit bereits umfassten. Zur Vorbereitung der Lochkarten wurden Sortiermaschinen eingesetzt um so ein einfaches Abarbeiten der Daten durch einfache Programme der Tabelliermaschine zu ermöglichen. Dies war auch eng mit den Anwendungsbereichen der Lochkartentechnik verbunden, die zum Beispiel eine Gruppierung nach Artikelnummern erforderten. Mischer\newline
 Die Ausgabe wurde mit einem Drucker erzeugt. Dieser war allerdings abweichend von Abbildung~\ref{EVA} oft in der Tabelliermaschine integriert. Aus logischer Sicht ist die Trennung in Verarbeitung und Ausgabe aber sinnvoll. Dadruch wird deutlich, dass die Maschinen der Verarbeitungsteils  leicht durch einen Computer ersetzt werden könnte, was dann auch geschah. Lochkarten dienten noch lange Zeit als Ein- und Ausgabe für Computer.
 
 
@@ -167,7 +167,38 @@ Die Tabelliermaschine D 11 der Deutschen Hollerith Maschinen Gesellschaft wurde 
 \subsection{Die Programmierung mit Hilfe des Schaltbretts}
 
 Erfunden von...
-Wenig Programmierung in den 1930er Jahren -> IBM Fortbildung nach dem Krieg
+Wenig Programmierung in den 1930er Jahren?? technische Funktionsweise?? Informatik?
+Hier soll an Hand eines typischen Beispiels eine kurze Einführung in die Programmierung der DEHOMAG D11 gegeben werden. Dabei wird auch vergleichend aufgezeigt, inwiefern Konzepte der modernen Rechnerarchitektur bereits in dieser Maschine Anwendung fanden. Das Beispiel ist entnommen aus~\cite{Schaltung}. Diese Quelle enthält leider kein genaues Erscheinungsjahr; auf einem Schaltplan findet sich aber das Datum 25.2.50. Dies erklärt sich durch den langen Zeitraum, in dem die D11-Maschine verwendet wurde. Insbesondere begann die IBM erst nach dem Krieg entsprechende Fortbildungen zur Programmierung durchzuführen. -......-.-. die IBM förderte die Programmierung durch .(bis 1960)
+Das im folgenden behandelte Beispiel ist die Saldierung mit wechselseitiger Niederschrift der Salden. Die Saldierung ist ein typisches Anwendungsbeispiel der D11: Lange Zeit gab es besonders in Deutschland die Nachfrage nach einer Tabelliermaschine, die die Saldierung automatisch durchführt; zuvor musste sie halb manuell durchgeführt werden. 
+Strukturiert wird die Programmierung durch folgende Schritte::
+
+\subsubsection{1. Listenbild}
+Das Listenbild gibt einen Überblick und beantwortet die Fragen: Was habe ich, was möchte ich haben? Es zeigt uns welche Daten auf den Lochkarten an welcher Stelle gespeichert sind und wie die ausgedruckte Tabelle aussehen soll (unser Ziel bzw. die Ausgabe unseres Programms). In der modernen Softwaretechnik würde man von den funktionalen Anforderungen an unser Programm sprechen ???????????????????????????
+Aus der oberen Tabelle des Listenbildes (abgeschrägte Kante als Andeutung der Lochkarten) können wir das Format der Lochkarte erkennen. In den drei ersten Spalten steht die Kontonummer (also eine Zahl zwischen 0 und 999; aus Anschaulichkeitsgründen für eine verhältnismäßig kleine Bank). In den zehn darauf folgenden Spalten sind die Umsätze des Kontos gespeichert. Dabei werden negative und positive in denselben Spalten gespeichert und mit einem Steuerloch (11er Lochung) voneinander unterschieden. Soll-Umsätze sind dabei positiv, Haben-Umsätze negativ. Negativ und positiv liegen eben im Auge des Betrachters: Aus Sicht der Bank ist das Guthaben der Kunden negativ, ihre Schulden dagegen positiv (das ist auch unsere Sicht als Programmierer für die Bank). Unsere Zielausgabe ist eine Tabelle mit den Umsätzen zu jedem Konto. Jeweils einzeln und am Ende die Gesamtsummen der Umsätze und der Saldo (Guthaben) des Kontos. Dabei sollen positive bzw. negative Umsätze und Salden in verschiedene Spalten gedruckt werden. Nun können wir bereits die Schreibwerke festlegen, die die Umsätze und Summen drucken sollen. Wie in Abbildung~\ref{DieD11} bereits gesehen, hat die D11 sieben Schreibwerke, welche abteigend von links nach rechts drucken. Um also unsere Tabelle zu drucken müssen wir für die Kontonummer das größte Schreibwerk wählen (S5 oberhalb der Tabelle notiert). Die anderen Werte schreiben wir einfach rechts daneben also jeweils mit den niedrigeren Schreibwerken (S4 bis S1). 
+	
+Das Listenbild bildet die Grundlage für unser Programm. Wir werden in den nächsten Schritten immer wieder darauf zurückkommen.
+
+\subsubsection{2. Gangschema}
+Das Gangschema ist das eigentliche Programm für die D11-Maschine. Ein Gang entspricht einem Takt?????????Maschinenzyklus?????????? Aus technischer Sicht entspricht ein Gang genau einer Umdrehung des Elektromotors. Die Nocken???Wellen im Inneren übertragen. Genaueres siehe Die Schaltbuchsen=?????  Es gibt 2 verschiedene Gangarten: Kartengänge und Zwischengänge. In jedem Kartengang wird eine neue Lochkarte eingelesen und die in ihr gespeicherten Werte in ein Zählwerk übernommen und eventuell auch ausgedruckt (je nach Schaltung kann eins, beides oder nichts davon passieren; dazu mehr in Punkt 3 Übertragungsschema). In jedem Zwischengang wird eine Zeile des von uns vorgegebenen Gangschemas ausgeführt. Dabei passieren parallel sämtliche Operationen, die wir als Programmierer vorgegeben haben. Eine Einschränkung der D11 ist die Begrenzung auf 9 Zwischengänge; unser Programm kann also nur aus maximal 9 Zeilen bestehen. Allerdings können durch Programmierung eines Dauergangs auch Schleifen programmiert werden. Unser Programm benötigt nur 4 der 9 Zwischengänge. Die Abarbeitung der Gänge erfolgt absteigend, beginnend mit dem Neunten. Nicht benötigte Gänge können abgeschaltet werden (siehe später). Im Listenbild haben wir bereits festgelegt, welche Schreibwerke die einzelnen Summen schreiben. In den Spalten des Gangschemas sind die einzelnen Schreibwerke und Zählwerke aufgelistet.\\
+Also beginnen wir im 4. Zwischengang (d.h. im ersten Programmschritt) mit zwei Schreibbefehlen (S). Schreibwerk 4 und Schreibwerk 3 drucken also die in den Zählern während der Kartengänge aufgelaufenen Summen (Z4: Soll-Umsätze; Z3: Haben-Umsätze). In diesem Fall schreiben wir mit Schreibwerk 4 den Inhalt von Zählwerk 4. Allerdings sind Zählwerke und Schreibwerke aber unabhängig voneinander (Wir könnten genausogut mit Schreibwerk 4 den Inhalt von Zähler 3 drucken). Wie die Summen in die Zählwerke kommen, werden wir erst später im Übertragungsschema durch eine entsprechende Verkabelung festlegen. Abschließend müssen wir für Gang 4 noch festlegen, ob wir eine Schreibwerksbewegung (SW) oder einen Zeilentransfer (ZT) durchführen wollen. Eine Schreibwerksbewegung ist immer dann zu schalten, falls etwas geschrieben wird. In unserem Fall schreiben wir zwei Summen, kreuzen also auf jeden Fall SW an. Für ZT (neue Zeile) werfen wir einen Blick ins Listenbild. Da nur am Anfang jedes Kartengangs ein Zeilentransfer erfolgt, benötigen wir hier einen weiteren Zeilentransfer. Ansonsten würden wir den letzen Umsatzeintrag überdrucken.\\
+In Gang 3 führen wir die eigentliche Saldierung durch: Wir subtrahieren Z3 von Z4. Dies geschieht mit Hilfe der subtraktiven Sendung (Quersubtraktion). Da die D11 MAschine intern nur addieren kann, wird automatisch das 9er Komplement von Zähler 3 gebildet und dann auf Zähler 4 addiert. Dies geschieht mit Hilfe eines Hilfsapparates, den wir hier bereits festlegen: Hilfsapparat IV???????????????? (dazu mehr in Punkt 4, wenn wir unser Gangschema auf der Kommandobrücke umsetzen). 
+9er Komplement!!!!!!!!!!!In Gang 3 brauchen wir weder eine Schreibwerksbewegung noch einen Zeilentransfer (dadurch verkürzt sich die Dauer des Gangs).\\
+In Gang 2 wollen wir nun das Ergebnis unserer Rechnung ausdrucken. Dazu schreiben wir den Wert aus Z4 (S/Z4) mit den Schreibwerken S2 und S1. Natürlich bedingt, je nachdem ob es sich um einen Sollsaldo (SS) oder einen Habensaldo (HS) handelt nur mit dem entsprechenden Schreibwerk (entweder S2 oder S1), wie im Listenbild gefordert. Damit wird auch wieder eine Schreibwerksbewegung notwendig (SW).\\
+Im letzten Gang löschen (L) wir die Zähler um in den jetzt folgenden Kartengängen wieder die Werte für das nächste Konto speichern zu können. Zur einfacheren Lesbarkeit unserer Tabelle erzeugen wir auch mit ZT einen weiteren Zeilenumbruch.
+
+\subsubsection{3. Übertragungsschema}
+Im Übertragungsschema werden sämtliche Datenpfade geschaltet. Kurz: Wie kommen die Daten aus der Lochkarte in die Zählwerke? Dies wird bei heutigen Computern in der Regel nicht mehr vom Programmierer gefordert, da die Datenpfade fest in der Hardware umgesetzt sind. Das logische Konzept dahinter bleibt aber gleich (??Naja??????????????LOAD Befehle in Assembler; Speicher und Register). Außerdem wird festgelegt, wann unser Programm (Gangschema) ausgeführt werden soll. 
+Abbildung~\ref{EVA} veranschaulicht an welchen Buchsen die Daten der Lochkarte ausgelesen werden können. Während der Kartengänge... In einem Kartengang können dann die Werte
+Aus den Buchsen untere Bürsten erhalten wir also die Daten der aktuellen Lochkarte. Mit den Buchsen obere Bürsten kann bereits auf die nächste Lochkarte zugegriffen werden. Dies wird besonders wichtig für das Konzept der automatischen Gruppenkontrolle.
+ Multiplexer
+
+\subsubsection{4. Schalten der Kommandobrücke}
+Als Grundlage zum Schalten der Kommandobrücke verwenden wir unser Gangschema. Wir wollen unser Programm jetzt auf die Maschine schalten.
+
+\subsubsection{5. Schalterstellung}
+Die D11 bietet eine Vielzahl von Schaltern. Dies zeigt einerseits wie umfangreich ihre Funktionen waren, andererseits auch die Spezialisierung auf einzelne Anwendungsgebiete. Für unser entwickeltes Programm brauchen wir nur... Selbstverständlich sollten wir die Maschine dann auch noch anschalten (bestenfalls nach Einsetzen unseres fehlerfrei programmierten Schaltbretts).
+
+Zusammenfassend: Alles durch Addition. Weitere Möglichkeiten (Gruppen, Schleifen, bed.vorwärtsverzweigung...)
 
 \subsection{Verwendung im dritten Reich}
 Die DEHOMAG D 11 wurde in der Zeit des dritten Reiches in Deutschland entwickelt (1935). 
@@ -188,16 +219,6 @@ Den eigentlichen Inhalt mit den \textit{ Markups} finden Sie in den entsprechend
 
 Sollten Sie keinen eigenen Rechner haben, auf dem \LaTeX\ Software installiert
 werden kann, können Sie die Rechner der \textit{ lxhalle.informatik.tu-muenchen.de} verwenden.
-Kopieren Sie die auf der Seminar-Homepage bereitgestellte Datei in Ihr home-Verzeichnis in
-der lxhalle. Verbinden Sie sich per SSH mit X11-Forwarding zur lxhalle (unter Linux mit
-\textit{ ssh -X $<$username$>$@lxhalle.informatik.tu-muenchen.de}). Nachdem das Archiv hier mit dem
-Befehl \textit{ tar -xvzf Latex-Einfuehrung.tar.gz} entpackt wurde, stehen Ihnen alle notwendigen
-Dateien im neuen Ordner \textit{ Latex-Einfuehrung} zur Verfügung. Benutzen Sie in diesem Ordner
-\textit{ make} um die \LaTeX-Vorlagen in ein PDF zu verwandeln. Mit \textit{ make clean} löschen Sie
-alle temporären Dateien. Vorausgesetzt die Verbindung ist richtig konfiguriert, können Sie das
-erstellte PDF direkt über den Befehl \textit{ evince Latex-Einfuehrung.pdf} öffnen, ohne das PDF
-vorher wieder auf ihren lokalen Rechner zu kopieren.
-
 
 
 \section{Textformatierung}
@@ -362,9 +383,7 @@ Zeile 2 & C& D\\
 
 \section{Einfügen von Code}
 
-Um Code direkt in das Dokument einzubinden, verwendet man z.B. das Paket \textit{ listings}.
-Für manche Programmiersprachen ist ein rudimentäres Syntax-Highlighting gegeben, welches weiter verfeinert werden kann.
-Es ist z.B. möglich eigene Keywords zu definieren. Wie für alle nutzbaren \LaTeX-Pakete gibt er hierzu Dokumentation, in der man nähere Informationen findet.\\
+Um Code direkt in das Dokument einzubinden, verwendet man z.B. das Paket \textit{ listings}.\\
 
 %Die vielen Parameter, die für das Paket listings gesetzt werden können,
 % kann man entweder in \lstset oder in direkt hinter dem
@@ -386,27 +405,17 @@ int main(){
 
 \section{Literatur}
 
-Natürlich sollten Sie alle Quellen im Literaturverzeichnis angeben
-(=zitieren). Wörtlich zitieren sollten Sie nur bedeutende Aussagen,
-wie z.B.:
 \begin{quote}
 	``I think there is a world market for maybe five computers.''
 	(T.J. Watson, IBM, 1943)
 \end{quote}
-Der übrige Teil der Arbeit müssen Sie in eigenen Worten frei formulieren,
-wobei Sie als Beleg auf die Literatur verweisen können. Z.B. basiert die
-``Analytical Engine'' von Charles Babbage aus dem Jahre 1838 auf dem Dezimalsystem.
 
-
-
-Die entsprechenden Bibtex-Einträge finden Sie in der Datei \textit{ Latex-Einfuehrung.bib}.
 Sie können diese von Hand erstellen, meist ist es jedoch leichter und schneller,
 Veröffentlichungen bei den entsprechenden Verlagen zu suchen und dort den (meist)
 bereitgestellten Bibtex-Eintrag zu kopieren. \\
 Mehrere Läufe des verwendeten Programms \textit{ pdflatex} sind notwendig, um aus einem
 \textit{ $\backslash$cite\{\}} Befehl die entsprechende Referenzierung zu erzeugen und
-im Text anzuzeigen. Achten Sie darauf, dass alle Referenzen richtig erscheinen und
-nicht so angezeigt werden:~\cite{DiesenBibtexEintragGibtEsNicht}.\\
+im Text anzuzeigen.
 
 Nicht nur für den \textit{ $\backslash$cite\{\}} Befehl, sondern auch bei Referenzen mit
 \textit{ $\backslash$ref\{\}}, ist es Sinnvoll, vor dem $\backslash$ das Leerzeichen
@@ -419,14 +428,7 @@ diese extra hervorgerufene neue Zeile %hier durch Wahl ``passender'' Wörter...
 \label{schluss}
 
 Diese Seiten, zusammen mit dem bereitgestellten Archiv, sollten Ihnen eine kurze
-Einleitung zur Arbeit mit \LaTeX\ geben. Für die Seminar-Ausarbeitung sollten die
-hier verwendeten Mittel ausreichend sein. Umfangreichere, detailliertere (und wohl
-auch professionellere) Hilfe und Dokumentation finden Sie reichlich im Internet.
-Neben der Dokumentation einzelner Pakete und zahlreicher Tutorials findet man
-leicht für jede (\LaTeX-)Frage eine Lösung.
-Zusätzlich sind verschiedene Ausgaben von~\cite{Nonrole}
-im Online-Katalog der Bibliothek der TUM verzeichnet, zusammen mit einer
-großen Auswahl weiterer Bücher zum Thema.
+Einleitung zur Arbeit mit \LaTeX\ geben.
 
 
 
@@ -443,6 +445,6 @@ großen Auswahl weiterer Bücher zum Thema.
 
 
 \bibliographystyle{plain}
-% Die Quellen sind in der Datei Latex-Einfuehrung.bib definiert
+% Die Quellen sind in der Datei Lochkartenverarbeitung.bib definiert
 \bibliography{Lochkartenverarbeitung}
 \end{document}
