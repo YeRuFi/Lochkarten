@@ -188,8 +188,10 @@ Im letzten Gang löschen (L) wir die Zähler um in den jetzt folgenden Kartengänge
 
 \subsubsection{3. Übertragungsschema}
 Im Übertragungsschema werden sämtliche Datenpfade geschaltet. Kurz: Wie kommen die Daten aus der Lochkarte in die Zählwerke? Dies wird bei heutigen Computern in der Regel nicht mehr vom Programmierer gefordert, da die Datenpfade fest in der Hardware umgesetzt sind. Das logische Konzept dahinter bleibt aber gleich (??Naja??????????????LOAD Befehle in Assembler; Speicher und Register). Außerdem wird festgelegt, wann unser Programm (Gangschema) ausgeführt werden soll. 
-Abbildung~\ref{EVA} veranschaulicht an welchen Buchsen die Daten der Lochkarte ausgelesen werden können. Während der Kartengänge... In einem Kartengang können dann die Werte
-Aus den Buchsen untere Bürsten erhalten wir also die Daten der aktuellen Lochkarte. Mit den Buchsen obere Bürsten kann bereits auf die nächste Lochkarte zugegriffen werden. Dies wird besonders wichtig für das Konzept der automatischen Gruppenkontrolle.
+Abbildung~\ref{EVA} veranschaulicht an welchen Buchsen die Daten der Lochkarte ausgelesen werden können. Die D11 hat zwei Bürstengruppen: Die oberen und die unteren Bürsten. Die Karten durchlaufen die Bürsten von oben nach unten. In jedem Kartengang können also die Daten der aktuellen Lochkarte aus den unteren Bürsten und zeitgleich die Daten der nächsten Lochkarte aus den oberen Bürsten entnommen werden. Die einzelnen Spalten der Lochkarte sind auf dem Schaltbrett (und auch auf der Programmiervorlage) durchnummeriert. Es gibt folglich für jede der 80 Spalten der Lochkarte jeweils eine Buchse an den unteren und oberen Bürsten. Vorerst lassen wir die oberen Bürsten außen vor und betrachten nur die unteren Bürsten (also die aktuelle Lochkarte). 
+
+
+Mit den Buchsen obere Bürsten kann bereits auf die nächste Lochkarte zugegriffen werden. Dies wird besonders wichtig für das Konzept der automatischen Gruppenkontrolle.
  Multiplexer
 
 \subsubsection{4. Schalten der Kommandobrücke}
