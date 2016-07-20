@@ -84,21 +84,20 @@ Die im Anschluss genauer beschriebenen Maschinen benutzten dasselbe Konzept für 
 
 \subsection{Datenverarbeitung mit Lochkarten}
 
+%Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
+\begin{figure*}[ht]
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/cycle.png}
+}
+\caption{Datenverarbeitung mit Lochkartentechnik}
+\label{EVA}
+\end{figure*}
+
 Die Datenverarbeitung mit Lochkarten unterscheidet sich nicht wesentlich von der Elektronischen Datenverarbeitung.~\cite{WayToD11} Der Prozess nach dem EVA-Prinzip (Eingabe, Verarbeitung und Ausgabe) wird in Abbildung~\ref{EVA} anschaulich dargstellt. \newline
 Zuerst müssen die Daten auf Lochkarten gespeichert werden, was mit Hilfe des Kartenlochers geschieht. Modernere Locher wie in der Abbildung hatten eine Tastatur (wie eine Schreibmaschine) und lochten die codierten Daten in die Lochkarten. Zusätzlich konnten die Daten auch als Klartext auf den oberen Rand der Lochkarte gedruckt werden (wie in Abbildung~\ref{80}), wodurch die Überprüfung und das Auslesen der Karte für den Menschen erleichtert wurde. Für die verarbeitenden Maschinen ist dieser Text natürlich irrelevant, einzig die Position und Anzahl der Löcher bestimmen den tatsächlichen Inhalt. Bei früheren Lochern hingegen musste der Operateur die Löcher noch selber auswählen, also den Code kennen. Für ein 'B' beispielsweise musste der Operateur eine 12er-Zonenlochung und eine 2er-Lochung auf dem Locher eingeben. Da dies fehleranfällig war gab es auch Maschinen zur Überprüfung der Lochkarten: Die Daten mussten also zweimal eingegeben werden um zu verhindern, dass fehlerhafte Daten gespeichert wurden.~\cite{D11} Es gab mit moderneren Lochern auch Maschinen, die alle Funktionen umfassten: Lochen, Verifizieren und Drucken des Klartexts. \newline
 Verarbeitet wurden die Lochkarten in der Regel durch verschiedene Maschinen. So gab es Sortiermaschinen, Tabelliermaschinen und Kartenmischer. Die zentrale Maschine war die Tabelliermaschine. Sie verarbeitete die Daten und gab als Ausgabe eine Tabelle. Da sich Tabelliermaschinen in ihrem Funktionsumfang immer mehr in Richtung Computer entwickelten (und tatsächlich die Vorläufer der Computer waren~\ref{D11}), werden diese in Abbildung~\ref{EVA} einfach als ''calculator'' bezeichnet. In den Kapiteln~\ref{Hollerith} und~\ref{DieD11} der Arbeit werden verschiedene Tabelliermaschinen vorgestellt. Die ersten Tabelliermaschinen waren noch keine ''Rechner'' sondern zählten nur die Lochanzahl in entsprechenden Zählern. Nach und nach kamen dann immer mehr Funktionen wie Addieren, Subtrahieren und später auch Multiplizieren und Dividieren hinzu. Die DEHOMAG D11 gilt als Höhepunkt der Entwicklung von Tabelliermaschinen. An derselben wird auch deutlich werden, wie viele Funktionen eines Computers die Tabelliermaschinen in dieser Zeit bereits umfassten. Zur Vorbereitung der Lochkarten wurden Sortiermaschinen eingesetzt um so ein einfaches Abarbeiten der Daten durch einfache Programme der Tabelliermaschine zu ermöglichen. Dies war auch eng mit den Anwendungsbereichen der Lochkartentechnik verbunden, die zum Beispiel eine Gruppierung nach Artikelnummern erforderten. Mischer\newline
 Die Ausgabe wurde mit einem Drucker erzeugt. Dieser war allerdings abweichend von Abbildung~\ref{EVA} oft in der Tabelliermaschine integriert. Aus logischer Sicht ist die Trennung in Verarbeitung und Ausgabe aber sinnvoll. Dadruch wird deutlich, dass die Maschinen der Verarbeitungsteils  leicht durch einen Computer ersetzt werden könnte, was dann auch geschah. Lochkarten dienten noch lange Zeit als Ein- und Ausgabe für Computer.
-
-
-\begin{figure*}[h]
-    \centerline{
-% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
-    \includegraphics[width=0.9\textwidth]{Abbildungen/punch-card-wiki}
-    }
-    \caption{Codierung der Zeichen der IBM Standardlochkarte mit 80 Spalten}
-    \label{EVA}
-    % Dieses Label bezieht sich auf die Abildung
-\end{figure*}
 
 \section{Die Hollerith-Maschine}
 \label{Hollerith}
@@ -132,20 +131,6 @@ Bei der Volkszählung werden im Zeitraum von einem Jahr Interviewer in jeden Haus
 \begin{figure}
   \begin{center}
     % Eine Abbildung, die 90% der Spaltenbreite einnimmt
-    \includegraphics[width=0.9\columnwidth]{Abbildungen/d11.PNG}
-    \caption{Aufbau der DEHOMAG D11}
-    \label{Aufbau}
-    % Dieses Label bezieht sich auf die Abildung
-  \end{center}
-\end{figure}
-
-%Auch wenn die Graphik inhaltlich zu einem späteren Kapitel gehört,
-% kann es Sinn machen diese weiter vorne zu platzieren, wenn an
-% dieser Stellt besser Platz für eine Grahpik ist.
-%Frei bewegliches Feld für Abbildung in Spaltenbreite
-\begin{figure}
-  \begin{center}
-    % Eine Abbildung, die 90% der Spaltenbreite einnimmt
     \includegraphics[width=0.9\columnwidth]{Abbildungen/museumdigital.jpg}
     \caption{DEHOMAG D11}
     \label{D11Bild1}
@@ -163,6 +148,17 @@ Die Tabelliermaschine D 11 der Deutschen Hollerith Maschinen Gesellschaft wurde 
 \end{quote}
 
 \subsection{Überblick über die Funktionsweise}
+
+\begin{figure*}[ht]
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/d11.PNG}
+}
+\caption{Aufbau der DEHOMAG D11}
+\label{Abb2}
+\end{figure*}
+
+
 
 \subsection{Die Programmierung mit Hilfe des Schaltbretts}
 
@@ -187,6 +183,17 @@ In Gang 2 wollen wir nun das Ergebnis unserer Rechnung ausdrucken. Dazu schreibe
 Im letzten Gang löschen (L) wir die Zähler um in den jetzt folgenden Kartengängen wieder die Werte für das nächste Konto speichern zu können. Zur einfacheren Lesbarkeit unserer Tabelle erzeugen wir auch mit ZT einen weiteren Zeilenumbruch.
 
 \subsubsection{3. Übertragungsschema}
+
+%Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
+\begin{figure*}[ht]
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/Gruppenkontrollenfolie.png}
+}
+\caption{}
+\label{Abb2}
+\end{figure*}
+
 Im Übertragungsschema werden sämtliche Datenpfade geschaltet. Kurz: Wie kommen die Daten aus der Lochkarte in die Zählwerke? Dies wird bei heutigen Computern in der Regel nicht mehr vom Programmierer gefordert, da die Datenpfade fest in der Hardware umgesetzt sind. Das logische Konzept dahinter bleibt aber gleich (??Naja??????????????LOAD Befehle in Assembler; Speicher und Register). Außerdem wird festgelegt, wann unser Programm (Gangschema) ausgeführt werden soll. 
 Abbildung~\ref{EVA} veranschaulicht an welchen Buchsen die Daten der Lochkarte ausgelesen werden können. Die D11 hat zwei Bürstengruppen: Die oberen und die unteren Bürsten. Die Karten durchlaufen die Bürsten von oben nach unten. In jedem Kartengang können also die Daten der aktuellen Lochkarte aus den unteren Bürsten und zeitgleich die Daten der nächsten Lochkarte aus den oberen Bürsten entnommen werden. Die einzelnen Spalten der Lochkarte sind auf dem Schaltbrett (und auch auf der Programmiervorlage) durchnummeriert. Es gibt folglich für jede der 80 Spalten der Lochkarte jeweils eine Buchse an den unteren und oberen Bürsten. Vorerst lassen wir die oberen Bürsten außen vor und betrachten nur die unteren Bürsten (also die aktuelle Lochkarte). 
 
@@ -305,18 +312,6 @@ oder das Logo der TU München (Abbildung~\ref{TUM}) verweisen kann.
 
 
 \section{Abbildungen}
-%Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
-\begin{figure*}[ht]
-\centerline{
-% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
-\includegraphics[width=0.9\textwidth]{Abbildungen/test.pdf}
-}
-\caption{Eine Bildunterschrift, die in ein oder zwei Sätzen
-         erklärt, was auf dem Bilde zu sehen ist.}
-\label{Abb2}
-\end{figure*}
-
-
 
 Abbildungen lassen sich entweder in Spaltenbreite (siehe Abb.~\ref{TUM}), oder
 in voller Seitenbreite einbinden (siehe Abb.~\ref{Abb2}). Den besten Ort für die Zeichnung wählt Latex
