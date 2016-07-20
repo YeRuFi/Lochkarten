@@ -132,7 +132,7 @@ Bei der Volkszählung werden im Zeitraum von einem Jahr Interviewer in jeden Haus
   \begin{center}
     % Eine Abbildung, die 90% der Spaltenbreite einnimmt
     \includegraphics[width=0.9\columnwidth]{Abbildungen/museumdigital.jpg}
-    \caption{DEHOMAG D11}
+    \caption{DEHOMAG D11: Links oben Kartenzufuhr}
     \label{D11Bild1}
     % Dieses Label bezieht sich auf die Abildung
   \end{center}
@@ -141,6 +141,15 @@ Bei der Volkszählung werden im Zeitraum von einem Jahr Interviewer in jeden Haus
 
 Die Tabelliermaschine D 11 der Deutschen Hollerith Maschinen Gesellschaft wurde 1935 Den Entwicklern der Maschine war durchaus bewusst, dass ihre Maschine eigentlich ein Computer und nicht nur eine Tabelliermaschine war: Bei einem internen ...Wettbewerb 
 
+\begin{figure}
+  \begin{center}
+    % Eine Abbildung, die 90% der Spaltenbreite einnimmt
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/Tabelliermaschine_d11wiki.jpg}
+    \caption{DEHOMAG D11: Unten rechts erkennt man das Schaltbrett}
+    \label{D11Bild2}
+    % Dieses Label bezieht sich auf die Abildung
+  \end{center}
+\end{figure}
 
 \begin{quote}
 	``The D 11 is the missing link between the tabulators of the punched-card era and the electronic computer era.'' 
@@ -169,12 +178,33 @@ Das im folgenden behandelte Beispiel ist die Saldierung mit wechselseitiger Nied
 Strukturiert wird die Programmierung durch folgende Schritte::
 
 \subsubsection{1. Listenbild}
+
+%Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
+\begin{figure*}[ht]
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/ListenbildAusarbeitung.png}
+}
+\caption{Listenbild für das Saldierungsprogramm}
+\label{lb}
+\end{figure*}
+
 Das Listenbild gibt einen Überblick und beantwortet die Fragen: Was habe ich, was möchte ich haben? Es zeigt uns welche Daten auf den Lochkarten an welcher Stelle gespeichert sind und wie die ausgedruckte Tabelle aussehen soll (unser Ziel bzw. die Ausgabe unseres Programms). In der modernen Softwaretechnik würde man von den funktionalen Anforderungen an unser Programm sprechen ???????????????????????????
 Aus der oberen Tabelle des Listenbildes (abgeschrägte Kante als Andeutung der Lochkarten) können wir das Format der Lochkarte erkennen. In den drei ersten Spalten steht die Kontonummer (also eine Zahl zwischen 0 und 999; aus Anschaulichkeitsgründen für eine verhältnismäßig kleine Bank). In den zehn darauf folgenden Spalten sind die Umsätze des Kontos gespeichert. Dabei werden negative und positive in denselben Spalten gespeichert und mit einem Steuerloch (11er Lochung) voneinander unterschieden. Soll-Umsätze sind dabei positiv, Haben-Umsätze negativ. Negativ und positiv liegen eben im Auge des Betrachters: Aus Sicht der Bank ist das Guthaben der Kunden negativ, ihre Schulden dagegen positiv (das ist auch unsere Sicht als Programmierer für die Bank). Unsere Zielausgabe ist eine Tabelle mit den Umsätzen zu jedem Konto. Jeweils einzeln und am Ende die Gesamtsummen der Umsätze und der Saldo (Guthaben) des Kontos. Dabei sollen positive bzw. negative Umsätze und Salden in verschiedene Spalten gedruckt werden. Nun können wir bereits die Schreibwerke festlegen, die die Umsätze und Summen drucken sollen. Wie in Abbildung~\ref{DieD11} bereits gesehen, hat die D11 sieben Schreibwerke, welche abteigend von links nach rechts drucken. Um also unsere Tabelle zu drucken müssen wir für die Kontonummer das größte Schreibwerk wählen (S5 oberhalb der Tabelle notiert). Die anderen Werte schreiben wir einfach rechts daneben also jeweils mit den niedrigeren Schreibwerken (S4 bis S1). 
 	
 Das Listenbild bildet die Grundlage für unser Programm. Wir werden in den nächsten Schritten immer wieder darauf zurückkommen.
 
 \subsubsection{2. Gangschema}
+
+\begin{figure*}[ht]
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/GangschemaAusarbeitung.png}
+}
+\caption{Gangschema für das Saldierungsprogramm}
+\label{lb}
+\end{figure*}
+
 Das Gangschema ist das eigentliche Programm für die D11-Maschine. Ein Gang entspricht einem Takt?????????Maschinenzyklus?????????? Aus technischer Sicht entspricht ein Gang genau einer Umdrehung des Elektromotors. Die Nocken???Wellen im Inneren übertragen. Genaueres siehe Die Schaltbuchsen=?????  Es gibt 2 verschiedene Gangarten: Kartengänge und Zwischengänge. In jedem Kartengang wird eine neue Lochkarte eingelesen und die in ihr gespeicherten Werte in ein Zählwerk übernommen und eventuell auch ausgedruckt (je nach Schaltung kann eins, beides oder nichts davon passieren; dazu mehr in Punkt 3 Übertragungsschema). In jedem Zwischengang wird eine Zeile des von uns vorgegebenen Gangschemas ausgeführt. Dabei passieren parallel sämtliche Operationen, die wir als Programmierer vorgegeben haben. Eine Einschränkung der D11 ist die Begrenzung auf 9 Zwischengänge; unser Programm kann also nur aus maximal 9 Zeilen bestehen. Allerdings können durch Programmierung eines Dauergangs auch Schleifen programmiert werden. Unser Programm benötigt nur 4 der 9 Zwischengänge. Die Abarbeitung der Gänge erfolgt absteigend, beginnend mit dem Neunten. Nicht benötigte Gänge können abgeschaltet werden (siehe später). Im Listenbild haben wir bereits festgelegt, welche Schreibwerke die einzelnen Summen schreiben. In den Spalten des Gangschemas sind die einzelnen Schreibwerke und Zählwerke aufgelistet.\\
 Also beginnen wir im 4. Zwischengang (d.h. im ersten Programmschritt) mit zwei Schreibbefehlen (S). Schreibwerk 4 und Schreibwerk 3 drucken also die in den Zählern während der Kartengänge aufgelaufenen Summen (Z4: Soll-Umsätze; Z3: Haben-Umsätze). In diesem Fall schreiben wir mit Schreibwerk 4 den Inhalt von Zählwerk 4. Allerdings sind Zählwerke und Schreibwerke aber unabhängig voneinander (Wir könnten genausogut mit Schreibwerk 4 den Inhalt von Zähler 3 drucken). Wie die Summen in die Zählwerke kommen, werden wir erst später im Übertragungsschema durch eine entsprechende Verkabelung festlegen. Abschließend müssen wir für Gang 4 noch festlegen, ob wir eine Schreibwerksbewegung (SW) oder einen Zeilentransfer (ZT) durchführen wollen. Eine Schreibwerksbewegung ist immer dann zu schalten, falls etwas geschrieben wird. In unserem Fall schreiben wir zwei Summen, kreuzen also auf jeden Fall SW an. Für ZT (neue Zeile) werfen wir einen Blick ins Listenbild. Da nur am Anfang jedes Kartengangs ein Zeilentransfer erfolgt, benötigen wir hier einen weiteren Zeilentransfer. Ansonsten würden wir den letzen Umsatzeintrag überdrucken.\\
 In Gang 3 führen wir die eigentliche Saldierung durch: Wir subtrahieren Z3 von Z4. Dies geschieht mit Hilfe der subtraktiven Sendung (Quersubtraktion). Da die D11 MAschine intern nur addieren kann, wird automatisch das 9er Komplement von Zähler 3 gebildet und dann auf Zähler 4 addiert. Dies geschieht mit Hilfe eines Hilfsapparates, den wir hier bereits festlegen: Hilfsapparat IV???????????????? (dazu mehr in Punkt 4, wenn wir unser Gangschema auf der Kommandobrücke umsetzen). 
