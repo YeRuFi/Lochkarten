@@ -68,7 +68,7 @@ Lochkarten wurden über einen sehr langen Zeitraum als Speichermedium verwendet. 
 
 \subsection{Codierung von Lochkarten}
 
-\begin{figure*}[h]
+\begin{figure*}
     \centerline{
 % Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
     \includegraphics[width=0.9\textwidth]{Abbildungen/punch-card-wiki}
@@ -85,7 +85,7 @@ Die im Anschluss genauer beschriebenen Maschinen benutzten dasselbe Konzept für 
 \subsection{Datenverarbeitung mit Lochkarten}
 
 %Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
-\begin{figure*}[ht]
+\begin{figure*}
 \centerline{
 % Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
 \includegraphics[width=0.9\textwidth]{Abbildungen/cycle.png}
@@ -158,7 +158,7 @@ Die Tabelliermaschine D 11 der Deutschen Hollerith Maschinen Gesellschaft wurde 
 
 \subsection{Überblick über die Funktionsweise}
 
-\begin{figure*}[ht]
+\begin{figure*}
 \centerline{
 % Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
 \includegraphics[width=0.9\textwidth]{Abbildungen/d11.PNG}
@@ -180,7 +180,7 @@ Strukturiert wird die Programmierung durch folgende Schritte::
 \subsubsection{1. Listenbild}
 
 %Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
-\begin{figure*}[ht]
+\begin{figure*}
 \centerline{
 % Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
 \includegraphics[width=0.9\textwidth]{Abbildungen/ListenbildAusarbeitung.png}
@@ -190,19 +190,22 @@ Strukturiert wird die Programmierung durch folgende Schritte::
 \end{figure*}
 
 Das Listenbild gibt einen Überblick und beantwortet die Fragen: Was habe ich, was möchte ich haben? Es zeigt uns welche Daten auf den Lochkarten an welcher Stelle gespeichert sind und wie die ausgedruckte Tabelle aussehen soll (unser Ziel bzw. die Ausgabe unseres Programms). In der modernen Softwaretechnik würde man von den funktionalen Anforderungen an unser Programm sprechen ???????????????????????????
-Aus der oberen Tabelle des Listenbildes (abgeschrägte Kante als Andeutung der Lochkarten) können wir das Format der Lochkarte erkennen. In den drei ersten Spalten steht die Kontonummer (also eine Zahl zwischen 0 und 999; aus Anschaulichkeitsgründen für eine verhältnismäßig kleine Bank). In den zehn darauf folgenden Spalten sind die Umsätze des Kontos gespeichert. Dabei werden negative und positive in denselben Spalten gespeichert und mit einem Steuerloch (11er Lochung) voneinander unterschieden. Soll-Umsätze sind dabei positiv, Haben-Umsätze negativ. Negativ und positiv liegen eben im Auge des Betrachters: Aus Sicht der Bank ist das Guthaben der Kunden negativ, ihre Schulden dagegen positiv (das ist auch unsere Sicht als Programmierer für die Bank). Unsere Zielausgabe ist eine Tabelle mit den Umsätzen zu jedem Konto. Jeweils einzeln und am Ende die Gesamtsummen der Umsätze und der Saldo (Guthaben) des Kontos. Dabei sollen positive bzw. negative Umsätze und Salden in verschiedene Spalten gedruckt werden. Nun können wir bereits die Schreibwerke festlegen, die die Umsätze und Summen drucken sollen. Wie in Abbildung~\ref{DieD11} bereits gesehen, hat die D11 sieben Schreibwerke, welche abteigend von links nach rechts drucken. Um also unsere Tabelle zu drucken müssen wir für die Kontonummer das größte Schreibwerk wählen (S5 oberhalb der Tabelle notiert). Die anderen Werte schreiben wir einfach rechts daneben also jeweils mit den niedrigeren Schreibwerken (S4 bis S1). 
+Aus der oberen Tabelle des Listenbildes (abgeschrägte Kante als Andeutung der Lochkarten) können wir das Format der Lochkarte erkennen (siehe~\ref{lb}). In den drei ersten Spalten steht die Kontonummer (also eine Zahl zwischen 0 und 999; aus Anschaulichkeitsgründen für eine verhältnismäßig kleine Bank). In den zehn darauf folgenden Spalten sind die Umsätze des Kontos gespeichert. Dabei werden negative und positive in denselben Spalten gespeichert und mit einem Steuerloch (11er Lochung) voneinander unterschieden. Soll-Umsätze sind dabei positiv, Haben-Umsätze negativ. Negativ und positiv liegen eben im Auge des Betrachters: Aus Sicht der Bank ist das Guthaben der Kunden negativ, ihre Schulden dagegen positiv (das ist auch unsere Sicht als Programmierer für die Bank). In der Tabelle stellt jede der Zeilen beispielhaft eine Lochkarte dar. Unsere Zielausgabe ist eine Tabelle mit den Umsätzen zu jedem Konto (untere Tabelle von Abbildung~\ref{lb}). Jeweils einzeln (für jede Lochkarte) gedruckt und am Ende die Summen der Umsätze und der Saldo (Guthaben) des Kontos. Dabei sollen positive bzw. negative Umsätze und Salden in verschiedene Spalten gedruckt werden. Nun können wir bereits die Schreibwerke festlegen, die die Umsätze und Summen drucken sollen. Wie in Abbildung~\ref{DieD11} bereits gesehen, hat die D11 sieben Schreibwerke, welche abteigend von links nach rechts drucken. Um also unsere Tabelle zu drucken müssen wir für die Kontonummer das größte Schreibwerk wählen (S5 oberhalb der Tabelle notiert). Die anderen Werte schreiben wir einfach rechts daneben also jeweils mit den niedrigeren Schreibwerken (S4 bis S1). 
 	
 Das Listenbild bildet die Grundlage für unser Programm. Wir werden in den nächsten Schritten immer wieder darauf zurückkommen.
 
+
+
+
 \subsubsection{2. Gangschema}
 
-\begin{figure*}[ht]
+\begin{figure*}
 \centerline{
 % Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
 \includegraphics[width=0.9\textwidth]{Abbildungen/GangschemaAusarbeitung.png}
 }
 \caption{Gangschema für das Saldierungsprogramm}
-\label{lb}
+\label{gs}
 \end{figure*}
 
 Das Gangschema ist das eigentliche Programm für die D11-Maschine. Ein Gang entspricht einem Takt?????????Maschinenzyklus?????????? Aus technischer Sicht entspricht ein Gang genau einer Umdrehung des Elektromotors. Die Nocken???Wellen im Inneren übertragen. Genaueres siehe Die Schaltbuchsen=?????  Es gibt 2 verschiedene Gangarten: Kartengänge und Zwischengänge. In jedem Kartengang wird eine neue Lochkarte eingelesen und die in ihr gespeicherten Werte in ein Zählwerk übernommen und eventuell auch ausgedruckt (je nach Schaltung kann eins, beides oder nichts davon passieren; dazu mehr in Punkt 3 Übertragungsschema). In jedem Zwischengang wird eine Zeile des von uns vorgegebenen Gangschemas ausgeführt. Dabei passieren parallel sämtliche Operationen, die wir als Programmierer vorgegeben haben. Eine Einschränkung der D11 ist die Begrenzung auf 9 Zwischengänge; unser Programm kann also nur aus maximal 9 Zeilen bestehen. Allerdings können durch Programmierung eines Dauergangs auch Schleifen programmiert werden. Unser Programm benötigt nur 4 der 9 Zwischengänge. Die Abarbeitung der Gänge erfolgt absteigend, beginnend mit dem Neunten. Nicht benötigte Gänge können abgeschaltet werden (siehe später). Im Listenbild haben wir bereits festgelegt, welche Schreibwerke die einzelnen Summen schreiben. In den Spalten des Gangschemas sind die einzelnen Schreibwerke und Zählwerke aufgelistet.\\
@@ -215,21 +218,25 @@ Im letzten Gang löschen (L) wir die Zähler um in den jetzt folgenden Kartengänge
 \subsubsection{3. Übertragungsschema}
 
 %Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
-\begin{figure*}[ht]
+\begin{figure*}
 \centerline{
 % Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
 \includegraphics[width=0.9\textwidth]{Abbildungen/Gruppenkontrollenfolie.png}
 }
-\caption{}
-\label{Abb2}
+%\caption{}
+\label{Gruppen}
 \end{figure*}
 
 Im Übertragungsschema werden sämtliche Datenpfade geschaltet. Kurz: Wie kommen die Daten aus der Lochkarte in die Zählwerke? Dies wird bei heutigen Computern in der Regel nicht mehr vom Programmierer gefordert, da die Datenpfade fest in der Hardware umgesetzt sind. Das logische Konzept dahinter bleibt aber gleich (??Naja??????????????LOAD Befehle in Assembler; Speicher und Register). Außerdem wird festgelegt, wann unser Programm (Gangschema) ausgeführt werden soll. 
-Abbildung~\ref{EVA} veranschaulicht an welchen Buchsen die Daten der Lochkarte ausgelesen werden können. Die D11 hat zwei Bürstengruppen: Die oberen und die unteren Bürsten. Die Karten durchlaufen die Bürsten von oben nach unten. In jedem Kartengang können also die Daten der aktuellen Lochkarte aus den unteren Bürsten und zeitgleich die Daten der nächsten Lochkarte aus den oberen Bürsten entnommen werden. Die einzelnen Spalten der Lochkarte sind auf dem Schaltbrett (und auch auf der Programmiervorlage) durchnummeriert. Es gibt folglich für jede der 80 Spalten der Lochkarte jeweils eine Buchse an den unteren und oberen Bürsten. Vorerst lassen wir die oberen Bürsten außen vor und betrachten nur die unteren Bürsten (also die aktuelle Lochkarte). 
+Abbildung~\ref{Gruppen} veranschaulicht an welchen Buchsen die Daten der Lochkarte ausgelesen werden können. Die D11 hat zwei Bürstengruppen: Die oberen und die unteren Bürsten. Die Karten durchlaufen die Bürsten von oben nach unten. In jedem Kartengang können also die Daten der aktuellen Lochkarte aus den unteren Bürsten und zeitgleich die Daten der nächsten Lochkarte aus den oberen Bürsten entnommen werden. Die einzelnen Spalten der Lochkarte sind auf dem Schaltbrett (und auch auf der Programmiervorlage) durchnummeriert. Es gibt folglich für jede der 80 Spalten der Lochkarte jeweils eine Buchse an den unteren und oberen Bürsten. Damit ist es möglich die Werte auf zwei aufeinanderfolgenden Lochkarten zu vergleichen, wodurch wir festlegen können, wann die Maschine aufhören soll Karten zu lesen und das von uns programmierte Gangschema ausführen soll: Dies ist der Wechsel von den Kartengängen zu den Zwischengängen. Da wir im normalen Anwendungsfall der Tabelliermaschine unser Programm genau dann ausführen, wenn eine Gruppe zusammengehörender Lochkarten abgearbeitet wurde, wird dies auch als automatische Gruppenkontrolle bezeichnet. Die Lochkarten wurden vor der Verarbeitung durch die Tabelliermaschine D11 durch eine Sortiermaschine nach Kontonummer sortiert. Somit können wir in jedem Kartengang einen Vergleich durchführen, ob sich die Kontonummer auf der nächsten Karte ändert. Wenn ja, haben wir alle Lochkarten einer Gruppe (eines Kontos) abgearbeitet, es wird keine weitere Lochkarte mit der gleichen Kontonummer mehr auftauchen. Die Summen in den Zählern entsprechen nun also bereits dem Gesamtumsatz auf dem Konto und unser Progamm kann ausgeführt werden. Um diesen Vergleich auf dem Schaltbrett zu programmieren verwenden wir das Feld zwischen den oberen und unteren Bürsten (siehe ~\ref{Gruppen}). Die ersten drei Spalten der unteren Bürsten (die Kontonummer) werden zu den untersten drei Stellen des Felds ''nach unteren Bürsten'' geführt. Genauso holen wir die Kontonummer der nächsten Karte aus dem Feld obere Bürsten und verbinden die drei Ziffern mit der Reihe ''nach oberen Bürsten''. Für uns relevant ist außerdem die Reihe Abriegelung. Hier können wir festlegen wie viele Stellen verglichen werden sollen. Wir verbinden also U (Untergruppe) mit dem dritten Feld der Abriegelung um bei der Gruppenkontrolle nur 3 Stellen zu vergleichen. Die anderen Felder sind für unser Programm nicht notwendig: Es könnten zum Beispiel wenn gewünscht zusätzliche Gruppen geschaltet werden (H und Ü für Haupt- und Übergruppe). Beispielsweise könnte man die Lochkarten nicht nur nach Kontonummer, sondern auch nach Filialnummer (wenn vorhanden) gruppieren und so die Umsätze in einer Filiale errechnen.\\
+Zurück zu unserem Beispiel: Wir haben nun die Gruppenkontrolle geschalten, aber nach wie vor laufen noch keine Werte in unsere Zähler. Wir müssen also die Werte aus den unteren Bürsten in die Zähler führen. Bei einfachen Schaltungen ist dies direkt möglich, da wir aber zwischen negativen und positiven Umsätzen unterscheiden möchten,  benötigen wir ein Schlatelement dazwischen. Dieses soll wie eine Weiche abhängig vom Vorzeichen die Umsätze in die Zähler vier und drei leiten. Dafür gibt es in der D11 die Steuerapparate, die auf dem Schaltbrett zwischen Zähl- und Summenwerk liegen. Ein Steuerapparat implementiert einen 2-zu-1 Multiplexer bzw. 1-zu-2 Demultiplexer (je nach geschalteter Richtung) mit Relaistechnik. Jeder Steuerapparat beinhaltet 11 2-zu-1 Multiplexer (für die 11 Stellen eines Zählwerks). Liegt Strom am Auswahlfeld an (Steuerloch vorhanden, bzw. negativer Umsatz) so gibt es eine Verbindung von Mitte und Arbeit. Fließt kein Strom gibt es eine Verbindung zwischen Ruhe und Mitte.\\
+Bei der weiteren Schaltung müssen wir auch eine Übertragung (subtraktive Sendung in Zwischengang 3) berücksichtigen. Zur strukturierten Schaltung gibt uns das Handbuch die folgenden Regeln:
+1. Übertragung schalten (für Zwischengang 3)
+2. Bürstenanschlüsse schalten (Kettenregel beachten)
+3. Postenschreibung schalten
+4. Summenwerke schalten 
 
-
-Mit den Buchsen obere Bürsten kann bereits auf die nächste Lochkarte zugegriffen werden. Dies wird besonders wichtig für das Konzept der automatischen Gruppenkontrolle.
- Multiplexer
+die auch in der heutigen Rechnerarchitektur??MUX
 
 \subsubsection{4. Schalten der Kommandobrücke}
 Als Grundlage zum Schalten der Kommandobrücke verwenden wir unser Gangschema. Wir wollen unser Programm jetzt auf die Maschine schalten.
@@ -238,6 +245,7 @@ Als Grundlage zum Schalten der Kommandobrücke verwenden wir unser Gangschema. Wi
 Die D11 bietet eine Vielzahl von Schaltern. Dies zeigt einerseits wie umfangreich ihre Funktionen waren, andererseits auch die Spezialisierung auf einzelne Anwendungsgebiete. Für unser entwickeltes Programm brauchen wir nur... Selbstverständlich sollten wir die Maschine dann auch noch anschalten (bestenfalls nach Einsetzen unseres fehlerfrei programmierten Schaltbretts).
 
 Zusammenfassend: Alles durch Addition. Weitere Möglichkeiten (Gruppen, Schleifen, bed.vorwärtsverzweigung...)
+Vereinfachte Darstellung Übertragungsschema.
 
 \subsection{Verwendung im dritten Reich}
 Die DEHOMAG D 11 wurde in der Zeit des dritten Reiches in Deutschland entwickelt (1935). 
