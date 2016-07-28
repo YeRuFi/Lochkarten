@@ -171,6 +171,14 @@ Die DEHOMAG D11 wurde 25 Jahre lang produziert und somit erst -......-.-. die IB
 
 \subsection{Die Programmierung mit Hilfe des Schaltbretts}
 
+\begin{figure*}
+\centerline{
+\includegraphics[width=0.8\textwidth]{Abbildungen/Schalttafeleinteilung.PNG}
+}
+\caption{Überblick über den Aufbau der Schalttafel der DEHOMAG D11}
+\label{strukt}
+\end{figure*}
+
 Hier soll an Hand eines typischen Beispiels eine kurze Einführung in die Programmierung der DEHOMAG D11 gegeben werden. Dabei wird auch vergleichend aufgezeigt, inwiefern Konzepte der modernen Rechnerarchitektur bereits in dieser Maschine Anwendung fanden. Das Beispiel ist entnommen aus~\cite{Schaltung}. Diese Quelle enthält leider kein genaues Erscheinungsjahr; auf einem Schaltplan findet sich aber das Datum 25.2.50. Dies erklärt sich durch den langen Zeitraum, in dem die D11-Maschine verwendet wurde. Insbesondere begann die IBM erst nach dem 2. Weltkrieg entsprechende Fortbildungen zur Programmierung durchzuführen. Zwar waren Programmierhandbücher bereits vor dem Krieg verfügbar, jedoch war das Konzept der Programmierung den Anwendern noch fremd und die Möglichkeiten der D11 konnten kaum genutzt werden.~\cite{WayToD11}\\
 Das im folgenden behandelte Beispiel ist die Saldierung mit wechselseitiger Niederschrift der Salden. Die Saldierung ist ein typisches Anwendungsbeispiel der D11: Lange Zeit gab es besonders von deutschen Unternehmen die Nachfrage nach einer Tabelliermaschine, die die Saldierung automatisch durchführt; zuvor musste sie halb manuell durchgeführt werden. Die Programmierung der D11 erfolgte mit Hilfe des Schaltbretts, also durch Stecken von Verbindungen. Die Struktur des Schaltbretts lässt sich Abbildung~\ref{strukt} entnehmen. Der obere Teil (Kommandobrücke) enthält den überwiegenden Teil des Programms. Im unteren Bereich befinden sich Anschlussbuchsen der einzelnen Zählwerke und Schreibwerke. Strukturiert wird die Programmierung durch folgende Schritte: Erstellen von Listenbild und Gangschema, danach schalten von Übertragungsschema und Kommandobrücke. Abschließend folgt die Angabe, welche Schalter an der Maschine umgelegt werden müssen. Normalerweise erfolgte die Programmierung auf Papier; die fertige Schaltung konnte dann einfach auf dem Schaltbrett gesteckt werden.
 
@@ -238,6 +246,14 @@ Bei der weiteren Schaltung müssen wir auch eine Übertragung (subtraktive Sendung
 3. Postenschreibung schalten
 4. Summenwerke schalten 
 
+\begin{figure*}
+\centerline{
+\includegraphics[width=0.9\textwidth]{Abbildungen/UebertragungschmemaKomplett.png}
+}
+\caption{Schalttafel der DEHOMAG D11 mit Saldierungsprogramm}
+\label{Schalttafel}
+\end{figure*}
+
 Wir beginnen also mit der Übertragung aus Zwischengang 3 (siehe Gangschema~\ref{gs}): Der Inhalt von Zähler 3 soll an Zähler 4 gesendet werden. Um Werte aus einem Zähler auszulesen wird das jeweilige Summenwerk verwendet. Für jeden Zähler (also 8 mal auf dem Schaltbrett) gibt es die Buchsen Zählwerk (Eingang), Summenwerk (Ausgang), und außerdem auch einen Steuerapparat zur entsprechenden Schaltung. Da wir nicht wissen wie viele Stellen eine Zahl in einem Zähler hat (Überträge), werden normalerweise immer alle 11 Stellen des Zählers ausgelesen (also alle 11 Stellen des Summenwerks verwendet). Wir verbinden also das Summenwerk 3 mit den Arbeitsbuchsen des Steuerapparates 3. Wir könnten natürlich auch jeden anderen Steuerapparat verwenden aber dieser liegt unserem Zähler am nächsten. Als Ausgang verwenden wir die Mittebuchsen die direkt mit Zählwerk 4 verbunden werden. Damit haben wir bereits die Übertragung geschalten. Nun muss später in Gang 3 nur sichergestellt werden, dass Steuerapparat 3 auf Arbeit umgeschaltet wird und der Wert kann korrekt übertragen werden.\\
 Als zweiten Schritt müssen die Bürstenanschlüsse geschaltet werden. Wie bekommen wir die Daten aus der Lochkarte in die Zähler? Wie bereits beschrieben verwenden wir einfach die Buchsen ''untere Bürsten'' und verbinden diese mit dem Zähler. In einfachen Programmen ist dies direkt möglich, wir jedoch haben zwei Probleme. An Zählwerk 4 haben wir gerade bereits einen Dateneingang angeschlossen, die Kettenregel besagt aber, dass nie zwei Stromeingänge auf einer Buchse (oder Doppelbuchse) aufeinandertreffen dürfen. Außerdem wollen wir je nach Vorzeichen des Umsatzes den Wert in Zähler 3 oder Zähler 4 speichern. Folglich benötigen wir einen weiteren Steuerapparat; als Selectsignal (Demultiplexer) verwenden wir nun das Vorzeichen (11er Lochung). Wir verwenden Steuerapparat 2 und verbinden die Spalten 4-13 (Umsatz) mit der Mitte des Steuerapparates. Die Ruhe (positives Vorzeichen, keine 11er-Lochung) verbinden wir indirekt mit Zähler 4. Dies geschieht über den Steuerapparat 2 , welcher sich bis auf in Zwischengang 3 immer in Ruhe befinden wird, und damit den Wert über die Mitte an Z4 weiterleitet.  Die Arbeit von Steuerapparat 2 (negatives Vorzeichen, also Haben-Umsatz) wird mit Z3 verbunden. Schließlich muss noch das Vorzeichen als Erregersignal von Steuerapparat 2 festgelegt werden: Da das Umschalten der Relais von Steuerapparat 2 Zeit benötigt, müssen wir den Vorgang bereits einen Gang vorher anregen. Das Vorzeichen wird also von den oberen Bürsten abgefühlt. Dies erfolgt durch die Verbindung von Lochkartenspalte 4 mit der Buchse von Steuerapparat 2.\\
 Der nächste Schritt im Übertragungsschema ist die Postenschreibung. Wie für jedes Zählwerk gibt es auch für jedes der sieben Schreibwerke eine Doppelbuchse für die Postenschreibung. Bei unserem Beispiel möchten wir die Umsätze jeder Lochkarte drucken. Dazu wird einfach der Umsatz an die Postenschreibung weitergeleitet, also eine Verbindung von Zählwerk 3 zu Postenschreibung 3 und von Zählwerk 4 zu Postenschreibung 4 geschalten.\\
@@ -247,6 +263,15 @@ Als letztes müssen die Summenwerke geschaltet werden. Dies geschieht hauptsächli
 die auch in der heutigen Rechnerarchitektur??MUX
 
 \subsubsection*{4. Schalten der Kommandobrücke}
+
+\begin{figure*}
+\centerline{
+\includegraphics[width=0.9\textwidth]{Abbildungen/Kommandobruecke.png}
+}
+\caption{Schalttafel der DEHOMAG D11 mit Saldierungsprogramm}
+\label{kommando}
+\end{figure*}
+
 Als Grundlage zum Schalten der Kommandobrücke verwenden wir unser Gangschema. Wir wollen unser Programm jetzt auf die Maschine schalten. Zuerst legen wir im Feld Maschinengänge fest wie viele Zwischengänge wir benötigen. Die ersten 5 Gänge (9-5) brauchen wir nicht. Wir verbinden also Gang 9 mit der Nullbuchse neben Gang 5 (alternativ kann auch jeder Gang einzeln mit 0 verbunden werden). 
 
 \subsubsection*{5. Schalterstellung}
