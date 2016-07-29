@@ -203,7 +203,7 @@ Aus der oberen Tabelle des Listenbildes (abgeschrägte Kante als Andeutung der Lo
 	
 Das Listenbild bildet die Grundlage für unser Programm. Wir werden in den nächsten Schritten immer wieder darauf zurückkommen.
 
-
+Summenzeichen***
 
 
 \subsubsection*{2. Gangschema}
@@ -232,25 +232,25 @@ Im letzten Gang löschen (L) wir die Zähler um in den jetzt folgenden Kartengänge
 % Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
 \includegraphics[width=0.9\textwidth]{Abbildungen/Gruppenkontrollenfolie.png}
 }
-%\caption{}
+\caption{Auslesen der Lochkarten und Funktionsweise der automatischen Gruppenkontrolle}
 \label{Gruppen}
 \end{figure*}
 
 Im Übertragungsschema werden sämtliche Datenpfade geschaltet. Kurz: Wie kommen die Daten aus der Lochkarte in die Zählwerke? Dies wird bei heutigen Computern in der Regel nicht mehr vom Programmierer gefordert, da die Datenpfade fest in der Hardware umgesetzt sind. Das logische Konzept dahinter bleibt aber gleich (??Naja??????????????LOAD Befehle in Assembler; Speicher und Register). Außerdem wird festgelegt, wann unser Programm (Gangschema) ausgeführt werden soll. 
 Abbildung~\ref{Gruppen} veranschaulicht an welchen Buchsen die Daten der Lochkarte ausgelesen werden können. Die D11 hat zwei Bürstengruppen: Die oberen und die unteren Bürsten. Die Karten durchlaufen die Bürsten von oben nach unten. In jedem Kartengang können also die Daten der aktuellen Lochkarte aus den unteren Bürsten und zeitgleich die Daten der nächsten Lochkarte aus den oberen Bürsten entnommen werden. Die einzelnen Spalten der Lochkarte sind auf dem Schaltbrett (und auch auf der Programmiervorlage) durchnummeriert. Es gibt folglich für jede der 80 Spalten der Lochkarte jeweils eine Buchse an den unteren und oberen Bürsten. Damit ist es möglich die Werte auf zwei aufeinanderfolgenden Lochkarten zu vergleichen, wodurch wir festlegen können, wann die Maschine aufhören soll Karten zu lesen und das von uns programmierte Gangschema ausführen soll: Dies ist der Wechsel von den Kartengängen zu den Zwischengängen. Da wir im normalen Anwendungsfall der Tabelliermaschine unser Programm genau dann ausführen, wenn eine Gruppe zusammengehörender Lochkarten abgearbeitet wurde, wird dies auch als automatische Gruppenkontrolle bezeichnet. Die Lochkarten wurden vor der Verarbeitung durch die Tabelliermaschine D11 durch eine Sortiermaschine nach Kontonummer sortiert. Somit können wir in jedem Kartengang einen Vergleich durchführen, ob sich die Kontonummer auf der nächsten Karte ändert. Wenn ja, haben wir alle Lochkarten einer Gruppe (eines Kontos) abgearbeitet, es wird keine weitere Lochkarte mit der gleichen Kontonummer mehr auftauchen. Die Summen in den Zählern entsprechen nun also bereits dem Gesamtumsatz auf dem Konto und unser Progamm kann ausgeführt werden. Um diesen Vergleich auf dem Schaltbrett zu programmieren verwenden wir das Feld zwischen den oberen und unteren Bürsten (siehe ~\ref{Gruppen}). Die ersten drei Spalten der unteren Bürsten (die Kontonummer) werden zu den untersten drei Stellen des Felds ''nach unteren Bürsten'' geführt. Genauso holen wir die Kontonummer der nächsten Karte aus dem Feld obere Bürsten und verbinden die drei Ziffern mit der Reihe ''nach oberen Bürsten''. Für uns relevant ist außerdem die Reihe Abriegelung. Hier können wir festlegen wie viele Stellen verglichen werden sollen. Wir verbinden also U (Untergruppe) mit dem dritten Feld der Abriegelung um bei der Gruppenkontrolle nur 3 Stellen zu vergleichen. Die anderen Felder sind für unser Programm nicht notwendig: Es könnten zum Beispiel wenn gewünscht zusätzliche Gruppen geschaltet werden (H und Ü für Haupt- und Übergruppe). Beispielsweise könnte man die Lochkarten nicht nur nach Kontonummer, sondern auch nach Filialnummer (wenn vorhanden) gruppieren und so die Umsätze in einer Filiale errechnen.\\
 Zurück zu unserem Beispiel: Wir haben nun die Gruppenkontrolle geschalten, aber nach wie vor laufen noch keine Werte in unsere Zähler. Wir müssen also die Werte aus den unteren Bürsten in die Zähler führen. Bei einfachen Schaltungen ist dies direkt möglich, da wir aber zwischen negativen und positiven Umsätzen unterscheiden möchten,  benötigen wir ein Schlatelement dazwischen. Dieses soll wie eine Weiche abhängig vom Vorzeichen die Umsätze in die Zähler vier und drei leiten. Dafür gibt es in der D11 die Steuerapparate, die auf dem Schaltbrett zwischen Zähl- und Summenwerk liegen. Ein Steuerapparat implementiert einen 2-zu-1 Multiplexer bzw. 1-zu-2 Demultiplexer (je nach geschalteter Richtung) mit Relaistechnik. Jeder Steuerapparat beinhaltet 11 2-zu-1 Multiplexer (für die 11 Stellen eines Zählwerks). Liegt Strom am Auswahlfeld an (Steuerloch vorhanden, bzw. negativer Umsatz) so gibt es eine Verbindung von Mitte und Arbeit. Fließt kein Strom gibt es eine Verbindung zwischen Ruhe und Mitte.\\
-Bei der weiteren Schaltung müssen wir auch eine Übertragung (subtraktive Sendung in Zwischengang 3) berücksichtigen. Zur strukturierten Schaltung gibt uns das Handbuch dafür die folgenden Regeln:
+Bei der weiteren Schaltung müssen wir auch eine Übertragung (subtraktive Sendung in Zwischengang 3) berücksichtigen. Zur strukturierten Schaltung gibt uns das Handbuch dafür die folgenden Regeln:\\
 
-1. Übertragung schalten (für Zwischengang 3)
-2. Bürstenanschlüsse schalten (Kettenregel beachten)
-3. Postenschreibung schalten
-4. Summenwerke schalten 
+1. Übertragung schalten (für Zwischengang 3)\\
+2. Bürstenanschlüsse schalten (Kettenregel beachten)\\
+3. Postenschreibung schalten\\
+4. Summenwerke schalten\\
 
 \begin{figure*}
 \centerline{
 \includegraphics[width=0.9\textwidth]{Abbildungen/UebertragungschmemaKomplett.png}
 }
-\caption{Schalttafel der DEHOMAG D11 mit Saldierungsprogramm}
+\caption{Unterer Teil der Schalttafel der DEHOMAG D11 mit Saldierungsprogramm}
 \label{Schalttafel}
 \end{figure*}
 
@@ -259,32 +259,38 @@ Als zweiten Schritt müssen die Bürstenanschlüsse geschaltet werden. Wie bekommen
 Der nächste Schritt im Übertragungsschema ist die Postenschreibung. Wie für jedes Zählwerk gibt es auch für jedes der sieben Schreibwerke eine Doppelbuchse für die Postenschreibung. Bei unserem Beispiel möchten wir die Umsätze jeder Lochkarte drucken. Dazu wird einfach der Umsatz an die Postenschreibung weitergeleitet, also eine Verbindung von Zählwerk 3 zu Postenschreibung 3 und von Zählwerk 4 zu Postenschreibung 4 geschalten.\\
 Als letztes müssen die Summenwerke geschaltet werden. Dies geschieht hauptsächlich für die Summenschreibung im Gangschema (hier ausschließlich). Analog zur Postenschreibung gibt es für jedes Schreibwerk eine Doppelbuchse Summenschreibung, um während der Zwischengänge zu drucken. Ein Blick auf das Gangschema (siehe~\ref{gs}) zeigt, dass in Gang 4 zwei Schreibvorgänge stattfinden: S4 soll den Inhalt von Z4 schreiben. Also wird das Summenwerk von Z4 mit Summenschreibung 4 verbunden. Genauso ist es bei S3 und Z3, allerdings sind die Buchsen Summenwerk bereits verbunden. Die Signale des Summenwerks können aber einfach über die Doppelbuchse der Arbeit von Steuerapparat 3 geholt werden. In Gang 2 muss Schreibwerk 2 bzw. 1 der Inhalt von Z4 zur Verfügung stehen. Wir verbinden folglich Summenschreibung 4 mit Summenschreibung 2 und diese wiederum mit Summenschreibung 1. Somit stehen den Schreibwerken die richtigen Zählerinhalte zur Verfügung.\\
 
-
-die auch in der heutigen Rechnerarchitektur??MUX
-
 \subsubsection*{4. Schalten der Kommandobrücke}
 
 \begin{figure*}
 \centerline{
 \includegraphics[width=0.9\textwidth]{Abbildungen/Kommandobruecke.png}
 }
-\caption{Schalttafel der DEHOMAG D11 mit Saldierungsprogramm}
+\caption{Kommandobrücke (oberer Teil) der Schalttafel mit Saldierungsprogramm}
 \label{kommando}
 \end{figure*}
 
-Als Grundlage zum Schalten der Kommandobrücke verwenden wir unser Gangschema. Wir wollen unser Programm jetzt auf die Maschine schalten. Zuerst legen wir im Feld Maschinengänge fest wie viele Zwischengänge wir benötigen. Die ersten 5 Gänge (9-5) brauchen wir nicht. Wir verbinden also Gang 9 mit der Nullbuchse neben Gang 5 (alternativ kann auch jeder Gang einzeln mit 0 verbunden werden). 
+Als Grundlage zum Schalten der Kommandobrücke verwenden wir unser Gangschema. Wir wollen unser Programm jetzt auf die Maschine schalten. Zuerst legen wir im Feld Maschinengänge (ganz links oben) fest wie viele Zwischengänge wir benötigen. Die ersten 5 Gänge (9-5) brauchen wir nicht. Wir verbinden also Gang 9 mit der Nullbuchse neben Gang 5 (alternativ kann auch jeder Gang einzeln mit 0 verbunden werden). Rechts daneben kann nun im Feld Zwischengänge für jeden unserer 4 Gänge festgelegt werden, was in diesem Gang geschieht.\\
+In Gang 4 sollen zwei Summen geschrieben werden. Es ist also eine Verbindung von der Buchse 4 zum Feld Summenschreibung zu schalten und zwar zu Schreibwerk 4 und 3 (vergleiche Gangschema~\ref{gs}). Dass die Werte aus den richtigen Zählern geschrieben werden, haben wir bereits im Übertragungsschema geschalten. In Gang 4 ist desweiteren auch eine Schreibwerksbewegung und ein Zeilentransfer zu schalten. Die Felder hierzu befinden sich im unteren linken Teil der Kommandobrücke. Wir schalten auch gleich die Shcreibwerksbewegungen und Zeilentransporte für die anderen Gänge: Im Feld Schreibwerksbewegung wird die Buchse SW mit Gang 4 und 2 verbunden, im Feld Zeilentransport 1Z (eine Zeile) mit Gang 4 und 1.\\
+Als nächstes soll in Gang 3 die subtraktive Übertragung von Zähler 3 auf Zähler 4 stattfinden (Z4=Z4-Z3). Buchse 3 des Feldes Zwischengänge wird also mit Z3 (Sendezähler) des Feldes Subtraktionsübertragung verbunden. Außerdem muss der verwendete Steuerapparat (im Übertragungsschema festgelegt: III) umgeschalten werden. Das Signal von Gang 3 wird also noch an die Buchse III des Feldes Steuerapparate weitergeleitet. Desweiteren muss im Feld Übertragungssteuerung (unten mittig) die Verbindung von Z3 mit Z4 über Steuerapparat III angegeben werden.\\
+In Gang 2 findet wieder eine Schreiboperation statt. Allerdings soll diesmal abhängig vom Vorzeichen des Saldos in Z4 nur ein Schreibwerk drucken. Hierzu gibt es das Feld Saldenkontrolle (ohne Beschriftung in Spalte 23, Zeile 9). Gang 2 wird folglich mit dem zu druckenden Zähler (Z4) in der Saldenkontrolle verbunden. Die Buchsen SS (Sollsaldo) und HS (Habensaldo) werden gemäß dem Gangschema mit den Schreibwerken 1 und 2 des Feldes Summenschreibung verbunden.\\
+Im letzten Gang sollen die Summen gelöscht werden. Dies geschieht durch eine einfache Verbindung mit den zu löschenden Zählern im Feld Summenlöschung.\\
+Um zusätzlich alle Summen wie bei der D11-Maschine üblich mit einem Stern zu kennzeichnen, werden im Feld Saldenzeichen alle Schreibwerke, die Summen drucken mit der Buchse * verbunden.\\
+Abschließend müssen auch für die Kartengänge noch Verbindungen auf der Kommandobrücke geschalten werden. Für die Postenschreibung (Drucken der einzelnen Umsätze und der Kontonummer) werden im Feld Postenschreibung (rechts) alle Schreibwerke, die in den Kartengängen schreiben sollen mit EP (Einzelpostenschreibung) verbunden (blaue Verbindung). Außerdem verwenden wir Steuerapparat 2 in den Kartengängen. Dazu ist eine Verbindung von H2 (Feld Erregerbuchsen) mit II (Feld Steuerapparate) notwendig. Diese Verbindung ist schwarz (Umsatz) gekennzeichnet. 
 
 \subsubsection*{5. Schalterstellung}
-Die D11 bietet eine Vielzahl von Schaltern. Dies zeigt einerseits wie umfangreich ihre Funktionen waren, andererseits auch die Spezialisierung auf einzelne Anwendungsgebiete. Für unser entwickeltes Programm brauchen wir nur... Selbstverständlich sollten wir die Maschine dann auch noch anschalten (bestenfalls nach Einsetzen unseres fehlerfrei programmierten Schaltbretts).
+Die D11 bietet eine Vielzahl von Schaltern. Dies zeigt einerseits wie umfangreich ihre Funktionen waren, andererseits auch die Spezialisierung auf einzelne Anwendungsgebiete. Für unser entwickeltes Programm brauchen wir nur die Schalter 1 und 4. Schalter 1 aktiviert die Einzelpostenschreibung (Im Sammelgang dagegen werden nur Summen gedruckt). Schalter 2 aktiviert die Untergruppenkontrolle. Selbstverständlich sollten wir die Maschine dann auch noch anschalten (bestenfalls nach Einsetzen unseres fehlerfrei programmierten Schaltbretts).
 
-Zusammenfassend: Alles durch Addition. Weitere Möglichkeiten (Gruppen, Schleifen, bed.vorwärtsverzweigung...)
-Vereinfachte Darstellung Übertragungsschema.
+\subsubsection*{Zusammenfassung}
+Die D11-Maschine umfasste außer den einfachen gezeigten Funktionen noch umfasssende weitere Möglichkeiten. So konnten mit Haupt- und Übergruppenkontrolle die Daten in weitere Gruppen unterteilt werden. Ferner gab es bereits die Möglchkeit Dauergänge (Schleifen) und bedingte Vorwärtsverzweigungen auf der Schalttafel zu programmieren.~\cite{schaltbuchsen} Zur Erleichterung der Programmierung gab es weiterhin vereinfachte Darstellungen (insbesondere für das Übertragungsschema), sodass nicht jede einzelne Kabelverbindung eingezeichnet werden musste. In dieser Arbeit wurde auf diese Darstellung verzichtet um die Programmierung am tatsächlichen Schaltbrett zu präsentieren. Tatsächlich sind aber die eingezeichneten Mehrfachverbindungen an diese Darstellung angelehnt.
+%Auch bei der technischen Implementierung war die D11-Maschine modern: Alle Grundrechenarten wurden auf die Addition zurückgeführt: Die Subtraktion über die Komplementbildung, die Multiplikation (Implementierung auf  
 
 \subsection{Verwendung im dritten Reich}
 Die DEHOMAG D 11 wurde in der Zeit des dritten Reiches in Deutschland entwickelt (1935). 
-Die Firma DEHOMAG stand dem Nazi-Regime positiv gegenüber. Der Firmenchef Willy Heidinger sprach 1934 bei einer Werkseröffnung, bei der auch Parteimitglieder der NSDAP anwesend waren, davon dem Führer zu vertrauen und blind zu folgen. Weiterhin untermauerte die Firma ihre nationalistische Berechtigung in ihrer Festschrift zum 25-jährigen Firmenjubiläum: Der Erfinder der Lochkarte Herman Hollerith wird kurzerhand zum ''biederen Pfälzer'' (aus ~\cite{Fest}, Seite 66), obwohl er nie in Europa gelebt hatte, sondern lediglich ein Sohn deutscher Auswanderer war. Die Firmenpolitik ging kurzfristig auf: Die DEHOMAG wurde zu einer wichtigen Firma für die deutsche Wiederaufrüstung. Das Wachstum der Firma war sogar größer als das von Siemens.~\cite{Explosion} 
-Die Maschinen der DEHOMAG und insbesondere auch die D11 fanden breite Verwendung in verschiedensten Unternehmen und erhöhten so die Effizienz der deutschen Wirtschaft. Wichtige Anwendungsgebiete waren die betriebswirtschaftliche Statistik und die Buchhaltung. Insbesondere zur Verwaltung der Wehrmacht wurden die Maschinen verwendet (Organisation und Kriegsführung). Für die statistische Überwachung von Soldaten, Ressourcen und Zivilbevölkerung spielten die Maschinen der DEHOMAG eine entscheidende Rolle. Eine spezielle Version der D 11 wurde für eine Volkszählung 1939 eingesetzt.~\cite{Nonrole} Desweiteren wurden die Mitglieder der NSDAP, SS und SA auf Lochkarten erfasst.
-Zum Ausmaß der Verwendung der D 11 im Holocaust gibt es widersprüchliche Quellen. Unumstritten ist jedoch, dass Maschinen in Konzentrationslagern aufgestellt waren und den Häftlingen Nummern eintätowiert wurden. Edwin Black stellt in seinem Buch ''IBM and the Holocaust: The Strategic Alliance between Nazi Germany and America's Most Powerful Corporation'' die folgenden Thesen auf: Die Organisation des Holocaust wäre mit Hilfe von Lochkartenmaschinen erfolgt und erst dadurch möglich gewesen (insbesondere die Lokalisierung der Juden). Desweiteren habe die amerikanische IBM als strategischer Partner des Nazi Regimes fungiert. Allerdings gibt es Kritik an der Wissenschaftlichkeit des Buches: Eine ausführlichere Auseinandersetzung mit dem Thema (als Reaktion auf das Buch von Black) findet sich in ~\cite{Genocide}. Eine umfassende Beschreibung würde in dieser Arbeit zu weit führen. Zur genaueren Auseinandersetzung empfiehlt sich die Lektüre von ~\cite{Explosion}, in welchem sich eine umfassende Beschreibung der wirtschaftlichen Entwicklung der Lochkartentechnik (insbesondere auch während des 2. Weltkrieges) findet.
+Die Firma DEHOMAG stand dem Nazi-Regime positiv gegenüber. Der Firmenchef Willy Heidinger sprach 1934 bei einer Werkseröffnung, bei der auch Parteimitglieder der NSDAP anwesend waren, davon dem Führer zu vertrauen und blind zu folgen. Weiterhin untermauerte die Firma ihre nationalistische Berechtigung in ihrer Festschrift zum 25-jährigen Firmenjubiläum: Der Erfinder der Lochkarte Herman Hollerith wird kurzerhand zum ''biederen Pfälzer'' (aus ~\cite{Fest}, Seite 66), obwohl er nie in Europa gelebt hat, sondern lediglich ein Sohn deutscher Auswanderer war. Die DEHOMAG zählte zu den wichtigen Firmen für die deutsche Wiederaufrüstung. In dieser Zeit war das Wachstum der Firma sogar größer als das von Siemens.~\cite{Explosion} 1940 wurde die Firma ferner zum Spezialbetrieb erklärt und von militärischen Stellen kontrolliert.~\cite{IBMweb}\\\\
+
+Die Maschinen der DEHOMAG und insbesondere auch die D11 fanden breite Verwendung in verschiedensten Unternehmen und erhöhten so die Effizienz der deutschen Wirtschaft. Wichtige Anwendungsgebiete waren die betriebswirtschaftliche Statistik und die Buchhaltung. Insbesondere zur Verwaltung der Wehrmacht wurden die Maschinen verwendet und spielten so für die Organisation des Krieges eine entscheidende Rolle. Die Maschinen wurden für die statistische Überwachung von Soldaten, Ressourcen und Zivilbevölkerung eingesetzt. Eine spezielle Version der D 11 fand für eine Volkszählung 1939 unter dem nationalsozilaistischen Regime Anwendung.~\cite{Nonrole} Desweiteren wurden die Mitglieder der NSDAP, SS und SA auf Lochkarten erfasst.~\cite{Explosion}\\
+
+Zum Ausmaß der Verwendung der D 11 im Holocaust gibt es widersprüchliche Quellen. Unumstritten ist jedoch, dass Maschinen in Konzentrationslagern aufgestellt waren und den Häftlingen Nummern eintätowiert wurden. Edwin Black stellt in seinem Buch ''IBM and the Holocaust: The Strategic Alliance between Nazi Germany and America's Most Powerful Corporation'' die folgenden Thesen auf: Die Organisation des Holocaust wäre mit Hilfe von Lochkartenmaschinen erfolgt und erst dadurch möglich gewesen (insbesondere die Lokalisierung der Juden). Desweiteren habe die amerikanische IBM als strategischer Partner des Nazi Regimes fungiert. Allerdings gibt es Kritik an der Wissenschaftlichkeit des Buches: Eine ausführlichere Auseinandersetzung mit dem Thema (als Reaktion auf das Buch von Black) findet sich in~\cite{Genocide}. Eine umfassende Beschreibung würde in dieser Arbeit zu weit führen. Zur genaueren Auseinandersetzung empfiehlt sich die Lektüre von~\cite{Explosion}, in welchem sich eine umfassende Beschreibung der wirtschaftlichen Entwicklung der Lochkartentechnik (insbesondere auch während des 2. Weltkrieges) findet.
 
 
 \section{Erzeugung eines PDFs aus den Vorlagen}
@@ -515,4 +521,4 @@ Einleitung zur Arbeit mit \LaTeX\ geben.
 \bibliographystyle{plain}
 % Die Quellen sind in der Datei Lochkartenverarbeitung.bib definiert
 \bibliography{Lochkartenverarbeitung}
-\end{document}
+\end{document}d 
