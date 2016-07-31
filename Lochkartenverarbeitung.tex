@@ -16,7 +16,6 @@
 % welche in unseren Ausarbeitungen verwendet werden sollen.
 \usepackage{Ausarbeitung}
 
-
 % Bitte hier Ihren Namen eintragen
 \author{Robert Lang und Jan Fischer \\ Technische Universität München}
 
@@ -44,7 +43,7 @@
 % wird in der abstract Umgebung eine kurze Zusammenfassung der Arbeit erstellt.
 \begin{abstract}
 
-Dieses Dokument soll einen Überblick über die Lochkartentechnologie geben. Dafür werden beispielhaft zwei besonders wichtige Maschinen der Lochkartentechnik beschrieben: Die erste Maschine von Herman Hollerith und der Höhepunkt der Lochkartenverarbeitung, die DEHOMAG D11. Dabei werden die Entwicklung durch Herman Hollerith, die Funktionsweise und die Anwendungsgebiete der Lochkartentechnik beschrieben. Insbesondere wird auch auf die Programmierung mit Steckverbindungen am Schaltbrett der D11 und die Bedeutung der D11 als Bindeglied zwischen Lochkartenmaschinen und Computern eingegangen. Ein kurzer Abschnitt beschäftigt sich mit der Verwendung der Lochkartentechnologie im dritten Reich.
+Dieses Dokument soll einen Überblick über die Lochkartentechnologie geben. Dafür wird die Datenverarbeitung mit Lochkarten erklärt und an Hand zweier besonders wichtiger Maschinen die praktische Anwendung eingehend beleuchtet. Mit der zeitlich zuerst entstandenen Hollerith-Maschine wird auf die Anfänge der Lochkartenverarbeitung eingegangen. Dabei wird die Funktionsweise dargestellt und Anwendungsgebiete und Weiterentwicklungen erläutert. Im Weiteren wird die DEHOMAG D11 insbesondere an Hand ihrer Programmierung mit Steckverbindungen am Schaltbrett beschrieben und auf ihre Bedeutung als Bindeglied zwischen Lochkartenmaschinen und Computern eingegangen. Ein kurzer Abschnitt befasst sich mit der Verwendung der Lochkartentechnologie im dritten Reich.
 
 \end{abstract}
 
@@ -103,21 +102,20 @@ Die im Anschluss genauer beschriebenen Maschinen benutzten dasselbe Konzept für 
 
 Die Datenverarbeitung mit Lochkarten unterscheidet sich nicht wesentlich von der Elektronischen Datenverarbeitung.~\cite{WayToD11} Der Prozess nach dem EVA-Prinzip (Eingabe, Verarbeitung und Ausgabe) wird in Abbildung~\ref{EVA} anschaulich dargestellt. \newline
 Zuerst müssen die Daten auf Lochkarten gespeichert werden, was mit Hilfe des Kartenlochers geschieht. Modernere Locher wie in der Abbildung hatten eine Tastatur (wie eine Schreibmaschine) und lochten die codierten Daten in die Lochkarten. Zusätzlich konnten die Daten auch als Klartext auf den oberen Rand der Lochkarte gedruckt werden (wie in Abbildung~\ref{80}), wodurch die Überprüfung und das Auslesen der Karte für den Menschen erleichtert wurde. Für die verarbeitenden Maschinen ist dieser Text natürlich irrelevant, einzig die Position und Anzahl der Löcher bestimmen den tatsächlichen Inhalt. Bei früheren Lochern hingegen musste der Operateur die Löcher noch selber auswählen, also den Code kennen. Für ein 'B' beispielsweise musste der Operateur eine 12er-Zonenlochung und eine 2er-Lochung auf dem Locher eingeben. Da dies fehleranfällig war gab es auch Maschinen zur Überprüfung der Lochkarten: Die Daten mussten also zweimal eingegeben werden um zu verhindern, dass fehlerhafte Daten gespeichert wurden. Es gab mit moderneren Lochern auch Maschinen, die alle Funktionen umfassten: Lochen, Verifizieren und Drucken des Klartexts.~\cite{Data2}~\cite{D11}\\
-Verarbeitet wurden die Lochkarten in der Regel durch verschiedene Maschinen. So gab es Sortiermaschinen, Tabelliermaschinen und Kartenmischer. Die zentrale Maschine war die Tabelliermaschine. Sie verarbeitete die Daten und gab als Ausgabe eine Tabelle. Da sich Tabelliermaschinen in ihrem Funktionsumfang immer mehr in Richtung Computer entwickelten (und tatsächlich die Vorläufer der Computer waren~\cite{D11}), werden diese in Abbildung~\ref{EVA} einfach als ''calculator'' bezeichnet. In den Kapiteln~\ref{Hollerith} und~\ref{DieD11} der Arbeit werden verschiedene Tabelliermaschinen vorgestellt. Die ersten Tabelliermaschinen waren noch keine ''Rechner'' sondern zählten nur die Lochanzahl in entsprechenden Zählern. Nach und nach kamen dann immer mehr Funktionen wie Addieren, Subtrahieren und später auch Multiplizieren und Dividieren hinzu. Die DEHOMAG D11 gilt als Höhepunkt der Entwicklung von Tabelliermaschinen. An derselben wird auch deutlich werden, wie viele Funktionen eines Computers die Tabelliermaschinen in dieser Zeit bereits umfassten. Zur Vorbereitung der Lochkarten wurden Sortiermaschinen eingesetzt um so ein einfaches Abarbeiten der Daten durch einfache Programme der Tabelliermaschine zu ermöglichen. Dies war auch eng mit den Anwendungsbereichen der Lochkartentechnik verbunden, die zum Beispiel eine Gruppierung nach Artikelnummern erforderten.\newline
+Verarbeitet wurden die Lochkarten in der Regel durch verschiedene Maschinen. So gab es Sortiermaschinen, Tabelliermaschinen und Kartenmischer. Die zentrale Maschine war die Tabelliermaschine. Sie verarbeitete die Daten und gab als Ausgabe eine Tabelle. Da sich Tabelliermaschinen in ihrem Funktionsumfang immer mehr in Richtung Computer entwickelten (und tatsächlich die Vorläufer der Computer waren~\cite{D11}), werden diese in Abbildung~\ref{EVA} einfach als ''calculator'' bezeichnet. In den Kapiteln~\ref{kapitelhollerith} und~\ref{DieD11} der Arbeit werden verschiedene Tabelliermaschinen vorgestellt. Die ersten Tabelliermaschinen waren noch keine ''Rechner'' sondern zählten nur die Lochanzahl in entsprechenden Zählern. Nach und nach kamen dann immer mehr Funktionen wie Addieren, Subtrahieren und später auch Multiplizieren und Dividieren hinzu. Die DEHOMAG D11 gilt als Höhepunkt der Entwicklung von Tabelliermaschinen. An derselben wird auch deutlich werden, wie viele Funktionen eines Computers die Tabelliermaschinen in dieser Zeit bereits umfassten. Zur Vorbereitung der Lochkarten wurden Sortiermaschinen eingesetzt um so ein einfaches Abarbeiten der Daten durch einfache Programme der Tabelliermaschine zu ermöglichen. Dies war auch eng mit den Anwendungsbereichen der Lochkartentechnik verbunden, die zum Beispiel eine Gruppierung nach Artikelnummern erforderten.\newline
 Die Ausgabe wurde mit einem Drucker erzeugt. Dieser war allerdings abweichend von Abbildung~\ref{EVA} oft in der Tabelliermaschine integriert. Aus logischer Sicht ist die Trennung in Verarbeitung und Ausgabe aber sinnvoll. Dadurch wird deutlich, dass die Maschinen des Verarbeitungsteils leicht durch einen Computer ersetzt werden könnten, was dann auch geschah. Lochkarten dienten noch lange Zeit als Ein- und Ausgabemedium für Computer.~\cite{Data}
 
 \section{Die Hollerith-Maschine}
-\label{Hollerith}
+\label{kapitelhollerith}
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/hollerith.jpg}
-    \caption{Herman Hollerith im Alter von 24 Jahren.}
+    \caption[von \url{http://s7.computerhistory.org/is/image/CHM/102672492-03-01?\$re-medium\$/} Zugriffsdatum: 31.07.2016]{Herman Hollerith im Alter von 24 Jahren.}
     \label{Hollerith}
   \end{center}
 \end{figure}
 \subsection{Das Leben von Herman-Hollerith}
-\label{kapitelhollerith}
-Herman Hollerith wurde 1860 in Buffalo, New York geboren. Seine Eltern sind 1848 von Deutschland in die USA eingewandert. Mit 19 Jahren hat er einen Abschluss als Mineningenieur an der Columbia University gemacht. Seine erste Arbeitsstelle trat er 1880 beim Statistikamt an. Dort arbeitete er an der Volkszählung von 1880 mit. Dort erfuhr er die aufwändige und monotone Arbeit. Außerdem konnte er die Prozesse und Anforderungen der Volkszählung studieren. Dies brachte ihm später Vorteile bei der Entwicklung seiner Hollerith-Maschine für die Volkszählung. (Dasgupta 2014, S. 30)
+Herman Hollerith (Abb. ~\ref{Hollerith}) wurde 1860 in Buffalo, New York geboren. Seine Eltern sind 1848 von Deutschland in die USA eingewandert. Mit 19 Jahren hat er einen Abschluss als Mineningenieur an der Columbia University gemacht. Seine erste Arbeitsstelle trat er 1880 beim Statistikamt an. Dort arbeitete er an der Volkszählung von 1880 mit. Dort erfuhr er die aufwändige und monotone Arbeit. Außerdem konnte er die Prozesse und Anforderungen der Volkszählung studieren. Dies brachte ihm später Vorteile bei der Entwicklung seiner Hollerith-Maschine für die Volkszählung. (\cite{Dasgupta2014} S. 30f)
 \subsection{Volkszählungen in den USA}
 In den USA sind seit 1790 Volkszählungen in der Verfassung festgeschrieben. Sie werden alle zehn Jahre durchgeführt.
 \subsubsection{Zweck}
@@ -128,108 +126,108 @@ Bei der Volkszählung werden im Zeitraum von einem Jahr Interviewer in jeden Haus
 Unter den gestellten Fragen waren unter anderem Fragen nach dem Alter, der Herkunft der Alter, der Ethnizität und des Berufs. Weitere Fragen betrafen Krankheiten und Wohnort. Bei den Fragen nach der Landwirtschaft wurde nach der Anzahl von Tieren und Ackerfläche gefragt.
 Mit diesen Daten konnten dann weitere Auswertungen vorgenommen werden. So zum Beispiel Krankheiten nach Bundesstaat oder Alter ausgewertet werden.
 \subsubsection{Die Idee zur Maschine}
-Zur Zeit als H. Hollerith lebte waren schon andere Maschinen mit Lochkarten bekannt.  1805 hatte Joseph-Marie Jacquard einen mechanischen mit Lochkarten gesteuerten Webstuhl entwickelt. Bei diesem noch heute verwendeten Webstuhl wird auf Lochkarten das Muster für das Gewebe gespeichert. Seit 1860 waren Musikspielgeräte mit auf Lochkarten gespeicherten Melodien bekannt. So waren Lochkarten Hollerith wohl bekannt.
+Zur Zeit als H. Hollerith lebte waren schon andere Maschinen mit Lochkarten bekannt.  1805 hatte Joseph-Marie Jacquard einen mechanischen mit Lochkarten gesteuerten Webstuhl entwickelt. Bei diesem noch heute verwendeten Webstuhl wird auf Lochkarten das Muster für das Gewebe gespeichert. Seit 1860 waren Musikspielgeräte mit auf Lochkarten gespeicherten Melodien bekannt. So waren Lochkarten Hollerith wohl bekannt. (\cite{Sobel1981} S. 13)
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/punchphotograph.jpg}
-    \caption{Zugfahrkarte mit seitlichen Lochungen zum Vermerk der Statur, Größe, Haarfarbe und Bartart.}
+    \caption[von \url{https://centerofthewest.org/wp-content/uploads/2014/09/MS6.3884a-train_ticket.jpg} Zugriffsdatum: 31.07.2016]{Zugfahrkarte mit seitlichen Lochungen zum Vermerk der Statur, Größe, Haarfarbe und Bartart.}
     \label{Fahrkarte}
   \end{center}
 \end{figure}
-Die zündende Idee hatte H. Hollerith dann bei einer Zugfahrt. Zur damaligen Zeit wurde am Rand der Fahrkarten mit Löchern das ungefähre Aussehen des Fahrgastes gekennzeichnet, so dass die Fahrkarte nicht übertragbar sein sollte. Hollerith wollte diese Art der Verwendung auf die Volkszählung anwenden. So dachte er über die Anfertigung je einer Lochkarte für jeden Bürger nach. Darauf sollten die ihn identifizierenden Merkmale gespeichert sein.
+Die zündende Idee hatte H. Hollerith dann bei einer Zugfahrt. Zur damaligen Zeit wurde am Rand der Fahrkarten (Abb. ~\ref{Fahrkarte}) mit Löchern das ungefähre Aussehen des Fahrgastes gekennzeichnet, so dass die Fahrkarte nicht übertragbar sein sollte. Hollerith wollte diese Art der Verwendung auf die Volkszählung anwenden. So dachte er über die Anfertigung je einer Lochkarte für jeden Bürger nach. Darauf sollten die ihn identifizierenden Merkmale gespeichert sein.(\cite{Sobel1981} S. 13)
 \subsection{Bestandteile der Maschine}
 Für den Betrieb der Maschine waren fünf  Bestandteile notwendig. Ein Lochkartenlocher zur Herstellung der Karten, die Presse zum Auslesen der Karten, Zähler zum Ablesen der Addierung und eine Sortierkiste. Der elektromechanische Betrieb wurde mit Batterien gewährleistet.
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/cardpunch.jpg}
-    \caption{Der Locher zum Herstellen der Karten mit tauschbarer Schablone rechts.}
+    \caption[von \url{https://centerofthewest.org/wp-content/uploads/2014/09/MS6.3884a-train_ticket.jpg} Zugriffsdatum: 29.07.2016]{Der Locher zum Herstellen der Karten mit tauschbarer Schablone rechts.}
     \label{Locher}
   \end{center}
 \end{figure}
 \subsubsection{Locher}
-Mit dem Locher wurden die Karten für die weitere Auswertung erstellt. So übertrug ein Arbeiter die Daten von den einzelnen Interviewbögen auf eine Karte je Bürger. Dabei wurde in den hinteren Teil eine leere Karte eingelegt, in welche die Löcher gestanzt wurden. Im vorderen Bereich des Geräts war eine Schablone mit Löchern. So war darauf die Bedeutung der einzelnen Löcher angegeben. Ein mit der Hand zu bedienender Stift wurde in das betreffende Loch der Schablone eingeführt und mittels eines Gestänges auf die eingelegte Karte ein Loch eingestanzt.
+Mit dem Locher (Abb. ~\ref{Locher}) wurden die Karten für die weitere Auswertung erstellt. So übertrug ein Arbeiter die Daten von den einzelnen Interviewbögen auf eine Karte je Bürger. Dabei wurde in den hinteren Teil eine leere Karte eingelegt, in welche die Löcher gestanzt wurden. Im vorderen Bereich des Geräts war eine Schablone mit Löchern. So war darauf die Bedeutung der einzelnen Löcher angegeben. Ein mit der Hand zu bedienender Stift wurde in das betreffende Loch der Schablone eingeführt und mittels eines Gestänges auf die eingelegte Karte ein Loch eingestanzt.
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/press.jpg}
-    \caption{Die Presse zum Auslesen der Karten.}
+    \caption[von \url{https://upload.wikimedia.org/wikipedia/commons/e/e7/Hollerith_card_reader_closeup.jpg} Zugriffsdatum: 29.07.2016]{Die Presse zum Auslesen der Karten.}
     \label{Presse}
   \end{center}
 \end{figure}
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/mercury.jpg}
-    \caption{Die mit Federn gelagerten Stifte tauchen beim Herunterdrücken in Behälter mit Quecksilber ein.}
+    \caption[von \url{http://www.columbia.edu/cu/computinghistory/census-process.jpg} Zugriffsdatum: 29.07.2016]{Die mit Federn gelagerten Stifte tauchen beim Herunterdrücken in Behälter mit Quecksilber ein.}
     \label{Quecksilber}
   \end{center}
 \end{figure}
 \subsubsection{Presse}
-Mit der Presse wurden die erstellten Karten ausgelesen. Die Presse bestand aus einem oberen Teil, der durch herunterdrücken des Hebels auf den unteren Teil gedrückt wurde. Dazwischen wurde eine Karte eingelegt. Im oberen Teil befanden sich mit Federn gelagerte Stifte, die beim Herunterdrücken im Falle eines Lochs in den unteren Teil eindrangen. Dort befanden sich je Loch kleine Behälter gefüllt mit Quecksilber. Beim Eintauchen in das Quecksilber wurde ein Stromkreis geschlossen. Die Presse war an die Zähler angeschlossen.
+Mit der Presse (Abb. ~\ref{Presse}) wurden die erstellten Karten ausgelesen. Die Presse bestand aus einem oberen Teil, der durch herunterdrücken des Hebels auf den unteren Teil gedrückt wurde. Dazwischen wurde eine Karte eingelegt. Im oberen Teil befanden sich mit Federn gelagerte Stifte, die beim Herunterdrücken im Falle eines Lochs in den unteren Teil eindrangen. Dort befanden sich je Loch kleine Behälter gefüllt mit Quecksilber (Abb. ~\ref{Quecksilber}). Beim Eintauchen in das Quecksilber wurde ein Stromkreis geschlossen. Die Presse war an die Zähler angeschlossen.
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/counter.jpg}
-    \caption{Zwei Z\"ahler mit den Ständen 5 477 (links) und 3 143 (rechts).}
+    \caption[von \url{https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Hollerith_census_machine_dials_\%28detail\%29.jpg/800px-Hollerith_census_machine_dials_\%28detail\%29.jpg} Zugriffsdatum: 29.07.2016]{Zwei Z\"ahler mit den Ständen 5 477 (links) und 3 143 (rechts).}
     \label{Zaehler}
   \end{center}
 \end{figure}
 \subsubsection{Zähler}
-Die Maschine verfügte über 40 Zähler. Auf den Zählern der Maschine konnte das Ergebnis der Auszählung abgelesen werden. Die Zähler hatten je zwei Zeiger, wobei die Funktionsweise wie bei einer Uhr war. Der kleinere Zeiger sprang bei jedem Stromkreisschluss um eine Stelle weiter. Der größere Zeiger sprang eine Stelle weiter, wenn der kleine Zeiger wieder auf die 0 traf. So konnte ein Ergebnis bis 9999 angezeigt werden.
+Die Maschine verfügte über 40 Zähler (Abb. ~\ref{Zaehler}). Auf den Zählern der Maschine konnte das Ergebnis der Auszählung abgelesen werden. Die Zähler hatten je zwei Zeiger, wobei die Funktionsweise wie bei einer Uhr war. Der kleinere Zeiger sprang bei jedem Stromkreisschluss um eine Stelle weiter. Der größere Zeiger sprang eine Stelle weiter, wenn der kleine Zeiger wieder auf die 0 traf. So konnte ein Ergebnis bis 9999 angezeigt werden.
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/relais.png}
-    \caption{Skizze eines Relais. Auf der rechten Seite ist die Spule mit Eisenkern zu sehen, die bei Stromfluss durch Entstehung eines Magnetfeldes den Hebel anzieht.}
+    \caption[eigenes Werk]{Skizze eines Relais. Auf der rechten Seite ist die Spule mit Eisenkern zu sehen, die bei Stromfluss durch Entstehung eines Magnetfeldes den Hebel anzieht.}
     \label{Relais}
   \end{center}
 \end{figure}
-Die Zähler waren nach dem Prinzip eines Relais aufgebaut. Dabei wird bei einem Stromstoß eine Spule durchflossen wodurch ein Magnetfeld entsteht. Durch dieses Magnetfeld wird ein Hebel angezogen, der ein Zahnrad um ein Ritzel weiterbewegt. Dieses Zahnrad ist mit einem Zeiger verbunden und so springt der Zeiger eine Stelle weiter.
+Die Zähler waren nach dem Prinzip eines Relais (Abb. ~\ref{Relais}) aufgebaut. Dabei wird bei einem Stromstoß eine Spule durchflossen wodurch ein Magnetfeld entsteht. Durch dieses Magnetfeld wird ein Hebel angezogen, der ein Zahnrad um ein Ritzel weiterbewegt. Dieses Zahnrad ist mit einem Zeiger verbunden und so springt der Zeiger eine Stelle weiter.
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/sorter.jpg}
-    \caption{Die Sortierkiste mit 26 Fächern.}
+    \caption[von \url{https://www.flickr.com/photos/epitti/2586173692/} Zugriffsdatum: 29.07.2016]{Die Sortierkiste mit 26 Fächern.}
     \label{Sortierer}
   \end{center}
 \end{figure}
 \subsubsection{Sortierer}
-An die Maschine war eine Sortierkiste angeschlossen mit der die Karten in 26 Gruppen sortiert abgelegt werden konnten. SolHollerith verwendete dieselben Kisten, die bereits zum Aufbewahren von 1-Dollarscheinen bei Großbanken verwendet wurden. Bei entsprechendem Kontakt öffnete sich die zu der Gruppe passende Klappe und die Karte konnte dort eingelegt werden.
+An die Maschine war eine Sortierkiste (Abb. ~\ref{Sortierer}) angeschlossen mit der die Karten in 26 Gruppen sortiert abgelegt werden konnten. SolHollerith verwendete dieselben Kisten, die bereits zum Aufbewahren von 1-Dollarscheinen bei Großbanken verwendet wurden. Bei entsprechendem Kontakt öffnete sich die zu der Gruppe passende Klappe und die Karte konnte dort eingelegt werden.
 Mit dem Sortierer wurden die Karten für weitere Auswertungen zunächst sortiert. Damit konnte dann eine Gruppe nach besonderen Merkmalen ausgewertet werden. So konnte man zum Beispiel die Krankheitshäufigkeiten nach Bundesstaaten untersuchen.
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/card.jpg}
-    \caption{Die für die Volkszählung im Jahr 1890 verwendete Lochkarte. Mit hervorgehobenen Bereichen Rasse, Geschlecht, Alter, Herkunft der Eltern (v. l. n. r.)}
+    \caption[von \url{http://www.columbia.edu/cu/computinghistory/1890-card.gif} Zugriffsdatum: 29.07.2016]{Die für die Volkszählung im Jahr 1890 verwendete Lochkarte. Mit hervorgehobenen Bereichen Rasse, Geschlecht, Alter, Herkunft der Eltern (v. l. n. r.)}
     \label{Lochkarte}
   \end{center}
 \end{figure}
 \subsubsection{Lochkarten}
-Im Jahr 1884 hatte Hollerith noch ein Patent bei der Lochstreifen als Speichermedium verwendet wurden. Im Jahr 1886 wechselte Hollerith dann auf Grund der schlechten Ablagemöglichkeit und des mit meterweise Streifen entstehenden Durcheinanders zu Lochkarten. Von nun an brauchte man für den Betrieb entsprechende Lochkarten. Die um 1890 verwendete Lochkarte wies 12 Zeilen und 24 Spalten auf und hatte eine Ecke am unteren rechten Rand. Für die Volkszählung 1890 hatte die Lochkarte 31 Bereiche zum Speichern der einzelnen Merkmale.
+Im Jahr 1884 hatte Hollerith noch ein Patent bei der Lochstreifen als Speichermedium verwendet wurden. Im Jahr 1886 wechselte Hollerith dann auf Grund der schlechten Ablagemöglichkeit und des mit meterweise Streifen entstehenden Durcheinanders zu Lochkarten. Von nun an brauchte man für den Betrieb entsprechende Lochkarten. Die um 1890 verwendete Lochkarte (Abb. ~\ref{Lochkarte}) wies 12 Zeilen und 24 Spalten auf und hatte eine Ecke am unteren rechten Rand. Für die Volkszählung 1890 hatte die Lochkarte 31 Bereiche zum Speichern der einzelnen Merkmale.
 In den 1920er Jahren umfasste die Lochkarte dann 45 Spalten. 1928 schließlich wurde die IBM Standardlochkarte mit 80 Spalten entwickelt. Besonders herausfordernd war die Stabilität der Karte zu gewährleisten.
 Da Hollerith seine Maschinen hauptsächlich vermietete brachten die Lochkarten für Hollerith die größte Einnahmequelle, da sie laufend in großen Mengen nachgekauft wurden. Um 1900 verkaufte Hollerith jährlich zwei Millionen Stück.
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/keypunch.jpg}
-    \caption{Tastatur aus den 1930er Jahren}
+    \caption[von \url{http://www.computinghistory.org.uk/det/6309/Hollerith-ICT-hand-operated-key-punch/} Zugriffsdatum: 29.07.2016]{Tastatur aus den 1930er Jahren}
     \label{Tastatur}
   \end{center}
 \end{figure}
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/autofeed.jpg}
-    \caption{Tabelliermaschine mit automatischem Einzug der Lochkarten.}
+    \caption[von \url{http://www.officemuseum.com/TMC_First_Automatic_Feed_Tabulator.jpg} Zugriffsdatum: 29.07.2016]{Tabelliermaschine mit automatischem Einzug der Lochkarten.}
     \label{autofeed}
   \end{center}
 \end{figure}
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{Abbildungen/printer.jpg}
-    \caption{Die erste Tabelliermaschine mit Drucker von der Firma Powers von 1921.}
-    \label{autofeed}
+    \caption[von \url{http://www.officemuseum.com/1921_Powers_Tabulator_Printer.jpg} Zugriffsdatum: 29.07.2016]{Die erste Tabelliermaschine mit Drucker von der Firma Powers von 1921.}
+    \label{Drucker}
   \end{center}
 \end{figure}
 \subsection{Anwendungsgebiete}
-Zuerst wurde die Maschine im Jahr 1886 zur Auswertung der Sterblichkeit und vom U.S. Amtsarzt des Heeres genutzt (Dasgupta 2014, S. 31). Dann konnte Hollerith sich bei einem Wettbewerb zur Bestimmung der schnellsten Möglichkeit zur Durchführung der U.S. Volkszählung durchsetzen, so dass seine Maschine im Jahr 1890 für die Volkszählung zur Anwendung kam. Hollerith konnte auch andere Länder von den Vorteilen seiner Maschine bei Volkszählungen überzeugen, jedoch war dieser Markt schnell gesättigt und Hollerith trat an neue Kundenkreise heran. So wurden die Maschinen zunächst bei den vermögenden Eisenbahngesellschaften genutzt. Auf Grund von Weiterentwicklungen dann auch im Bankenwesen, im Großhandel zur Verwaltung der Lagerbestände und schließlich auch in gewöhnlichen Unternehmen zur Rechnungserstellung.
+Zuerst wurde die Maschine im Jahr 1886 zur Auswertung der Sterblichkeit und vom U.S. Amtsarzt des Heeres genutzt. (\cite{Dasgupta2014} S. 31) Dann konnte Hollerith sich bei einem Wettbewerb zur Bestimmung der schnellsten Möglichkeit zur Durchführung der U.S. Volkszählung durchsetzen, (\cite{Regan2012} S. 71) so dass seine Maschine im Jahr 1890 für die Volkszählung zur Anwendung kam. Hollerith konnte auch andere Länder von den Vorteilen seiner Maschine bei Volkszählungen überzeugen, (\cite{Wussing2009} S. 511) jedoch war dieser Markt schnell gesättigt und Hollerith trat an neue Kundenkreise heran. So wurden die Maschinen zunächst bei den vermögenden Eisenbahngesellschaften genutzt. Auf Grund von Weiterentwicklungen dann auch im Bankenwesen, im Großhandel zur Verwaltung der Lagerbestände und schließlich auch in gewöhnlichen Unternehmen zur Rechnungserstellung.
 \subsection{Weiterentwicklungen}
-An der Weiterentwicklung der Tabelliermaschinen waren auch andere Firmen beteiligt. So stellten auch Firmen wie Powers und Remington Rand Tabelliermaschinen her. Die Verbreitung dieser Maschinen war allerdings im Gegensatz zu denen der Tabulating Machine Company geringer, jedoch erfolgten die Innovationen manchesmal früher. So kam der erste druckende Tabellierer von Powers im Jahr 1921. Als andere Entwicklungen, die die Verbreitung der Maschinen förderten, weil Arbeitskräfte eingespart werden konnten durch die schnellere Verarbeitung der Daten, sind der Tastaturlocher und die Tabelliermaschine mit automatischem Einzug zu nennen. In der Folge wurde auch ein Gruppenlocher entwickelt zur Lochung mehrerer Karten mit dem gleichen Lochmuster, wie man sie zur Erfassung von Daten in einer bestimmten Filiale benötigt hatte.
+An der Weiterentwicklung der Tabelliermaschinen waren auch andere Firmen beteiligt. So stellten auch Firmen wie Powers und Remington Rand Tabelliermaschinen her. Die Verbreitung dieser Maschinen war allerdings im Gegensatz zu denen der Tabulating Machine Company geringer, jedoch erfolgten die Innovationen manchesmal früher. So kam der erste druckende Tabellierer von Powers im Jahr 1921 (Abb. ~\ref{Drucker}). Als andere Entwicklungen, die die Verbreitung der Maschinen förderten, weil Arbeitskräfte eingespart werden konnten durch die schnellere Verarbeitung der Daten, sind der Tastaturlocher (Abb. ~\ref{Tastatur}) und die Tabelliermaschine mit automatischem Einzug (Abb. ~\ref{autofeed}) zu nennen. In der Folge wurde auch ein Gruppenlocher entwickelt zur Lochung mehrerer Karten mit dem gleichen Lochmuster, wie man sie zur Erfassung von Daten in einer bestimmten Filiale benötigt hatte.
 Technische Entwicklungen an dem Tabellierer selbst waren die Realisierung von Addition und Subtraktion und die Installation von relaisgesteuerten mechanischen Zählwerken.
 \subsection{Spezielle Einsatzbereiche}
-Für einen speziellen Einsatzbereich hat Leslie J. Comrie im Jahr 1928 die Hollerith-Maschinen verwendet. Er entwickelte eine Methode mit hintereinandergeschalteten Maschinen die Differenzmaschine von Babbage nachzuempfinden. Damit berechnete er lediglich mit der Möglichkeit der Subtraktion der Maschine mittels Fourierreihen die Mondlaufbahn. Bei diesem Verfahren wurde ein Ergebnis der ersten Maschine an die folgende Maschine weitergeleitet und mit diesem eine neue Berechnung ausgeführt. Die Zeitersparnis dieser Methode war enorm, denn die Differenzen wurden bislang händisch mit einem Tischrechner ausgeführt. Dabei war das Zwischenergebnis zu notieren und erneut für die nächste Berechnung einzugeben. Nun erfolgte die Berechnung automatisch und sekundenschnell. (Williams 1997, S. 248ff., Comrie in Popular Astronomy 1925, 243f.)
+Für einen speziellen Einsatzbereich hat Leslie J. Comrie im Jahr 1928 die Hollerith-Maschinen verwendet. Er entwickelte eine Methode mit hintereinandergeschalteten Maschinen die Differenzmaschine von Babbage nachzuempfinden. Damit berechnete er lediglich mit der Möglichkeit der Subtraktion der Maschine mittels Fourierreihen die Mondlaufbahn. Bei diesem Verfahren wurde ein Ergebnis der ersten Maschine an die folgende Maschine weitergeleitet und mit diesem eine neue Berechnung ausgeführt. Die Zeitersparnis dieser Methode war enorm, denn die Differenzen wurden bislang händisch mit einem Tischrechner ausgeführt. Dabei war das Zwischenergebnis zu notieren und erneut für die nächste Berechnung einzugeben. Nun erfolgte die Berechnung automatisch und sekundenschnell. (\cite{Williams1997} S. 248-250, Comrie in Popular Astronomy 1925, 243f.)
 
 \section{Die Dehomag D 11}
 \label{DieD11}
@@ -420,12 +418,13 @@ Die Lochkartenverarbeitung umfasst also eine große Zeitspanne. So tauchten die e
 % zur Literaturliste hinzugefügt. Sollen hier weitere Einträge aus der .bib
 % Datei erscheinen, können diese mit dem Befehl \nocite eingebunden werden.
 % Dies sollten in einer eigentlichen Ausarbeitung Ausnahmen sein!
-\nocite{Nonrole, Data}
+%\nocite{}
 
 
 \bibliographystyle{plain}
 % Die Quellen sind in der Datei Lochkartenverarbeitung.bib definiert
 \bibliography{Lochkartenverarbeitung}
 %Abbildungsverzeichnis
-\listoffigures
+%\listoffigures
+%führt zu overflow
 \end{document}
