@@ -1,0 +1,430 @@
+\documentclass[twocolumn,german]{article}
+
+%Durch die Verwendung von hyperref werden im PDF alle
+% URLs, ref's und cite's verlinkt.
+\usepackage{hyperref}
+
+%paralist wird benötigt, um bei Aufzählungen die
+% kompakten Varianten zu verwenden
+\usepackage{paralist}
+
+%listings ist das Paket, welches die Darstellung
+% von Code mit Hilfe der lstlisting Umgebung erlaubt.
+\usepackage{listings}
+
+%Ein von uns erstelltes package mit ein paar Definitionen
+% welche in unseren Ausarbeitungen verwendet werden sollen.
+\usepackage{Ausarbeitung}
+
+% Bitte hier Ihren Namen eintragen
+\author{Robert Lang und Jan Fischer \\ Technische Universität München}
+
+\title{Verarbeitung von Lochkarten: Hollerith und die D11}
+
+% Bitte Datum des Vortrags angeben
+\date{06.07.2016}
+
+%Soll bei jedem Übersetzen der .tex Datei in ein PDF das aktuelle Datum
+% eingefügt werden, kann alternativ auch
+% \date{\today}
+% verwendet werden. Vorsicht mit der Formatierung!
+
+
+%zwischen \begin{document} und \end{document} befindet sich der eigentliche Inhalt
+\begin{document}
+
+
+%An die Stelle des Aufrufs von maketitle werden die oben definierten Informationen
+% wie title und author in den Dokumenten-Kopf übersetzt.
+\maketitle
+
+
+%In Dokumenten, bei denen dies verlangt wird (wie in der Ausarbeitung)
+% wird in der abstract Umgebung eine kurze Zusammenfassung der Arbeit erstellt.
+\begin{abstract}
+
+Dieses Dokument soll einen Überblick über die Lochkartentechnologie geben. Dafür wird die Datenverarbeitung mit Lochkarten erklärt und an Hand zweier besonders wichtiger Maschinen die praktische Anwendung eingehend beleuchtet. Mit der zeitlich zuerst entstandenen Hollerith-Maschine wird auf die Anfänge der Lochkartenverarbeitung eingegangen. Dabei wird die Funktionsweise dargestellt und Anwendungsgebiete und Weiterentwicklungen erläutert. Im Weiteren wird die DEHOMAG D11 insbesondere an Hand ihrer Programmierung mit Steckverbindungen am Schaltbrett beschrieben und auf ihre Bedeutung als Bindeglied zwischen Lochkartenmaschinen und Computern eingegangen. Ein kurzer Abschnitt befasst sich mit der Verwendung der Lochkartentechnologie im dritten Reich.
+
+\end{abstract}
+
+% definiert einen Abschnitt, die Nummerierung erfolgt automatisch
+% es gibt auch \subsection und \subsubsection
+% die Variante \section* \subsection* etc. sind für nicht nummerierte
+% (Unter-)Abschnitte
+\section{Einführung in die Verarbeitung von Lochkarten}
+
+% Label können frei gewählt werden. Später kann mittels \ref{Einleitung}
+% auf diesen Abschnitt verwiesen werden
+\label{Einleitung}
+
+Eingangs soll ein allgemeiner Überblick über die Verarbeitung von Lochkarten gegeben werden. Dazu wird an Hand eines Beispiels die Codierung von Lochkarten und darüber hinaus der Prozess der Datenverarbeitung mit Hilfe der verschiedenen Maschinen beleuchtet.
+Lochkarten wurden über einen sehr langen Zeitraum als Speichermedium verwendet. Im Lauf der Zeit wurden für verschiedene Arten von Daten entsprechende Codierungen entwickelt. So wurden Lochkarten bereits 1890 in den USA zur Volkszählung verwendet, worauf in Kapitel \ref{kapitelhollerith} genauer eingegangen wird. Bald spielten Lochkarten auch in Unternehmen zur Speicherung und Verarbeitung von Daten, wie zum Beispiel in der Buchhaltung, eine wichtige Rolle. Im weiteren Verlauf wurden Lochkarten auch als Ein- und Ausgabe Medien für Computer verwendet, bis sie dann durch andere Speichermedien abgelöst wurden.
+% Die Tilde zwischen . und \cite erzeugt ein Leerzeichen, verbietet
+% aber, dass an dieser Stelle ein Zeilenumbruch eingefügt wird.
+% mit ~\cite kann man sich auf Quellen beziehen
+% Die Quellen sind in der Datei Latex-Einfuehrung.bib definiert
+
+\subsection{Codierung von Lochkarten}
+
+\begin{figure*}
+    \centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+    \includegraphics[width=0.9\textwidth]{Abbildungen/punch-card-wiki}
+    }
+    \caption{Codierung der Zeichen der IBM Standardlochkarte mit 80 Spalten \cite{wikiki}}
+    \label{80}
+    % Dieses Label bezieht sich auf die Abbildung
+\end{figure*}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/40lochkartewiki.jpg}
+    \caption{Lochkarte mit 40 Spalten \cite{wikiki1}}
+    \label{40}
+  \end{center}
+\end{figure}
+
+Als Beispiel dient die am häufigsten verwendete IBM Standardlochkarte (siehe Abb.~\ref{80}). Auf der IBM Standardlochkarte (auch Hollerith Karte genannt) können sowohl Zahlen als auch Text gespeichert werden. In jeder Spalte kann eine Ziffer (bzw. ein Buchstabe) gespeichert werden. Die IBM Standardlochkarte hat insgesamt 80 Spalten, bietet damit also Platz für 80 Zeichen. Dabei wird eine Zahl sehr intuitiv im Dezimalsystem codiert: Die Reihenfolge der einzelnen Ziffern erfolgt wie für den Menschen gewohnt. Um die Ziffer 2 zu speichern wird die 2 gelocht. Natürlich ist für die Maschine nur die Position des Loches entscheidend. Buchstaben werden mit zwei Löchern codiert. Das Obere gibt den Bereich (Zonenlochung) an, in dem der Buchstabe liegt; das Untere den genauen Wert. Um auf einer einzelnen Lochkarte mehrere Daten zu speichern, wird die Karte gewöhnlich in Felder unterteilt: Beispielsweise könnten die ersten 5 Spalten als Kundennummer festgelegt werden. Dies wird an Abbildung~\ref{40} deutlich. Auf dieser Lochkarte wurden in drei verschiedenen Feldern eine Kundennummer (45310), ein Text (''GUTHABEN'') und ein Geldbetrag (580 DM und 99 Pfennige) gespeichert.~\cite{Data}
+\newline
+Die im Anschluss genauer beschriebenen Maschinen benutzten dasselbe Konzept für die Codierung der Lochkarten, das auf Herman Hollerith zurückgeht. Die ersten Maschinen verwendeten allerdings noch eine Karte mit weniger Spalten. Die DEHOMAG D11 verwendete schon die IBM Standardlochkarte mit 80 Spalten, die 1928 eingeführt wurde. Allerdings wurde mit der D11 noch kein Text verarbeitet, sondern nur nummerische Daten.~\cite{WayToD11}
+
+\subsection{Datenverarbeitung mit Lochkarten}
+
+%Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
+\begin{figure*}
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/cycle.png}
+}
+\caption{Datenverarbeitung mit Lochkartentechnik (aus \cite{Data} Seite 63)}
+\label{EVA}
+\end{figure*}
+
+Die Datenverarbeitung mit Lochkarten unterscheidet sich nicht wesentlich von der Elektronischen Datenverarbeitung.~\cite{WayToD11} Der Prozess nach dem EVA-Prinzip (Eingabe, Verarbeitung und Ausgabe) wird in Abbildung~\ref{EVA} anschaulich dargestellt. \newline
+Zuerst müssen die Daten auf Lochkarten gespeichert werden, was mit Hilfe des Kartenlochers geschieht. Modernere Locher wie in der Abbildung hatten eine Tastatur (wie eine Schreibmaschine) und lochten die codierten Daten in die Lochkarten. Zusätzlich konnten die Daten auch als Klartext auf den oberen Rand der Lochkarte gedruckt werden (wie in Abbildung~\ref{80}), wodurch die Überprüfung und das Auslesen der Karte für den Menschen erleichtert wurde. Für die verarbeitenden Maschinen ist dieser Text natürlich irrelevant, einzig die Position und Anzahl der Löcher bestimmen den tatsächlichen Inhalt. Bei früheren Lochern hingegen musste der Operateur die Löcher noch selber auswählen, also den Code kennen. Für ein 'B' beispielsweise musste der Operateur eine 12er-Zonenlochung und eine 2er-Lochung auf dem Locher eingeben. Da dies fehleranfällig war gab es auch Maschinen zur Überprüfung der Lochkarten: Die Daten mussten also zweimal eingegeben werden um zu verhindern, dass fehlerhafte Daten gespeichert wurden. Es gab mit moderneren Lochern auch Maschinen, die alle Funktionen umfassten: Lochen, Verifizieren und Drucken des Klartexts.~\cite{Data2}~\cite{D11}\\
+Verarbeitet wurden die Lochkarten in der Regel durch verschiedene Maschinen. So gab es Sortiermaschinen, Tabelliermaschinen und Kartenmischer. Die zentrale Maschine war die Tabelliermaschine. Sie verarbeitete die Daten und gab als Ausgabe eine Tabelle. Da sich Tabelliermaschinen in ihrem Funktionsumfang immer mehr in Richtung Computer entwickelten (und tatsächlich die Vorläufer der Computer waren~\cite{D11}), werden diese in Abbildung~\ref{EVA} einfach als ''calculator'' bezeichnet. In den Kapiteln~\ref{kapitelhollerith} und~\ref{DieD11} der Arbeit werden verschiedene Tabelliermaschinen vorgestellt. Die ersten Tabelliermaschinen waren noch keine ''Rechner'' sondern zählten nur die Lochanzahl in entsprechenden Zählern. Nach und nach kamen dann immer mehr Funktionen wie Addieren, Subtrahieren und später auch Multiplizieren und Dividieren hinzu. Die DEHOMAG D11 gilt als Höhepunkt der Entwicklung von Tabelliermaschinen. An derselben wird auch deutlich werden, wie viele Funktionen eines Computers die Tabelliermaschinen in dieser Zeit bereits umfassten. Zur Vorbereitung der Lochkarten wurden Sortiermaschinen eingesetzt um so ein einfaches Abarbeiten der Daten durch einfache Programme der Tabelliermaschine zu ermöglichen. Dies war auch eng mit den Anwendungsbereichen der Lochkartentechnik verbunden, die zum Beispiel eine Gruppierung nach Artikelnummern erforderten.\newline
+Die Ausgabe wurde mit einem Drucker erzeugt. Dieser war allerdings abweichend von Abbildung~\ref{EVA} oft in der Tabelliermaschine integriert. Aus logischer Sicht ist die Trennung in Verarbeitung und Ausgabe aber sinnvoll. Dadurch wird deutlich, dass die Maschinen des Verarbeitungsteils leicht durch einen Computer ersetzt werden könnten, was dann auch geschah. Lochkarten dienten noch lange Zeit als Ein- und Ausgabemedium für Computer.~\cite{Data}
+
+\section{Die Hollerith-Maschine}
+\label{kapitelhollerith}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/hollerith.jpg}
+    \caption{Herman Hollerith im Alter von 24 Jahren \cite{hollerith24}}
+    \label{Hollerith}
+  \end{center}
+\end{figure}
+\subsection{Das Leben von Herman-Hollerith}
+Herman Hollerith (Abb. ~\ref{Hollerith}) wurde 1860 in Buffalo, New York geboren. Seine Eltern sind 1848 von Deutschland in die USA eingewandert. Mit 19 Jahren hat er einen Abschluss als Mineningenieur an der Columbia University gemacht. Seine erste Arbeitsstelle trat er 1880 beim Statistikamt an. Dort arbeitete er an der Volkszählung von 1880 mit. Dort erfuhr er die aufwändige und monotone Arbeit. Außerdem konnte er die Prozesse und Anforderungen der Volkszählung studieren. Dies brachte ihm später Vorteile bei der Entwicklung seiner Hollerith-Maschine für die Volkszählung. (\cite{Dasgupta2014} S. 30f)
+\subsection{Volkszählungen in den USA}
+In den USA sind seit 1790 Volkszählungen in der Verfassung festgeschrieben. Sie werden alle zehn Jahre durchgeführt.
+\subsubsection{Zweck}
+Mit dem Ergebnis der Volkszählung wird die Anzahl der Mitglieder im House of Representatives festgelegt. Die Mitglieder verteilen sich nach der Anzahl der in einem Bundestaat lebenden Menschen im Verhältnis zur Gesamtbevölkerung in den USA, wobei jeder Staat mindestens einen Sitz im House of Representatives erhält.
+\subsubsection{Ablauf}
+Bei der Volkszählung werden im Zeitraum von einem Jahr Interviewer in jeden Haushalt des Landes gesendet, um die Informationen zu sammeln. Da die Volkszählung eine Möglichkeit bietet von den Bewohnern Informationen zu sammeln und die Bevölkerung damit besser abbilden zu können wurden bei der Volkszählung 1880 circa 26 Standardfragen gestellt. Zusätzlich wuuden spezielle Fragen insbesondere die Landwirtschaft betreffend gestellt; insgesamt sollen so insgesamt 160 Fragen gestellt worden sein. Bei der Volkszählung im Jahr 1890 soll die Anzahl ausgewerteter Anfragen an die ermittelten Daten die Zahl 13 000 erreicht haben.
+\subsubsection{Abgefragte Informationen}
+Unter den gestellten Fragen waren unter anderem Fragen nach dem Alter, der Herkunft der Alter, der Ethnizität und des Berufs. Weitere Fragen betrafen Krankheiten und Wohnort. Bei den Fragen nach der Landwirtschaft wurde nach der Anzahl von Tieren und Ackerfläche gefragt.
+Mit diesen Daten konnten dann weitere Auswertungen vorgenommen werden. So zum Beispiel Krankheiten nach Bundesstaat oder Alter ausgewertet werden.
+\subsubsection{Die Idee zur Maschine}
+Zur Zeit als H. Hollerith lebte waren schon andere Maschinen mit Lochkarten bekannt.  1805 hatte Joseph-Marie Jacquard einen mechanischen mit Lochkarten gesteuerten Webstuhl entwickelt. Bei diesem noch heute verwendeten Webstuhl wird auf Lochkarten das Muster für das Gewebe gespeichert. Seit 1860 waren Musikspielgeräte mit auf Lochkarten gespeicherten Melodien bekannt. So waren Lochkarten Hollerith wohl bekannt. (\cite{Sobel1981} S. 13)
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/punchphotograph.jpg}
+    \caption{Zugfahrkarte mit seitlichen Lochungen zum Vermerk der Statur, Größe, Haarfarbe und Bartart \cite{ticket}}
+    \label{Fahrkarte}
+  \end{center}
+\end{figure}
+Die zündende Idee hatte H. Hollerith dann bei einer Zugfahrt. Zur damaligen Zeit wurde am Rand der Fahrkarten (Abb. ~\ref{Fahrkarte}) mit Löchern das ungefähre Aussehen des Fahrgastes gekennzeichnet, so dass die Fahrkarte nicht übertragbar sein sollte. Hollerith wollte diese Art der Verwendung auf die Volkszählung anwenden. So dachte er über die Anfertigung je einer Lochkarte für jeden Bürger nach. Darauf sollten die ihn identifizierenden Merkmale gespeichert sein.(\cite{Sobel1981} S. 13)
+\subsection{Bestandteile der Maschine}
+Für den Betrieb der Maschine waren fünf  Bestandteile notwendig. Ein Lochkartenlocher zur Herstellung der Karten, die Presse zum Auslesen der Karten, Zähler zum Ablesen der Addierung und eine Sortierkiste. Der elektromechanische Betrieb wurde mit Batterien gewährleistet.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/cardpunch.jpg}
+    \caption{Der Locher zum Herstellen der Karten mit tauschbarer Schablone rechts. \cite{locher}}
+    \label{Locher}
+  \end{center}
+\end{figure}
+\subsubsection{Locher}
+Mit dem Locher (Abb. ~\ref{Locher}) wurden die Karten für die weitere Auswertung erstellt. So übertrug ein Arbeiter die Daten von den einzelnen Interviewbögen auf eine Karte je Bürger. Dabei wurde in den hinteren Teil eine leere Karte eingelegt, in welche die Löcher gestanzt wurden. Im vorderen Bereich des Geräts war eine Schablone mit Löchern. So war darauf die Bedeutung der einzelnen Löcher angegeben. Ein mit der Hand zu bedienender Stift wurde in das betreffende Loch der Schablone eingeführt und mittels eines Gestänges auf die eingelegte Karte ein Loch eingestanzt.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/press.jpg}
+    \caption{Die Presse zum Auslesen der Karten. \cite{presse}}
+    \label{Presse}
+  \end{center}
+\end{figure}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/mercury.jpg}
+    \caption{Die mit Federn gelagerten Stifte tauchen beim Herunterdrücken in Behälter mit Quecksilber ein. \cite{quecksilber}}
+    \label{Quecksilber}
+  \end{center}
+\end{figure}
+\subsubsection{Presse}
+Mit der Presse (Abb. ~\ref{Presse}) wurden die erstellten Karten ausgelesen. Die Presse bestand aus einem oberen Teil, der durch herunterdrücken des Hebels auf den unteren Teil gedrückt wurde. Dazwischen wurde eine Karte eingelegt. Im oberen Teil befanden sich mit Federn gelagerte Stifte, die beim Herunterdrücken im Falle eines Lochs in den unteren Teil eindrangen. Dort befanden sich je Loch kleine Behälter gefüllt mit Quecksilber (Abb. ~\ref{Quecksilber}). Beim Eintauchen in das Quecksilber wurde ein Stromkreis geschlossen. Die Presse war an die Zähler angeschlossen.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/counter.jpg}
+    \caption{Zwei Z\"ahler mit den Ständen 5 477 (links) und 3 143 (rechts). \cite{???}}
+    \label{Zaehler}
+  \end{center}
+\end{figure}
+\subsubsection{Zähler}
+Die Maschine verfügte über 40 Zähler (Abb. ~\ref{Zaehler}). Auf den Zählern der Maschine konnte das Ergebnis der Auszählung abgelesen werden. Die Zähler hatten je zwei Zeiger, wobei die Funktionsweise wie bei einer Uhr war. Der kleinere Zeiger sprang bei jedem Stromkreisschluss um eine Stelle weiter. Der größere Zeiger sprang eine Stelle weiter, wenn der kleine Zeiger wieder auf die 0 traf. So konnte ein Ergebnis bis 9999 angezeigt werden.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/relais.png}
+    \caption{Skizze eines Relais. Auf der rechten Seite ist die Spule mit Eisenkern zu sehen, die bei Stromfluss durch Entstehung eines Magnetfeldes den Hebel anzieht.}
+    \label{Relais}
+  \end{center}
+\end{figure}
+Die Zähler waren nach dem Prinzip eines Relais (Abb. ~\ref{Relais}) aufgebaut. Dabei wird bei einem Stromstoß eine Spule durchflossen wodurch ein Magnetfeld entsteht. Durch dieses Magnetfeld wird ein Hebel angezogen, der ein Zahnrad um ein Ritzel weiterbewegt. Dieses Zahnrad ist mit einem Zeiger verbunden und so springt der Zeiger eine Stelle weiter.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/sorter.jpg}
+    \caption{Die Sortierkiste mit 26 Fächern. \cite{sorter}}
+    \label{Sortierer}
+  \end{center}
+\end{figure}
+\subsubsection{Sortierer}
+An die Maschine war eine Sortierkiste (Abb. ~\ref{Sortierer}) angeschlossen mit der die Karten in 26 Gruppen sortiert abgelegt werden konnten. SolHollerith verwendete dieselben Kisten, die bereits zum Aufbewahren von 1-Dollarscheinen bei Großbanken verwendet wurden. Bei entsprechendem Kontakt öffnete sich die zu der Gruppe passende Klappe und die Karte konnte dort eingelegt werden.
+Mit dem Sortierer wurden die Karten für weitere Auswertungen zunächst sortiert. Damit konnte dann eine Gruppe nach besonderen Merkmalen ausgewertet werden. So konnte man zum Beispiel die Krankheitshäufigkeiten nach Bundesstaaten untersuchen.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/card.jpg}
+    \caption{Die für die Volkszählung im Jahr 1890 verwendete Lochkarte, mit Bereichen für Rasse, Geschlecht, Alter, Herkunft der Eltern (v. l. n. r.) \cite{lochkarte}}
+    \label{Lochkarte}
+  \end{center}
+\end{figure}
+\subsubsection{Lochkarten}
+Im Jahr 1884 hatte Hollerith noch ein Patent bei der Lochstreifen als Speichermedium verwendet wurden. Im Jahr 1886 wechselte Hollerith dann auf Grund der schlechten Ablagemöglichkeit und des mit meterweise Streifen entstehenden Durcheinanders zu Lochkarten. Von nun an brauchte man für den Betrieb entsprechende Lochkarten. Die um 1890 verwendete Lochkarte (Abb. ~\ref{Lochkarte}) wies 12 Zeilen und 24 Spalten auf und hatte eine Ecke am unteren rechten Rand. Für die Volkszählung 1890 hatte die Lochkarte 31 Bereiche zum Speichern der einzelnen Merkmale.
+In den 1920er Jahren umfasste die Lochkarte dann 45 Spalten. 1928 schließlich wurde die IBM Standardlochkarte mit 80 Spalten entwickelt. Besonders herausfordernd war die Stabilität der Karte zu gewährleisten.
+Da Hollerith seine Maschinen hauptsächlich vermietete brachten die Lochkarten für Hollerith die größte Einnahmequelle, da sie laufend in großen Mengen nachgekauft wurden. Um 1900 verkaufte Hollerith jährlich zwei Millionen Stück.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/keypunch.jpg}
+    \caption{Tastatur aus den 1930er Jahren \cite{keypunch}}
+    \label{Tastatur}
+  \end{center}
+\end{figure}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/autofeed.jpg}
+    \caption{Tabelliermaschine mit automatischem Einzug der Lochkarten. \cite{autofeed}}
+    \label{autofeed}
+  \end{center}
+\end{figure}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/printer.jpg}
+    \caption{Die erste Tabelliermaschine mit Drucker von der Firma Powers von 1921.}
+    \label{Drucker}
+  \end{center}
+\end{figure}
+\subsection{Anwendungsgebiete}
+Zuerst wurde die Maschine im Jahr 1886 zur Auswertung der Sterblichkeit und vom U.S. Amtsarzt des Heeres genutzt. (\cite{Dasgupta2014} S. 31) Dann konnte Hollerith sich bei einem Wettbewerb zur Bestimmung der schnellsten Möglichkeit zur Durchführung der U.S. Volkszählung durchsetzen, (\cite{Regan2012} S. 71) so dass seine Maschine im Jahr 1890 für die Volkszählung zur Anwendung kam. Hollerith konnte auch andere Länder von den Vorteilen seiner Maschine bei Volkszählungen überzeugen, (\cite{Wussing2009} S. 511) jedoch war dieser Markt schnell gesättigt und Hollerith trat an neue Kundenkreise heran. So wurden die Maschinen zunächst bei den vermögenden Eisenbahngesellschaften genutzt. Auf Grund von Weiterentwicklungen dann auch im Bankenwesen, im Großhandel zur Verwaltung der Lagerbestände und schließlich auch in gewöhnlichen Unternehmen zur Rechnungserstellung.
+\subsection{Weiterentwicklungen}
+An der Weiterentwicklung der Tabelliermaschinen waren auch andere Firmen beteiligt. So stellten auch Firmen wie Powers und Remington Rand Tabelliermaschinen her. Die Verbreitung dieser Maschinen war allerdings im Gegensatz zu denen der Tabulating Machine Company geringer, jedoch erfolgten die Innovationen manchesmal früher. So kam der erste druckende Tabellierer von Powers im Jahr 1921 (Abb. ~\ref{Drucker}). Als andere Entwicklungen, die die Verbreitung der Maschinen förderten, weil Arbeitskräfte eingespart werden konnten durch die schnellere Verarbeitung der Daten, sind der Tastaturlocher (Abb. ~\ref{Tastatur}) und die Tabelliermaschine mit automatischem Einzug (Abb. ~\ref{autofeed}) zu nennen. In der Folge wurde auch ein Gruppenlocher entwickelt zur Lochung mehrerer Karten mit dem gleichen Lochmuster, wie man sie zur Erfassung von Daten in einer bestimmten Filiale benötigt hatte.
+Technische Entwicklungen an dem Tabellierer selbst waren die Realisierung von Addition und Subtraktion und die Installation von relaisgesteuerten mechanischen Zählwerken.
+\subsection{Spezielle Einsatzbereiche}
+Für einen speziellen Einsatzbereich hat Leslie J. Comrie im Jahr 1928 die Hollerith-Maschinen verwendet. Er entwickelte eine Methode mit hintereinandergeschalteten Maschinen die Differenzmaschine von Babbage nachzuempfinden. Damit berechnete er lediglich mit der Möglichkeit der Subtraktion der Maschine mittels Fourierreihen die Mondlaufbahn. Bei diesem Verfahren wurde ein Ergebnis der ersten Maschine an die folgende Maschine weitergeleitet und mit diesem eine neue Berechnung ausgeführt. Die Zeitersparnis dieser Methode war enorm, denn die Differenzen wurden bislang händisch mit einem Tischrechner ausgeführt. Dabei war das Zwischenergebnis zu notieren und erneut für die nächste Berechnung einzugeben. Nun erfolgte die Berechnung automatisch und sekundenschnell. (\cite{Williams1997} S. 248-250, Comrie in Popular Astronomy 1925, 243f.)
+
+\section{Die Dehomag D 11}
+\label{DieD11}
+
+\subsection{Überblick über die D11-Maschine}
+
+\begin{quote}
+	``The D11 is the missing link between the tabulators of the punched-card era and the electronic computer era.'' 
+	(F.W. Kistermann, ~\cite{WayToD11}, Seite 47)
+\end{quote}
+
+%Auch wenn die Graphik inhaltlich zu einem späteren Kapitel gehört,
+% kann es Sinn machen diese weiter vorne zu platzieren, wenn an
+% dieser Stellt besser Platz für eine Graphik ist.
+%Frei bewegliches Feld für Abbildung in Spaltenbreite
+\begin{figure}
+  \begin{center}
+    % Eine Abbildung, die 90% der Spaltenbreite einnimmt
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/museumdigital.jpg}
+    \caption{DEHOMAG D11 \cite{mdigital}}
+    \label{D11Bild1}
+    % Dieses Label bezieht sich auf die Abbildung
+  \end{center}
+\end{figure}
+
+Die Tabelliermaschine D11 (siehe Abb.~\ref{D11Bild1}) der Deutschen Hollerith Maschinen Gesellschaft (DEHOMAG) wurde 1935 offiziell angekündigt; die erste Maschine wurde 1936 installiert. Sie gilt als Höhepunkt der Entwicklung von Tabelliermaschinen und wurde über den Zeitraum von 25 Jahren produziert. Wie das obige Zitat besagt, kann die D11 als Bindestück zwischen den Lochkartenmaschinen und den Computern angesehen werden. Da die Maschine als Tabelliermaschine vermarktet wurde, erhielt sie lange Zeit wenig Aufmerksamkeit in vielen geschichtlichen Abhandlungen zur Computertechnologie, die Lochkartenmaschinen häufig außen vor ließen. Die Entwicklung des Computers ist jedoch vielschichtig und kann nur im Kontext der existierenden Industrie der Lochkartenmaschinen verstanden werden. Tabelliermaschinen deckten bereits zahlreiche Anwendungsbereiche in der Datenverarbeitung ab bevor es überhaupt Computer gab. Den Entwicklern der D11-Maschine war der umfangreiche Funktionsumfang ihrer Maschine durchaus bewusst: Bei einem internen Namensgebungswettbewerb gewann der Name Hollerith-Allrechner. Aus Gründen des Marketings wurde die Maschine jedoch als DEHOMAG Tabelliermaschine Type D11 bezeichnet, da hier bereits ein Kundenstamm vorhanden war.~\cite{D11}\\
+
+\begin{quote}
+	``Whatever the definition of a 'computer' may be, and at the moment there is no consensus about this, the DEHOMAG D11 is a computer.''
+	(F.W. Kistermann, ~\cite{D11}, Seite 234)
+\end{quote}
+
+Abbildung~\ref{aufbau} zeigt den Aufbau der DEHOMAG D11. Die Maschine war elektromechanisch und wurde durch einen Elektromotor (unten links) angetrieben. Bei den Zählern wurde nach wie vor eine intuitive dezimale Zahlendarstellung verwendet. Die Zähler der D11 hatten jeweils 11 Stellen. Die Maschine beherrschte Addition und Subtraktion; Multiplikation und Division konnten durch entsprechende Hardware ergänzt werden oder auf der Schalttafel (unten rechts) programmiert werden. Diese Schalttafel (sichtbar in Abbildung~\ref{D11Bild2}) war austauschbar, sodass während des Programmierens (auf einem Tisch) die Maschine (mit einer anderen Schalttafel) weiterhin betrieben werden konnte. Die Maschine umfasste sämtliche vorangegangenen Weiterentwicklungen wie zum Beispiel die direkte Eingabe negativer Zahlen (ohne manuelle Komplementbildung), Stanzen von Ergebnislochkarten (zur weiteren Verarbeitung) und Drucken der Ergebnistabelle. Der Drucker befindet sich in der Mitte der Maschine und umfasst sieben Schreibwerke (siehe Abb.~\ref{aufbau}). Unterhalb davon befinden sich die Schalter zum Einstellen der Maschine.~\cite{Schaltung}\\
+Als Tabelliermaschine eingesetzt war eine Verarbeitung von bis zu 9000 Karten pro Stunde möglich (keine Verbesserung seit 1908 auf Grund mechanischem Einlesen der Lochkarten, dies entspricht immerhin 2,5 Karten pro Sekunde!). Eine Multiplikation dauerte inklusive Ausdruck 4,6 Sekunden. Bei zusätzlichem Stanzen einer Ergebnislochkarte kamen zusätzliche 1,2 bis 1,6 Sekunden hinzu.~\cite{D11}
+
+\begin{figure}
+  \begin{center}
+    % Eine Abbildung, die 90% der Spaltenbreite einnimmt
+    \includegraphics[width=0.9\columnwidth]{Abbildungen/Tabelliermaschine_d11wiki.jpg}
+    \caption{DEHOMAG D11 von rechts \cite{wikiki2}}
+    \label{D11Bild2}
+    % Dieses Label bezieht sich auf die Abbildung
+  \end{center}
+\end{figure}
+
+\begin{figure*}
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/d11.PNG}
+}
+\caption{Aufbau der DEHOMAG D11 (aus \cite{Schaltung} Seite 1)}
+\label{aufbau}
+\end{figure*}
+
+\subsection{Die Programmierung mit Hilfe des Schaltbretts}
+
+\begin{figure*}
+\centerline{
+\includegraphics[width=0.8\textwidth]{Abbildungen/Schalttafeleinteilung.PNG}
+}
+\caption{Überblick über den Aufbau der Schalttafel der DEHOMAG D11 (aus \cite{Schaltung} Seite 3)}
+\label{strukt}
+\end{figure*}
+
+Hier soll an Hand eines typischen Beispiels eine kurze Einführung in die Programmierung der DEHOMAG D11 gegeben werden. Dabei wird auch vergleichend aufgezeigt, inwiefern Konzepte der modernen Rechnerarchitektur bereits in dieser Maschine Anwendung fanden. Das Beispiel ist entnommen aus~\cite{Schaltung}. Diese Quelle enthält leider kein genaues Erscheinungsjahr; auf einem Schaltplan findet sich aber das Datum 5.5.50. Dies erklärt sich durch den langen Zeitraum, in dem die D11-Maschine verwendet wurde. Insbesondere begann die IBM (die DEHOMAG wurde nach dem 2. Weltkrieg in IBM Deutschland umbenannt) erst nach dem 2. Weltkrieg entsprechende Fortbildungen zur Programmierung durchzuführen. Zwar waren Programmierhandbücher bereits vor dem Krieg verfügbar, jedoch war das Konzept der Programmierung den Anwendern noch fremd und die Möglichkeiten der D11 konnten kaum genutzt werden.~\cite{WayToD11}\\
+
+Das im folgenden behandelte Beispiel ist die Saldierung mit wechselseitiger Niederschrift der Salden. Die Saldierung ist ein typisches Anwendungsbeispiel der D11: Lange Zeit gab es besonders von deutschen Unternehmen die Nachfrage nach einer Tabelliermaschine, die die Saldierung automatisch durchführt; zuvor musste sie halb manuell durchgeführt werden. Die Programmierung der D11 erfolgte mit Hilfe des Schaltbretts, also durch Stecken von Verbindungen. Die Struktur des Schaltbretts lässt sich Abbildung~\ref{strukt} entnehmen. Der obere Teil (Kommandobrücke) enthält den überwiegenden Teil des Programms. Im unteren Bereich befinden sich Anschlussbuchsen der einzelnen Zählwerke und Schreibwerke. Strukturiert wird die Programmierung durch folgende Schritte: Erstellen von Listenbild und Gangschema, danach schalten von Übertragungsschema und Kommandobrücke. Abschließend folgt die Angabe, welche Schalter an der Maschine umgelegt werden müssen. Normalerweise erfolgte die Programmierung auf Papier; die fertige Schaltung konnte dann einfach auf dem Schaltbrett gesteckt werden.
+
+\subsubsection*{1. Listenbild}
+
+%Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
+\begin{figure*}
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/ListenbildAusarbeitung.png}
+}
+\caption{Listenbild für das Saldierungsprogramm (Inhalt aus \cite{Schaltung} Seite 49)}
+\label{lb}
+\end{figure*}
+
+Das Listenbild gibt einen Überblick und beantwortet die Fragen: Was habe ich, was möchte ich haben? Es zeigt uns welche Daten auf den Lochkarten an welcher Stelle gespeichert sind und wie die ausgedruckte Tabelle aussehen soll (unser Ziel bzw. die Ausgabe unseres Programms). In der modernen Softwaretechnik würde man von den Anforderungen an das Programm sprechen.\\
+
+Aus der oberen Tabelle des Listenbildes (abgeschrägte Kante als Andeutung der Lochkarten) können wir das Format der Lochkarte erkennen (siehe~\ref{lb}). In den drei ersten Spalten steht die Kontonummer (also eine Zahl zwischen 0 und 999; aus Anschaulichkeitsgründen wird eine verhältnismäßig kleine Bank betrachtet). In den zehn darauf folgenden Spalten sind die Umsätze des Kontos gespeichert. Dabei werden negative und positive in denselben Spalten gespeichert und mit einem Steuerloch (11er Lochung) voneinander unterschieden. Soll-Umsätze sind dabei positiv, Haben-Umsätze negativ. Negativ und positiv liegen eben im Auge des Betrachters: Aus Sicht der Bank ist das Guthaben der Kunden negativ, ihre Schulden dagegen positiv (das ist auch unsere Sicht als Programmierer für die Bank). In der Tabelle stellt jede der Zeilen beispielhaft eine Lochkarte dar. Unsere Zielausgabe ist eine Tabelle mit den Umsätzen zu jedem Konto (untere Tabelle von Abbildung~\ref{lb}). Diese sollen erst jeweils einzeln (für jede Lochkarte) gedruckt werden und zusätzlich am Ende auch die Summen der Umsätze und der Saldo (Guthaben) des Kontos. Die Letzteren werden - wie bei der D11 üblich - mit einem Stern (Summenzeichen) gekennzeichnet. Dabei sollen positive bzw. negative Umsätze und Salden in verschiedene Spalten gedruckt werden.\\
+Die Schreibwerke, welche die Umsätze und Summen drucken sollen, können wir bereits hier festlegen: Wie in Abbildung~\ref{aufbau} bereits gesehen, hat die D11 sieben Schreibwerke, welche absteigend von links nach rechts drucken. Um also unsere Tabelle zu drucken, müssen wir für die Kontonummer das größte Schreibwerk wählen (S5 oberhalb der Tabelle notiert). Die anderen Werte schreiben wir einfach rechts daneben also jeweils mit den niedrigeren Schreibwerken (S4 bis S1).\\
+Das Listenbild bildet die Grundlage für unser Programm. Wir werden in den nächsten Schritten immer wieder darauf zurückkommen.
+
+\subsubsection*{2. Gangschema}
+
+\begin{figure*}
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/GangschemaAusarbeitung.png}
+}
+\caption{Gangschema für das Saldierungsprogramm (Inhalt aus \cite{Schaltung} Seite 50)}
+\label{gs}
+\end{figure*}
+
+Das Gangschema ist das eigentliche Programm für die D11-Maschine. Die Gänge entsprechen dem Takt aus der heutigen Rechnerarchitektur. Aus technischer Sicht entspricht ein Gang genau einer Umdrehung des Elektromotors. Die Wellen im Inneren übertragen die Bewegung an die einzelnen Komponenten der Maschine, wie Kartenleser, Zähler, Drucker usw.~\cite{D11} Es gibt 2 verschiedene Gangarten: Kartengänge und Zwischengänge. In jedem Kartengang wird eine neue Lochkarte eingelesen und die in ihr gespeicherten Werte in ein Zählwerk übernommen und eventuell auch ausgedruckt (je nach Schaltung kann eins, beides oder nichts davon passieren; dazu mehr in Punkt 3 Übertragungsschema). In jedem Zwischengang werden hingegen keine Karten gelesen, sondern es wird eine Zeile des von uns vorgegebenen Gangschemas ausgeführt. Dabei passieren parallel sämtliche Operationen, die wir als Programmierer vorgegeben haben. Eine Einschränkung der D11 ist die Begrenzung auf 9 Zwischengänge; unser Programm kann also nur aus maximal 9 Zeilen bestehen. Allerdings können durch Programmierung eines Dauergangs auch Schleifen programmiert werden. Unser Programm benötigt nur 4 der 9 Zwischengänge. Die Abarbeitung der Gänge erfolgt absteigend, beginnend mit dem Neunten. Nicht benötigte Gänge können abgeschaltet werden (siehe später). Im Listenbild haben wir bereits festgelegt, welche Schreibwerke die einzelnen Summen schreiben. In den Spalten des Gangschemas (siehe Abb.~\ref{gs}) sind die einzelnen Schreibwerke und Zählwerke aufgelistet.\\
+
+Also beginnen wir im 4. Zwischengang (d.h. im ersten Programmschritt) mit zwei Schreibbefehlen (S). Schreibwerk 4 und Schreibwerk 3 drucken damit die in den Zählern während der Kartengänge aufgelaufenen Summen (Z4: Soll-Umsätze; Z3: Haben-Umsätze). In diesem Fall schreiben wir mit Schreibwerk 4 den Inhalt von Zählwerk 4. Allerdings sind Zählwerke und Schreibwerke aber unabhängig voneinander (Wir könnten genauso gut mit Schreibwerk 4 den Inhalt von Zähler 3 drucken). Wie die Summen in die Zählwerke kommen, werden wir erst später im Übertragungsschema durch eine entsprechende Verkabelung festlegen. Abschließend müssen wir für Gang 4 noch festlegen, ob wir eine Schreibwerksbewegung (SW) oder einen Zeilentransfer (ZT) durchführen wollen. Eine Schreibwerksbewegung ist immer dann zu schalten, falls etwas geschrieben wird. In unserem Fall schreiben wir zwei Summen, kreuzen also auf jeden Fall SW an. Für ZT (neue Zeile) werfen wir einen Blick ins Listenbild. Da nur am Anfang jedes Kartengangs ein Zeilentransfer erfolgt, benötigen wir hier einen weiteren Zeilentransfer. Ansonsten würden wir den letzten Umsatzeintrag überdrucken.\\
+In Gang 3 führen wir die eigentliche Saldierung durch: Wir subtrahieren Z3 von Z4. Dies geschieht mit Hilfe der subtraktiven Sendung (Quersubtraktion). Da die D11-Maschine intern nur addieren kann, wird automatisch das 9er Komplement von Zähler 3 gebildet und dann auf Zähler 4 addiert. Dies geschieht mit Hilfe eines Steuerapparates, den wir hier bereits festlegen: Steuerapparat III (dazu mehr in Punkt 3 und 4, wenn wir unser Gangschema auf der Kommandobrücke umsetzen). In Gang 3 brauchen wir weder eine Schreibwerksbewegung noch einen Zeilentransfer (dadurch verkürzt sich die Dauer des Gangs).\\
+In Gang 2 wollen wir nun das Ergebnis unserer Rechnung ausdrucken. Dazu schreiben wir den Wert aus Z4 (S/Z4) mit den Schreibwerken S2 und S1. Natürlich bedingt, je nachdem ob es sich um einen Sollsaldo (SS) oder einen Habensaldo (HS) handelt nur mit dem entsprechenden Schreibwerk (entweder S2 oder S1), wie im Listenbild gefordert. Damit wird auch wieder eine Schreibwerksbewegung notwendig (SW).\\
+Im letzten Gang löschen (L) wir die Zähler um in den jetzt folgenden Kartengängen wieder die Werte für das nächste Konto speichern zu können. Zur einfacheren Lesbarkeit unserer Tabelle erzeugen wir auch mit ZT einen weiteren Zeilenumbruch.
+
+\subsubsection*{3. Übertragungsschema}
+
+%Frei bewegliches Feld für Abbildung in Seitenbreite (figure* statt figure)
+\begin{figure*}
+\centerline{
+% Eine Abbildung, die 90% der Seitenbreite (d.h. 2 Spalten) einnimmt
+\includegraphics[width=0.9\textwidth]{Abbildungen/Gruppenkontrollenfolie.png}
+}
+\caption{Auslesen der Lochkarten und Funktionsweise der automatischen Gruppenkontrolle (aus \cite{Schaltung} Seite 11)}
+\label{Gruppen}
+\end{figure*}
+
+Im Übertragungsschema werden sämtliche Datenpfade geschaltet. Kurz: Wie kommen die Daten aus der Lochkarte in die Zählwerke? Außerdem wird mit der Gruppenkontrolle festgelegt, wann unser Programm (Gangschema) ausgeführt werden soll. Abbildung~\ref{Gruppen} veranschaulicht an welchen Buchsen die Daten der Lochkarte ausgelesen werden können. Die D11 hat zwei Bürstengruppen: Die oberen und die unteren Bürsten. Die Karten durchlaufen die Bürsten von oben nach unten. In jedem Kartengang können also die Daten der aktuellen Lochkarte aus den unteren Bürsten und zeitgleich die Daten der nächsten Lochkarte aus den oberen Bürsten entnommen werden. Die einzelnen Spalten der Lochkarte sind auf dem Schaltbrett (und auch auf der Programmiervorlage) durchnummeriert. Es gibt folglich für jede der 80 Spalten der Lochkarte jeweils eine Buchse an den unteren und oberen Bürsten. Damit ist es möglich die Werte auf zwei aufeinander folgenden Lochkarten zu vergleichen, wodurch wir festlegen können, wann die Maschine aufhören soll Karten zu lesen und das von uns programmierte Gangschema ausführen soll: Dies ist der Wechsel von den Kartengängen zu den Zwischengängen. Da wir im normalen Anwendungsfall der Tabelliermaschine unser Programm genau dann ausführen, wenn eine Gruppe zusammengehörender Lochkarten abgearbeitet wurde, wird dies auch als automatische Gruppenkontrolle bezeichnet. Die Lochkarten wurden vor der Verarbeitung durch die Tabelliermaschine D11 durch eine Sortiermaschine nach Kontonummer sortiert. Somit können wir in jedem Kartengang einen Vergleich durchführen, ob sich die Kontonummer auf der nächsten Karte ändert. Wenn ja, haben wir alle Lochkarten einer Gruppe (eines Kontos) abgearbeitet, es wird keine weitere Lochkarte mit der gleichen Kontonummer mehr auftauchen. Die Summen in den Zählern entsprechen nun also bereits dem Gesamtumsatz auf dem Konto und unser Programm kann ausgeführt werden.\\
+Um diesen Vergleich auf dem Schaltbrett zu programmieren verwenden wir das Feld zwischen den oberen und unteren Bürsten (siehe~\ref{Gruppen}). Die ersten drei Spalten der unteren Bürsten (die Kontonummer) werden zu den untersten drei Stellen des Felds ''nach unteren Bürsten'' geführt (rote Verbindungen in~\ref{Schalttafel}). Dies erfolgt über den Umweg der Postenschreibung 5 (Schreibwerk 5 wie im Listenbild festgelegt), da wir die Kontonummer auch drucken möchten (mehr dazu später). Die Postenschreibung besteht aus sogenannten Doppelbuchsen (angedeutet durch die schwarze Verbindung der jeweils äußeren Buchsen). Die Buchsen der oberen Reihe sind elektrisch mit den jeweiligen Buchsen der unteren Reihe verbunden. Dies ermöglicht es Daten mehrfach weiterzuleiten. Allerdings muss dadurch auch darauf geachtet werden nie zwei Stromeingänge auf eine Buchse zu schalten (Kettenregel). Nun holen wir genauso (nur ohne Postenschreibung) die Kontonummer der nächsten Karte aus dem Feld obere Bürsten und verbinden die drei Ziffern mit der Reihe ''nach oberen Bürsten''. Für uns relevant ist außerdem die Reihe Abriegelung. Hier können wir festlegen wie viele Stellen verglichen werden sollen. Wir verbinden also U (Untergruppe) mit dem dritten Feld der Abriegelung um bei der Gruppenkontrolle nur 3 Stellen zu vergleichen. Die anderen Felder sind für unser Programm nicht notwendig: Es könnten zum Beispiel wenn gewünscht zusätzliche Gruppen geschaltet werden (H und Ü für Haupt- und Übergruppe). Dadurch könnte man die Lochkarten nicht nur nach Kontonummer, sondern auch nach Filialnummer (wenn auf der Lochkarte vorhanden) gruppieren und so die Umsätze in einer Filiale errechnen.\\
+
+Zurück zu unserem Beispiel: Wir haben nun die Gruppenkontrolle geschalten, aber nach wie vor laufen noch keine Werte in unsere Zähler. Wir müssen also die Werte aus den unteren Bürsten in die Zähler führen. Bei einfachen Schaltungen ist dies direkt möglich, da wir aber zwischen negativen und positiven Umsätzen unterscheiden möchten,  benötigen wir ein Schaltelement dazwischen. Dieses soll wie eine Weiche abhängig vom Vorzeichen die Umsätze in die Zähler vier und drei leiten. Dafür gibt es in der D11 die Steuerapparate, die auf dem Schaltbrett zwischen Zähl- und Summenwerk liegen. Ein Steuerapparat implementiert einen 2-zu-1 Multiplexer bzw. 1-zu-2 Demultiplexer (je nach geschalteter Richtung) mit Relaistechnik. Jeder Steuerapparat beinhaltet 11 2-zu-1 Multiplexer (für die 11 Stellen eines Zählwerks). Liegt Strom am Auswahlfeld an (Steuerloch vorhanden, bzw. negativer Umsatz) so gibt es eine Verbindung von Mitte und Arbeit. Fließt kein Strom gibt es eine Verbindung zwischen Ruhe und Mitte. Mitte, Ruhe und Arbeit sind jeweils Doppelbuchsen und in Abbildung~\ref{Schalttafel} bei Steuerapparat III (links unten) gekennzeichnet.\\
+Bei der weiteren Schaltung müssen wir auch eine Übertragung (subtraktive Sendung in Zwischengang 3) berücksichtigen. Zur strukturierten Schaltung gibt uns das Handbuch dafür die folgenden Regeln:\\
+
+1. Übertragung schalten (für Zwischengang 3)\\
+2. Bürstenanschlüsse schalten (Kettenregel beachten)\\
+3. Postenschreibung schalten\\
+4. Summenwerke schalten\\
+
+\begin{figure*}
+\centerline{
+\includegraphics[width=0.9\textwidth]{Abbildungen/UebertragungschmemaKomplett.png}
+}
+\caption{Unterer Teil der Schalttafel der DEHOMAG D11 mit Saldierungsprogramm (Inhalt aus \cite{Schaltung} Seite 50)}
+\label{Schalttafel}
+\end{figure*}
+
+Wir beginnen also mit der Übertragung aus Zwischengang 3 (siehe Gangschema~\ref{gs}): Der Inhalt von Zähler 3 soll an Zähler 4 gesendet werden. Um Werte aus einem Zähler auszulesen wird das jeweilige Summenwerk verwendet. Für jeden Zähler (also 8 mal auf dem Schaltbrett) gibt es die Buchsen Zählwerk (Eingang), Summenwerk (Ausgang), und außerdem auch einen Steuerapparat zur entsprechenden Schaltung. Da wir nicht wissen wie viele Stellen eine Zahl in einem Zähler hat (Überträge), werden normalerweise immer alle 11 Stellen des Zählers ausgelesen (also alle 11 Stellen des Summenwerks verwendet). Wir verbinden also das Summenwerk 3 mit den Arbeitsbuchsen des Steuerapparates 3 (grün-weiße Verbindungen in~\ref{Schalttafel}). Wir könnten natürlich auch jeden anderen Steuerapparat verwenden aber dieser liegt unserem Zähler am nächsten. Als Ausgang verwenden wir die Mittebuchsen die direkt mit Zählwerk 4 verbunden werden. Damit haben wir bereits die Übertragung geschalten. Nun muss später in Gang 3 nur sichergestellt werden, dass Steuerapparat 3 auf Arbeit umgeschaltet wird und der Wert kann korrekt übertragen werden.\\
+
+Als zweiten Schritt müssen die Bürstenanschlüsse geschaltet werden. Wie bekommen wir die Daten aus der Lochkarte in die Zähler? Wie bereits beschrieben verwenden wir einfach die Buchsen ''untere Bürsten'' und verbinden diese mit dem Zähler. In einfachen Programmen ist dies direkt möglich, wir jedoch haben zwei Probleme. An Zählwerk 4 haben wir gerade bereits einen Dateneingang angeschlossen, die Kettenregel besagt aber, dass nie zwei Stromeingänge auf einer Buchse (bzw. Doppelbuchse) aufeinandertreffen dürfen. Außerdem wollen wir je nach Vorzeichen des Umsatzes den Wert in Zähler 3 oder Zähler 4 speichern. Folglich benötigen wir einen weiteren Steuerapparat; als Selectsignal (Demultiplexer) verwenden wir nun das Vorzeichen (11er Lochung). Wir verwenden Steuerapparat 2 und verbinden die Spalten 4-13 (Umsatz) mit der Mitte des Steuerapparates (schwarze Verbindungen in~\ref{Schalttafel}). Die Ruhe (positives Vorzeichen, keine 11er-Lochung) verbinden wir indirekt mit Zähler 4. Dies geschieht über den Steuerapparat 2 , welcher sich bis auf in Zwischengang 3 immer in Ruhe befinden wird, und damit den Wert über die Mitte an Z4 weiterleitet.  Die Arbeit von Steuerapparat 2 (negatives Vorzeichen, also Haben-Umsatz) wird mit Z3 verbunden. Schließlich muss noch das Vorzeichen als Erregersignal von Steuerapparat 2 festgelegt werden: Da das Umschalten der Relais von Steuerapparat 2 Zeit benötigt, müssen wir den Vorgang bereits einen Gang vorher anregen. Das Vorzeichen wird also von den oberen Bürsten abgefühlt. Dies erfolgt durch die Verbindung von Lochkartenspalte 4 mit der Buchse von Steuerapparat 2.\\
+
+Der nächste Schritt im Übertragungsschema ist die Postenschreibung (blaue Verbindungen in~\ref{Schalttafel}). Wie für jedes Zählwerk gibt es auch für jedes der sieben Schreibwerke eine Doppelbuchse für die Postenschreibung. Bei unserem Beispiel möchten wir die Umsätze jeder Lochkarte drucken. Dazu wird einfach der Umsatz an die Postenschreibung weitergeleitet, also eine Verbindung von Zählwerk 3 zu Postenschreibung 3 und von Zählwerk 4 zu Postenschreibung 4 geschalten.\\
+
+Als letztes müssen die Summenwerke geschalten werden. Dies geschieht hauptsächlich für die Summenschreibung im Gangschema (hier ausschließlich). Analog zur Postenschreibung gibt es für jedes Schreibwerk eine Doppelbuchse Summenschreibung, um während der Zwischengänge zu drucken. Ein Blick auf das Gangschema (siehe~\ref{gs}) zeigt, dass in Gang 4 zwei Schreibvorgänge stattfinden: S4 soll den Inhalt von Z4 schreiben. Also wird das Summenwerk von Z4 mit Summenschreibung 4 verbunden (schwarz-weiße Verbindungen in~\ref{Schalttafel}). Genauso ist es bei S3 und Z3, allerdings sind die Buchsen Summenwerk bereits verbunden. Die Signale des Summenwerks können aber einfach über die Doppelbuchse der Arbeit von Steuerapparat 3 geholt werden. In Gang 2 muss Schreibwerk 2 bzw. 1 der Inhalt von Z4 zur Verfügung stehen. Wir verbinden folglich Summenschreibung 4 mit Summenschreibung 2 und diese wiederum mit Summenschreibung 1. Somit stehen den Schreibwerken die richtigen Zählerinhalte zur Verfügung.
+
+\subsubsection*{4. Schalten der Kommandobrücke}
+
+\begin{figure*}
+\centerline{
+\includegraphics[width=0.9\textwidth]{Abbildungen/Kommandobruecke.png}
+}
+\caption{Kommandobrücke (oberer Teil) der Schalttafel mit Saldierungsprogramm (Inhalt aus \cite{Schaltung} Seite 50)}
+\label{kommando}
+\end{figure*}
+
+Als Grundlage zum Schalten der Kommandobrücke verwenden wir unser Gangschema. Wir wollen unser Programm jetzt auf die Maschine schalten. Sämtliche Verbindungen, die mit dem Gangschema zu tun haben enthalten in den Abbildungen die Farbe weiß. Zuerst legen wir im Feld Maschinengänge (in Abbildung~\ref{kommando} ganz links oben) fest wie viele Zwischengänge wir benötigen. Die ersten 5 Gänge (9-5) brauchen wir nicht. Wir verbinden also Gang 9 mit der Nullbuchse neben Gang 5 (alternativ kann auch jeder Gang einzeln mit 0 verbunden werden). Rechts daneben kann nun im Feld Zwischengänge für jeden unserer 4 Gänge festgelegt werden, was in diesem Gang geschieht.\\
+In Gang 4 sollen zwei Summen geschrieben werden. Es ist also eine Verbindung von der Buchse 4 zum Feld Summenschreibung zu schalten und zwar zu Schreibwerk 4 und 3 (vergleiche Gangschema~\ref{gs}). Dass die Werte aus den richtigen Zählern geschrieben werden, haben wir bereits im Übertragungsschema geschalten. In Gang 4 ist des weiteren auch eine Schreibwerksbewegung und ein Zeilentransfer zu schalten. Die Felder hierzu befinden sich im unteren linken Teil der Kommandobrücke. Wir schalten auch gleich die Schreibwerksbewegungen und Zeilentransporte für die anderen Gänge: Im Feld Schreibwerksbewegung wird die Buchse SW mit Gang 4 und 2 verbunden, im Feld Zeilentransport 1Z (eine Zeile) mit Gang 4 und 1.\\
+Als nächstes soll in Gang 3 die subtraktive Übertragung (grün-weiß in Abbildung~\ref{kommando}) von Zähler 3 auf Zähler 4 stattfinden (Z4=Z4-Z3). Buchse 3 des Feldes Zwischengänge wird also mit Z3 (Sendezähler) des Feldes Subtraktionsübertragung verbunden. Außerdem muss der verwendete Steuerapparat (im Übertragungsschema festgelegt: III) umgeschalten werden. Das Signal von Gang 3 wird also noch an die Buchse III des Feldes Steuerapparate weitergeleitet. Des weiteren muss im Feld Übertragungssteuerung (unten mittig) die Verbindung von Z3 mit Z4 über Steuerapparat III angegeben werden.\\
+In Gang 2 findet wieder eine Schreiboperation statt. Allerdings soll diesmal abhängig vom Vorzeichen des Saldos in Z4 nur ein Schreibwerk drucken. Hierzu gibt es das Feld Saldenkontrolle (ohne Beschriftung in Spalte 23, Zeile 9). Gang 2 wird folglich mit dem zu druckenden Zähler (Z4) in der Saldenkontrolle verbunden. Die Buchsen SS (Sollsaldo) und HS (Habensaldo) werden gemäß dem Gangschema mit den Schreibwerken 1 und 2 des Feldes Summenschreibung verbunden.\\
+Im letzten Gang sollen die Summen gelöscht werden. Dies geschieht durch eine einfache Verbindung mit den zu löschenden Zählern im Feld Summenlöschung.\\
+Um zusätzlich alle Summen wie bei der D11-Maschine üblich mit einem Stern zu kennzeichnen, werden im Feld Saldenzeichen alle Schreibwerke, die Summen drucken mit der Buchse * verbunden.\\
+
+Abschließend müssen auch für die Kartengänge noch Verbindungen auf der Kommandobrücke geschalten werden. Für die Postenschreibung (Drucken der einzelnen Umsätze und der Kontonummer) werden im Feld Postenschreibung (rechts in Abbildung~\ref{kommando}) alle Schreibwerke, die in den Kartengängen schreiben sollen mit EP (Einzelpostenschreibung) verbunden (blaue Verbindung). Außerdem verwenden wir Steuerapparat 2 in den Kartengängen. Dazu ist zum einen eine Verbindung von H2 (Feld Erregerbuchsen) mit II (Feld Steuerapparate) auf der Kommandobrücke notwendig. Zum anderen muss im Feld Haltestrombuchsen der Hilfsapparate auch noch die Buchse ST mit H2 verbunden werden (mittig auf der Schalttafel, sichtbar in Abbildung~\ref{Schalttafel}). Diese Verbindungen sind schwarz (Umsatz) gekennzeichnet. 
+
+\subsubsection*{5. Schalterstellung}
+Die D11 bietet eine Vielzahl von Schaltern. Dies zeigt einerseits wie umfangreich ihre Funktionen waren, andererseits auch die Spezialisierung auf einzelne Anwendungsgebiete. Für unser entwickeltes Programm brauchen wir nur die Schalter 1 und 4. Schalter 1 aktiviert die Einzelpostenschreibung (Im Sammelgang dagegen werden nur Summen gedruckt). Schalter 2 aktiviert die Untergruppenkontrolle. Selbstverständlich sollten wir die Maschine dann auch noch anschalten (bestenfalls nach Einsetzen unseres fehlerfrei programmierten Schaltbretts).
+
+\subsubsection*{Zusammenfassung}
+Die D11-Maschine umfasste außer den einfachen gezeigten Funktionen noch umfassende weitere Möglichkeiten. So konnten mit Haupt- und Übergruppenkontrolle die Daten in weitere Gruppen unterteilt werden. Ferner gab es bereits die Möglichkeit Dauergänge (Schleifen) und damit komplexere Programme auf der Schalttafel zu implementieren.~\cite{schaltbuchsen}~\cite{D11} Zur Erleichterung der Programmierung gab es weiterhin vereinfachte Darstellungen (insbesondere für das Übertragungsschema), sodass nicht jede einzelne Kabelverbindung eingezeichnet werden musste. In dieser Arbeit wurde auf diese Darstellung verzichtet um die Programmierung am tatsächlichen Schaltbrett zu präsentieren. Tatsächlich sind aber die eingezeichneten Mehrfachverbindungen an diese Darstellung angelehnt.\\
+%Auch bei der technischen Implementierung war die D11-Maschine modern: Alle Grundrechenarten wurden auf die Addition zurückgeführt: Die Subtraktion über die Komplementbildung, die Multiplikation (Implementierung auf  
+Im Gesamten ist die Programmierung der D11 am ehesten mit der Mikroprogrammierung vergleichbar, da alle Operationen je Gang parallel ablaufen. Bei der Mikroprogrammierung wird für jeden Takt (Gang) genauso festgelegt, was in den einzelnen Teilen des Computers geschehen soll: Register (Zählwerke) werden in der ALU miteinander verrechnet, Multiplexer (Steuerapparate) werden mit einem passendem Selectsignal angeregt um Datenpfade zu steuern (z.B. Daten auf den Datenbus legen). Bei der D11 war Hardware und Software noch nicht getrennt: Sämtliche Datenpfade mussten noch vom Programmierer geschalten werden. Bei heutigen Computern sind diese in der Regel fest in der Hardware umgesetzt.
+
+\subsection{Verwendung im dritten Reich}
+Die DEHOMAG D 11 wurde in der Zeit des dritten Reiches in Deutschland entwickelt (1935). 
+Die Firma DEHOMAG stand dem Nazi-Regime positiv gegenüber. Der Firmenchef Willy Heidinger sprach 1934 bei einer Werkseröffnung, bei der auch Parteimitglieder der NSDAP anwesend waren, davon dem Führer zu vertrauen und blind zu folgen. Weiterhin untermauerte die Firma ihre nationalistische Berechtigung in ihrer Festschrift zum 25-jährigen Firmenjubiläum: Der Erfinder der Lochkarte Herman Hollerith wird kurzerhand zum ''biederen Pfälzer'' (aus ~\cite{Fest}, Seite 66), obwohl er nie in Europa gelebt hat, sondern lediglich ein Sohn deutscher Auswanderer war. Die DEHOMAG zählte zu den wichtigen Firmen für die deutsche Wiederaufrüstung. In dieser Zeit war das Wachstum der Firma sogar größer als das von Siemens.~\cite{Explosion} 1940 wurde die Firma ferner zum Spezialbetrieb erklärt und von militärischen Stellen kontrolliert.~\cite{IBMweb}\\
+
+Die Maschinen der DEHOMAG und insbesondere auch die D11 fanden breite Verwendung in verschiedensten Unternehmen und erhöhten so die Effizienz der deutschen Wirtschaft. Wichtige Anwendungsgebiete waren die betriebswirtschaftliche Statistik und die Buchhaltung. Insbesondere zur Verwaltung der Wehrmacht wurden die Maschinen verwendet und spielten so für die Organisation des Krieges eine entscheidende Rolle. Die Maschinen wurden für die statistische Überwachung von Soldaten, Ressourcen und Zivilbevölkerung eingesetzt. Eine spezielle Version der D 11 fand für eine Volkszählung 1939 unter dem nationalsozialistischen Regime Anwendung.~\cite{Nonrole} Des weiteren wurden die Mitglieder der NSDAP, SS und SA auf Lochkarten erfasst.~\cite{Explosion}\\
+
+Zum Ausmaß der Verwendung der D 11 im Holocaust gibt es widersprüchliche Quellen. Unumstritten ist jedoch, dass Maschinen in Konzentrationslagern aufgestellt waren und mit denselben statistische Daten über die Häftlinge erfasst wurden. Dazu wurden den Häftlingen Nummern zugeordnet und kurzerhand eintätowiert. Edwin Black stellt in seinem Buch ''IBM and the Holocaust: The Strategic Alliance between Nazi Germany and America's Most Powerful Corporation'' noch weitreichendere Thesen auf: Unter anderem sei die Lokalisierung der Juden mit Hilfe von Lochkartenmaschinen erfolgt und die amerikanische IBM habe als strategischer Partner des Nazi Regimes fungiert. Allerdings gibt es von Seiten der Wissenschaft Kritik an dem Buch: Eine ausführlichere Auseinandersetzung mit dem Thema, als Reaktion auf das Buch von Black, findet sich in~\cite{Genocide} von Lars Heide. Eine umfassende Beschreibung würde in dieser Arbeit zu weit führen. Zur genaueren Auseinandersetzung empfiehlt sich die Lektüre von~\cite{Explosion}, in welchem sich eine umfangreiche Beschreibung der wirtschaftlichen Entwicklung der Lochkartentechnik (insbesondere auch während des 2. Weltkrieges) findet.
+
+\section{Abschließende Zusammenfassung}
+\label{schluss}
+Die Lochkartenverarbeitung umfasst also eine große Zeitspanne. So tauchten die ersten Lochkarten schon im 19. Jahrhundert auf. Mit der Hollerith-Maschine begann die Zeit der Lochkartenverarbeitung. Dabei wurden Lochkarten zur Speicherung von Daten verwendet - so auch schon beim Jacquard-Webstuhl. Die Neuerung der Hollerith-Maschine war die elektromechanische Auswertung der gespeicherten Daten. Solche Maschinen wurden dann weiterentwickelt und viele Anwendungsgebiete fanden sich. Nachdem anfangs die Daten nur gezählt wurden, konnten sie bald schon addiert und schließlich subtrahiert werden. Dann folgte der automatische Einzug und der automatische Druck. Mit der Entwicklung der D11 wurden durch Verwirklichung von Multiplikation und Division nun die vier Grundrechenarten auf einer automatischen Tabelliermaschine beherrscht. Dies führte zu flächendeckender Ausbreitung der Maschinen. So im Bankenwesen, bei Versorgungsbetrieben, im Großhandel und auch im Dienstleistungssektor. Die D11 stellte mit ihren umfangreichen Möglichkeiten neue Ansprüche an die Benutzer der Maschinen und ist somit als eine der ersten weit verbreiteten programmierbaren Maschinen ein wichtiger Teil für die Anfänge der Programmierung. Die IBM förderte diese Entwicklung der Programmierung durch zahlreiche Fortbildungen. Durch die enorme Verbreitung und Leistungsfähigkeit der Maschinen dauerte die Umstellung in vielen Betrieben auf die elektronischen Computer bis Anfang 1980 an. Lochkarten waren von 1950-1980 allgegenwärtig; so zur Wahl des Waschmaschinenprogramms, als Hotelzimmerschlüssel, als Scheck und im universitären Bereich bei der Notenvergabe. In der heutigen Zeit sind Lochkarten aus dem Alltag verschwunden. In einzelnen Bereichen finden sich noch Relikte aus der Hochzeit der Lochkartenverarbeitung. So werden alte Großrechner in Banken teilweise noch mittels virtueller Lochkarten programmiert, manchmal sind Formulare noch im Lochkartenformat gehalten und es existieren Empfehlungen für guten Programmierstil die maximale Zeilenlänge im Quellcode auf 80 Zeichen zu begrenzen. Einzig die Lochkarten bei manchen Strickmaschinen sind schließlich noch geblieben.
+
+
+% Mit diesem Kommando kann man nicht im Text zitierte Quellen zum Literaturverzeichnis
+% hinzufuegen
+% Die Quellen sind in der Datei Latex-Einfuehrung.bib definiert
+% Literatur Einträge, die im Text referenziert werden, werden automatisch
+% zur Literaturliste hinzugefügt. Sollen hier weitere Einträge aus der .bib
+% Datei erscheinen, können diese mit dem Befehl \nocite eingebunden werden.
+% Dies sollten in einer eigentlichen Ausarbeitung Ausnahmen sein!
+%\nocite{}
+
+
+\bibliographystyle{plain}
+% Die Quellen sind in der Datei Lochkartenverarbeitung.bib definiert
+\bibliography{Lochkartenverarbeitung}
+%Abbildungsverzeichnis
+%\listoffigures
+%führt zu overflow
+\end{document}
